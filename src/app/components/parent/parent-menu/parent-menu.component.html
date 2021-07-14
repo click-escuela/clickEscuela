@@ -236,31 +236,8 @@
         <div [ngClass]="dinamicDisplay" (mouseover)="hideNotificaction()" [ngSwitch]="blockDinamicActually">
 
        
-          
-          <div *ngSwitchCase="'parent-asistance'">
-            <app-asistance-parents [route]="blockDinamicActually"></app-asistance-parents>
-          </div>
-          
-        
-          <div *ngSwitchCase="'payment'">
-            <app-payment></app-payment>
-          </div>
-          <div *ngSwitchCase="'grade'">
-            <app-grades></app-grades>
-          </div>
-          <div *ngSwitchCase="'message'">
-            <app-messages></app-messages>
-          </div>
-          <div *ngSwitchCase="'reportCard'">
-            <app-report-card></app-report-card>
-          </div>
+          <router-outlet></router-outlet>
 
-
-
-
-
-
-          <div *ngSwitchDefault>Default Option</div>
         </div>
        
 

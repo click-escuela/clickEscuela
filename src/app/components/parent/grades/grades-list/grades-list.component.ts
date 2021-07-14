@@ -60,7 +60,7 @@ export class GradesListComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.routeLink === '/parent/menu') {
+    if (this.routeLink === '/parent/menu/grade') {
 
       this.displayedColumns = ['student', 'description', 'matter', 'grade'];
     } else {

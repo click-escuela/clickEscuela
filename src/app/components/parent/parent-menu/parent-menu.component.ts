@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatSidenav } from '@angular/material/sidenav';
 import { Notification } from '../../interfaces/Notification';
 import { HomeComponent } from '../../teacher/home/home.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class ParentMenuComponent implements OnInit {
 
   routeLink: string;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   theEvent$;
 
@@ -86,10 +87,10 @@ export class ParentMenuComponent implements OnInit {
   }
 
   changeBlock(newBlock: string) {
-    console.log(this.showHomeButton);
-    this.showHomeButton = newBlock !== 'home' ? true : false;
     this.blockDinamicActually = newBlock;
-    console.log(newBlock);
+    this.router.navigate(['/parent/menu/' + newBlock]);
+
+
   }
 
   notNotification() {

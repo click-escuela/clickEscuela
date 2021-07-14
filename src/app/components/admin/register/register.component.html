@@ -21,16 +21,16 @@
 
     <mat-list>
 
-      <mat-list-item *ngIf="blockDinamicActually != 'account'" class="button-menu-container" id="responsivehomeButton"
-      [ngClass]="{'animate-logo': blockDinamicActually !== 'account'}">
-      <button class="home-button mb-2" mat-button color (click)="changeBlock('account');">
+      <mat-list-item *ngIf="blockDinamicActually != 'accounts'" class="button-menu-container" id="responsivehomeButton"
+      [ngClass]="{'animate-logo': blockDinamicActually !== 'accounts'}">
+      <button class="home-button mb-2" mat-button color (click)="changeBlock('accounts');">
         <img width="130px" src="./assets/images/logo.svg" alt="" >
       </button>
     </mat-list-item>
 
     <mat-list-item class="button-menu-container">
-      <button [ngClass]="{ 'option-selected': blockDinamicActually == 'account' }" class="button-menu" mat-button
-        color (click)="changeBlock('account')">
+      <button [ngClass]="{ 'option-selected': blockDinamicActually == 'accounts' }" class="button-menu" mat-button
+        color (click)="changeBlock('accounts')">
         <svg class="icon-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 469.341 469.341"
           style="enable-background: new 0 0 469.341 469.341" xml:space="preserve">
@@ -61,8 +61,8 @@
 
     <mat-divider></mat-divider>
       <mat-list-item class="button-menu-container">
-        <button class="button-menu" [ngClass]="{ 'option-selected': blockDinamicActually == 'student' }" mat-button
-          color (click)="changeBlock('student')">
+        <button class="button-menu" [ngClass]="{ 'option-selected': blockDinamicActually == 'students' }" mat-button
+          color (click)="changeBlock('students')">
           <svg class="icon-svg" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 396.05 448">
             <g>
@@ -84,8 +84,8 @@
       <mat-divider></mat-divider>
 
       <mat-list-item class="button-menu-container text-center">
-        <button [ngClass]="{ 'option-selected': blockDinamicActually == 'teacher' }" class="button-menu" mat-button
-          color (click)="changeBlock('teacher')">
+        <button [ngClass]="{ 'option-selected': blockDinamicActually == 'teachers' }" class="button-menu" mat-button
+          color (click)="changeBlock('teachers')">
           <svg class="icon-svg" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 396.05 448">
             <path class="cls-1"
@@ -158,26 +158,8 @@
 
 
         <div [ngSwitch]="blockDinamicActually">
-          <div *ngSwitchCase="'account'">
-            <app-account [route]="blockDinamicActually"></app-account>
-          </div>
-          <div *ngSwitchCase="'student'">
-            <app-add-student></app-add-student>
-          </div>
-
-          <div *ngSwitchCase="'teacher'">
-            <app-add-teacher></app-add-teacher>
-          </div>
-
-          <div *ngSwitchCase="'configurations'">
-            <app-configuration></app-configuration>
-          </div>
-
-          <div *ngSwitchCase="'calendar'">
-            <app-calendar></app-calendar>
-          </div>
-
-          <div *ngSwitchDefault>Default Option</div></div>
+         <router-outlet></router-outlet>
+        </div>
         </div>
       </div>
     </div>

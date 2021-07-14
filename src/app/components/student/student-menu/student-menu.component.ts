@@ -91,10 +91,10 @@ export class StudentMenuComponent implements OnInit {
   }
 
   changeBlock(newBlock: string) {
-    console.log(this.showHomeButton);
-    this.showHomeButton = newBlock !== 'home' ? true : false;
     this.blockDinamicActually = newBlock;
-    console.log(newBlock);
+    this.router.navigate(['/student/menu/' + newBlock]);
+
+   
   }
 
   notNotification() {

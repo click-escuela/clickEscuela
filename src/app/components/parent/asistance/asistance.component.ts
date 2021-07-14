@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './asistance.component.html',
   styleUrls: ['./asistance.component.scss']
 })
-export class AsistanceComponent implements OnInit {
+export class AsistanceParentComponent implements OnInit {
 
 
   constructor() { }
