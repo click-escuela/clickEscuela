@@ -43,6 +43,7 @@
 
     display: flex;
     justify-content: space-around;
+    border-bottom: 7px solid #00000054;
 
 }
 
@@ -57,7 +58,7 @@
 .login-box svg{
     position: absolute;
     width: 90px;
-    right: -60px;
+    right: -34px;
     z-index: 101;
     bottom: 0;
     filter: drop-shadow(-2px 1px 12px rgba(0, 0, 0, 0.425));
