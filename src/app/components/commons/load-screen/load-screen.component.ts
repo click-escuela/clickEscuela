@@ -14,6 +14,8 @@ export class LoadScreenComponent implements OnInit {
   @Input() messageInfo: string;
   @Input() messageInfoClass: string;
 
+  @Input() showCancel: string;
+
   @Output() cancel = new EventEmitter<string>();
 
   constructor( private iconsService: IconGeneratorService) { }
