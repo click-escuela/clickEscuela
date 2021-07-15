@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { Router, RouterModule } from '@angular/router';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { DetailStudentComponent } from './detail-student/detail-student.component';
@@ -91,7 +92,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ContactInfoComponent,
     ConfirmDialogComponent,
     DetailStudentComponent,
-    LoadScreenComponent
+    LoadScreenComponent,
+    LoginComponent
   ],
   exports: [
     CalendarComponent,
@@ -101,7 +103,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ContactInfoComponent,
     ConfirmDialogComponent,
     DetailStudentComponent,
-    LoadScreenComponent
+    LoadScreenComponent,
+    LoginComponent
   ],
 })
 export class CommonsModule {}

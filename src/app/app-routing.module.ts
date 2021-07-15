@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/commons/login/login.component';
 import { AsistanceParentComponent } from './components/parent/asistance/asistance.component';
 import { PaymentComponent } from './components/parent/payment/payment.component';
 import { GroupsComponent } from './components/student/groups/groups.component';
@@ -24,6 +25,7 @@ import { LibraryComponent } from './components/student/library/library.component
 
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   { path: 'teacher/menu', component: MenuComponent ,
   children: [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -56,7 +58,7 @@ children: [
   { path: 'groups', component: GroupsComponent},
 ]},
   { path: 'parent/menu', component: ParentMenuComponent,
-  children:[
+  children: [
   {path: '', redirectTo: 'parent-asistance', pathMatch: 'full'},
   { path: 'parent-asistance', component: AsistanceParentComponent},
   { path: 'payment', component: PaymentComponent},
