@@ -76,9 +76,19 @@
 
 svg,g{
     transition: 0.5s ease-in-out;
+    cursor: help;
+}
+
+a{
+    font-size: 0.8em;
+    transition: 0.5s ease-in-out;
+    color: $custom-blue !important;
     cursor: pointer;
 }
 
+a:hover{
+    transform: scale(1.1);
+}
 
 
 
@@ -89,15 +99,39 @@ g#hand{
     
 }
 
-svg:hover g#hand{
+// svg:hover g#hand{
+//     transform:scale(1)
+
+// }
+
+// svg:hover g#hand{
+//     animation: greeting 0.6s ease-in-out 0.5s infinite alternate;
+//     transform-origin: 235px  170px;
+// }
+
+g#hand.animate-clicky{
     transform:scale(1)
 
 }
+g#clicky-eyes{
+    transition: 0.5s ease-in-out;
+}
 
-svg:hover g#hand{
+g#clicky-eyes.view-login{
+ transform: translate(-20px,-20px);
+}
+
+svg:hover g#clicky-eyes.move-eyes{
+    transform: translateY(-30px) scaleY(0.9);
+}
+
+
+
+g#hand.animate-clicky{
     animation: greeting 0.6s ease-in-out 0.5s infinite alternate;
     transform-origin: 235px  170px;
 }
+
 
 @keyframes greeting {
     from{
@@ -109,4 +143,20 @@ svg:hover g#hand{
    to{
         transform: rotate(8deg);
     }
+}
+
+.avatar{
+    position: relative;
+    display: flex;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid $custom-blue;
+}
+
+.avatar img{
+    position: absolute;
+    width: 110%;
+    height: 110%;
 }
