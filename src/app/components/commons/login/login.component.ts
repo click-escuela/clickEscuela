@@ -135,11 +135,13 @@ export class LoginComponent implements OnInit {
   setSessionToken() {
 
     this.load = true;
+    this.checkLogin = true;
+
       setTimeout(() => {
         this.load = false;
 
         this.router.navigate([ this.login.profile]);
-      }, 5000);
+      }, 1000);
 
   }
 
@@ -166,8 +168,10 @@ export class LoginComponent implements OnInit {
       this.load = false;
 
       this.router.navigate([ this.login.profile ]);
-    }, 5000);
+    }, 1000);
   } else {
+    this.checkLogin = false;
+
     this.snackbar.showSnackBar('Revise el usario y la contraseña', COMMONS.SNACK_BAR.ACTION.CLOSE, COMMONS.SNACK_BAR.TYPE.ERROR);
   }
 

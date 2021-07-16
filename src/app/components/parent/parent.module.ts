@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AsistanceParentComponent } from './asistance/asistance.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MessagesComponent } from './messages/messages.component';
-import { GradesComponent } from './grades/grades.component';
+import { GradesResumeComponent } from './grades/grades.component';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -50,12 +50,12 @@ import { ReportCardListComponent } from './report-card/report-card-list/report-c
     PaymentComponent,
     MessagesComponent,
     MessageContentComponent,
-    GradesComponent,
+    GradesResumeComponent,
     ReportCardComponent,
     ParentMenuComponent,
     AsistanceListComponent,
     PaymentListComponent,
-    GradesComponent,
+    GradesResumeComponent,
     GradesListComponent,
     FirstLetterPipe,
     ReportCardListComponent,
@@ -102,7 +102,7 @@ import { ReportCardListComponent } from './report-card/report-card-list/report-c
   ],
   exports: [
     ReportCardComponent,
-    GradesComponent,
+    GradesResumeComponent,
     MessagesComponent,
     FirstLetterPipe,
     MessagesComponent,
