@@ -1,6 +1,7 @@
 import {animate, state, style, transition, trigger, } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -45,7 +46,7 @@ export class RegisterComponent implements OnInit {
   isNotification: boolean;
   numberNotifications: number;
 
-  constructor() {
+  constructor(private router: Router) {
     console.log('register');
   }
 
@@ -54,9 +55,7 @@ export class RegisterComponent implements OnInit {
   }
 
   changeBlock(newBlock: string) {
-    console.log(this.showHomeButton);
-    this.showHomeButton = newBlock !== 'home' ? true : false;
     this.blockDinamicActually = newBlock;
-    console.log(newBlock);
+    this.router.navigate(['/admin/register/' + newBlock]);
   }
 }

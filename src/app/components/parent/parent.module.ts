@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CommonsModule } from './../commons/commons.module';
 import { FirstLetterPipe } from './../../pipes/firstLetter.pipe';
 import { MessageContentComponent } from './messages/message-content/message-content.component';
@@ -8,7 +9,7 @@ import { ParentMenuComponent } from './parent-menu/parent-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AsistanceComponent } from './asistance/asistance.component';
+import { AsistanceParentComponent } from './asistance/asistance.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MessagesComponent } from './messages/messages.component';
 import { GradesComponent } from './grades/grades.component';
@@ -45,7 +46,7 @@ import { ReportCardListComponent } from './report-card/report-card-list/report-c
 
 @NgModule({
   declarations: [
-    AsistanceComponent,
+    AsistanceParentComponent,
     PaymentComponent,
     MessagesComponent,
     MessageContentComponent,
@@ -58,7 +59,6 @@ import { ReportCardListComponent } from './report-card/report-card-list/report-c
     GradesListComponent,
     FirstLetterPipe,
     ReportCardListComponent,
-    AsistanceComponent,
     AsistanceListComponent,
   ],
   imports: [
@@ -72,7 +72,7 @@ import { ReportCardListComponent } from './report-card/report-card-list/report-c
     MatInputModule,
     MatButtonModule,
     FormsModule,
-
+    RouterModule,
     MatTabsModule,
     MatAutocompleteModule,
     MatDividerModule,

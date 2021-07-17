@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { HistoryComponent } from './groups/groups-list/history/history.component';
 import { CommentComponent } from './groups/groups-list/comment/comment.component';
@@ -92,6 +93,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ParentModule,
     MatSelectModule,
     MatGridListModule,
+    RouterModule
   ],
 })
 export class StudentModule {}
