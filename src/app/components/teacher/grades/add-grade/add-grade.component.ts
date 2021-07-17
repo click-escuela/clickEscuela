@@ -60,13 +60,13 @@ export class AddGradeComponent implements OnInit {
   ) {
     if (data.grade === undefined) {
       this.currentGrade = {
-      studentId: 'ee019c2e-665e-400c-bf6f-946bcc51fcf7',
-      courseId: '27d2217c-d0f4-11eb-aa1f-0237763a7d5e',
-       name: '',
-       subject: '',
-       type: '',
-       schoolId: SCHOOL.ID,
-       number: 0,
+        studentId: '03d0b885-5ffe-4e7a-aa9d-7630a6756e94',
+        name: '',
+        schoolId: '12345',
+        courseId: '27d2217c-d0f4-11eb-aa1f-0237763a7d5e',
+        subject: 'Filosofía',
+        type: '',
+        number: 9
 
       };
       this.localData = {
@@ -106,7 +106,7 @@ export class AddGradeComponent implements OnInit {
         this.dialogRef.close();
     },
       error => {
-        this.snackBar.showSnackBar(MESSAGES.GRADES.POST.ERROR[error.code], COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
+        this.snackBar.showSnackBar(MESSAGES.GRADES.POST.ERROR[400], COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
 
       }
     );

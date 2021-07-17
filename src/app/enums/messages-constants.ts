@@ -45,7 +45,7 @@ GRADES: {
     POST: {
         SUCCES: 'Se agrego la nota correctamente.',
         ERROR: {
-            400: 'El alumno ya existe en la base de datos'
+            400: 'No existe el alumno al cual desea ingresar la nota'
         },
         NORMAL: 'Sin cambios en el agregado de notas'
     },

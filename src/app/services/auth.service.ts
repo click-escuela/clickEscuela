@@ -18,7 +18,6 @@ getToken(session: Session) {
   const authDate = moment(new Date().toString());
   const expiration = authDate.add(1, 'minutes');
   const token = new Token(session.token, authDate.toString(), expiration.toString(),session.profile);
-  localStorage.setItem('token', JSON.stringify(token));
 
   return token;
 }
