@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.css']
 })
-export class GradesComponent implements OnInit {
+export class GradesResumeComponent implements OnInit {
 
   sonParent: string[];
 
