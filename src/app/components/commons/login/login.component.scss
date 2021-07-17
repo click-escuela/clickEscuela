@@ -118,7 +118,8 @@ g#clicky-eyes{
 }
 
 g#clicky-eyes.view-login{
- transform: translate(-20px,-20px);
+    transform: skew(-8deg,-4deg)
+
 }
 
 svg:hover g#clicky-eyes.move-eyes{
@@ -128,21 +129,39 @@ svg:hover g#clicky-eyes.move-eyes{
 
 
 g#hand.animate-clicky{
-    animation: greeting 0.6s ease-in-out 0.5s infinite alternate;
+    animation: greeting 0.6s ease 0.5s infinite alternate;
     transform-origin: 235px  170px;
 }
+
+
+
 
 
 @keyframes greeting {
     from{
         transform: rotate(-4deg);
     }
-
-   
-
    to{
         transform: rotate(8deg);
     }
+}
+
+@keyframes sayno
+ {
+    0%,25%{
+        transform: translateX(0)
+    }
+    25%,50%{
+        transform: translateX(-15px)
+    }
+    
+    50%,75%{
+        transform: translateX(15px)
+    }
+    75%,100%{
+        transform: translateX(0)
+    }
+
 }
 
 .avatar{
