@@ -15,15 +15,11 @@ export class GradesComponent implements OnInit {
   currentOption = 'Notas';
   @ViewChildren(GradesListComponent) listGrades: QueryList<GradesListComponent>;
 
-
-
   constructor(public dialog: MatDialog) {
-
   }
 
   openDialog(input) {
     console.log(this.listGrades);
-
     const dialogRef = this.dialog.open(AddGradeComponent,
       {
         data: input,

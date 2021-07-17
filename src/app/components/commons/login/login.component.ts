@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit {
   welcomeMessage = 'Bienvenidos';
   load = false;
   validCredentials: boolean;
+  // Variables para animar a clicky
   yesAnimate = false;
   help = false;
   checkLogin = false;
+  countErrors = 0;
+  // Fin de variables de animacion
   selectedProfile = '';
 
   currentSession: Session;
@@ -75,7 +78,7 @@ export class LoginComponent implements OnInit {
     this.yesAnimate = false;
     this.tooltip.hide();
     this.clickyMessage = '¿Necesitas ayuda?';
-   }, 5000);
+   }, 4000);
 
 
 
@@ -134,31 +137,44 @@ export class LoginComponent implements OnInit {
 
   setSessionToken() {
 
+    let credential;
+
+    if (localStorage.getItem('token'))
+    {
+    credential = JSON.parse(localStorage.getItem('token'));
+    }
+
     this.load = true;
     this.checkLogin = true;
 
-      setTimeout(() => {
+    setTimeout(() => {
         this.load = false;
 
-        this.router.navigate([ this.login.profile]);
-      }, 1000);
+        this.router.navigate([ credential.profileUrl]);
+      }, 3000);
 
   }
 
   setSession() {
     this.checkLogin = true;
-    let token;
+    let token:Token;
     let session = null;
 
     if (this.login.user === 'maria' && this.login.password === '12345') {
       session = this.sessions[0];
       session.profile = this.login.profile;
       token = this.authService.getToken(session);
+      token.setProfile(session.profile)
+
     } else if (this.login.user === 'roberto' && this.login.password === '67890') {
       session = this.sessions[1];
       session.profile = this.login.profile;
       token = this.authService.getToken(session);
+      token.setProfile(session.profile)
     }
+
+    localStorage.setItem('token', JSON.stringify(token));
+
 
     if (session !== null) {
     console.log(token);
@@ -166,12 +182,15 @@ export class LoginComponent implements OnInit {
 
     setTimeout(() => {
       this.load = false;
-
+      
       this.router.navigate([ this.login.profile ]);
-    }, 1000);
+    }, 3000);
   } else {
     this.checkLogin = false;
-
+    this.countErrors++;
+    if (this.countErrors%2 === 0) {
+      this.tooltip.show();
+    }
     this.snackbar.showSnackBar('Revise el usario y la contraseña', COMMONS.SNACK_BAR.ACTION.CLOSE, COMMONS.SNACK_BAR.TYPE.ERROR);
   }
 
