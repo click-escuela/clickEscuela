@@ -1,12 +1,13 @@
+
 import { AsistanceParentComponent } from './components/parent/asistance/asistance.component';
 import { PaymentComponent } from './components/parent/payment/payment.component';
 import { GroupsComponent } from './components/student/groups/groups.component';
 import { MessagesComponent } from './components/parent/messages/messages.component';
-import { GradesComponent } from './components/parent/grades/grades.component';
 import { ConfigurationComponent } from './components/admin/configuration/configuration.component';
 import { CalendarComponent } from './components/commons/calendar/calendar.component';
 import { AddTeacherComponent } from './components/admin/teacher-component/add-teacher/add-teacher.component';
 import { AddStudentComponent } from './components/admin/students-component/add-student/add-student.component';
+import { GradesComponent } from './components/teacher/grades/grades.component';
 import { HomeworkComponent } from './components/student/homework/homework.component';
 import { CoursesComponent } from './components/teacher/courses/courses.component';
 import { HomeComponent } from './components/teacher/home/home.component';
@@ -19,13 +20,16 @@ import { RegisterComponent } from './components/admin/register/register.componen
 import { MenuComponent } from './components/commons/menu/menu.component';
 import { ParentMenuComponent } from './components/parent/parent-menu/parent-menu.component';
 import { ReportCardComponent } from './components/parent/report-card/report-card.component';
+
 import { AccountComponent } from './components/admin/account/account.component';
 import { LibraryComponent } from './components/student/library/library.component';
+
 
 
 const routes: Routes = [
   { path: 'teacher/menu', component: MenuComponent ,
   children: [
+
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: HomeComponent},
     { path: 'course', component: CoursesComponent},
@@ -34,6 +38,7 @@ const routes: Routes = [
     { path: 'reportCard', component: ReportCardComponent},
     { path: 'asistance', component: AsistanceComponent},
   ]},
+
   { path: 'admin/register', component: RegisterComponent,
 
   children: [
@@ -66,6 +71,10 @@ children: [
 
 ]
 },
+
+  { path: 'admin/register', component: RegisterComponent },
+  { path: 'student/menu', component: StudentMenuComponent },
+  { path: 'parent/menu', component: ParentMenuComponent },
   { path: '**', component: Error404Component}
 ];
 
