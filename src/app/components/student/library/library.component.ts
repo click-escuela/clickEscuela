@@ -1,18 +1,24 @@
 import { MatDialog } from '@angular/material/dialog';
-import { LibraryServiceService } from '../../../services/library-service.service';
-import { LibraryFile } from '../../../models/library-file';
-import { Component, OnInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChildren,
+  QueryList,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
 import 'jspdf-autotable';
 import * as pdfjsLib from 'pdfjs-dist';
-import { DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { ModalFrameComponent } from '../modal-frame/modal-frame.component';
-
+import { LibraryFile } from 'src/app/models/library-file';
+import { LibraryServiceService } from 'src/app/services/library-service.service';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css'],
-  providers: [],
 })
 export class LibraryComponent implements OnInit {
   @ViewChildren('canvas') canvasDiv: QueryList<ElementRef>;
@@ -21,6 +27,7 @@ export class LibraryComponent implements OnInit {
   currentURL: any;
 
   constructor(
+    private renderer: Renderer2,
     private libraryService: LibraryServiceService,
     private sanitazer: DomSanitizer,
     private dialog: MatDialog
@@ -30,29 +37,37 @@ export class LibraryComponent implements OnInit {
     this.currentURL = '';
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
     for (let i = 0; i < this.canvasList.length; i++) {
       this.getPdf(this.canvasList[i].url, i);
     }
   }
 
-
   openFrame(index) {
+    console.log(index);
     this.currentURL = this.sanitazer.bypassSecurityTrustResourceUrl(
       this.canvasList[index].url
     );
+    console.log(this.currentURL);
 
-    this.dialog.open(ModalFrameComponent, {
+    const dialogRef = this.dialog.open(ModalFrameComponent, {
       data: this.currentURL,
+      panelClass: 'url-frame',
       width: '530px',
       height: '90%',
-      panelClass: 'url-frame',
     });
 
+    dialogRef.afterClosed().subscribe((result) => {
+     
+    });
   }
 
   getPdf(url: string, ind) {
-    const that = this.canvasDiv.filter((index) => index === ind)[0];
+    const that = this.canvasDiv.filter((element, index) => index === ind)[0];
+    console.log(that);
+    // console.log(this.canvasDiv);
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       '//cdn.jsdelivr.net/npm/pdfjs-dist@2.6.347/build/pdf.worker.js';
@@ -61,19 +76,22 @@ export class LibraryComponent implements OnInit {
 
     loadingTask.promise.then((pdf) => {
       pdf.getPage(1).then((page) => {
-        const theViewport = page.getViewport({ scale: 1.5 });
+        const scale = 1.5;
+        const viewport = page.getViewport({ scale });
 
         const canvas = that.nativeElement;
+        console.log(canvas);
         const context = canvas.getContext('2d');
-        canvas.height = theViewport.height;
-        canvas.width = theViewport.width;
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
         const renderContext = {
           canvasContext: context,
-          viewport: theViewport,
+          viewport,
         };
         page.render(renderContext);
       });
     });
   }
+
 }
