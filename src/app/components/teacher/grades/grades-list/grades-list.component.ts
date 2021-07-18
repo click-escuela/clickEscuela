@@ -64,10 +64,8 @@ export class GradesListComponent implements OnInit {
   }
 
   getAllGrades() {
-    console.log('Llamando al servicio')
     this.gradeService.getGrades(this.idSchool).subscribe(
       data => {
-        console.log(data)
         this.dataSource.data = data;
         this.gradesList = data;
         setTimeout(() => this.loadScreen = false, 500);
@@ -140,7 +138,6 @@ export class GradesListComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.loadScreen = true;
     this.getAllGrades();
   }

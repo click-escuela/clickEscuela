@@ -1,4 +1,6 @@
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from 'src/app/test-mocks/material.module';
 
 import { StudentsComponent } from './students.component';
 
@@ -8,7 +10,9 @@ describe('StudentsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StudentsComponent ]
+      imports:[MaterialModule],
+      declarations: [ StudentsComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });

@@ -11,7 +11,6 @@ export class ContactInfoComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ContactInfoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    console.log(this.data.web);
     this.dialogRef.updateSize('550px', this.defineHeightSize() + 'px');
   }
 
@@ -28,7 +27,6 @@ export class ContactInfoComponent implements OnInit {
 
     size += 45 + 48;
 
-    console.log(size);
     return size;
 
 

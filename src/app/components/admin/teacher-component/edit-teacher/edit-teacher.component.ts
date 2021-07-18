@@ -47,8 +47,7 @@ export class EditTeacherComponent implements OnInit {
 }
 
   ngOnInit() {
-    console.log(this.data.teacher);
-    console.log(this.allgrades);
+
 
   }
 

@@ -8,7 +8,7 @@
     <svg
     (click)="toggleHelp()"
       [matTooltip]="clickyMessage"
-      #tooltip="matTooltip"
+      #tooltip
       matTooltipPosition="above"
       matTooltipClass="welcome-tooltip"
       id="Capa_1"
@@ -90,7 +90,7 @@
     </svg>
 
     
-<mat-menu #belowMenu="matMenu" yPosition="below">
+<mat-menu #belowMenu yPosition="below">
   <button mat-menu-item style="background-color: #136399; color: whitesmoke;">¿Has olvidado la contraseña?</button>
   <button mat-menu-item>¿Como obtener un usuario?</button>
 </mat-menu>

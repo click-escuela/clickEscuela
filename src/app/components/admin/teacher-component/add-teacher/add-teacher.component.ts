@@ -70,20 +70,16 @@ export class AddTeacherComponent implements OnInit {
   }
 
   openListChips() {
-    console.log('Se hizo click');
     if (!this.matAutocompleteTrigger.panelOpen) {
       this.matAutocompleteTrigger.openPanel();
-      console.log('abierto');
 
     } else {
       this.matAutocompleteTrigger.closePanel();
-      console.log('cerrado');
     }
   }
 
 
   ngOnInit() {
-    console.log(this.teachersService.teacherList);
   }
 
   addTeacher() {
@@ -142,7 +138,6 @@ export class AddTeacherComponent implements OnInit {
     this.currentTeacher.courses.push(event.option.viewValue);
     this.gradeInput.nativeElement.value = '';
     this.gradeCtrl.setValue(null);
-    console.log(this.currentTeacher);
   }
 
   private _filter(value: string): string[] {

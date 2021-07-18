@@ -100,7 +100,6 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('account');
   }
 
   arrayObjToCsv(ar) {
@@ -177,7 +176,6 @@ export class AccountComponent implements OnInit {
       }
     }
     if (period === WEEK) {
-      console.log(weekDays);
       expenses =
         (this.expensesService.expenseList.filter(a =>
           moment(a.$date, 'DD-MM-YYYY').isSameOrAfter(moment(weekDays[0], 'DD-MM-YYYY'), 'day') &&
@@ -196,7 +194,6 @@ export class AccountComponent implements OnInit {
        this.currentDate.getMonth() && a.$date.getFullYear() === this.currentDate.getFullYear()));
     }
     if (period === CUSTOM_PERIOD) {
-      console.log(this.selectedRange);
 
       expenses =
         (this.expensesService.expenseList.filter(a =>
@@ -269,7 +266,6 @@ export class AccountComponent implements OnInit {
   }
 
   centerText(initialPoint: number, containerWidth: number, stringWidht: number) {
-    console.log(initialPoint + stringWidht / 2);
     return initialPoint + (containerWidth - stringWidht) / 2;
   }
 
@@ -280,7 +276,6 @@ export class AccountComponent implements OnInit {
       const row = (Array.from(Object.values(obj)));
       tableData.push(row);
     }
-    console.log(tableData);
     return tableData;
   }
 

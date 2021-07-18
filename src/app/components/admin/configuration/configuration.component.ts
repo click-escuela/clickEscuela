@@ -35,6 +35,5 @@ export class ConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log('configuration');
   }
 }

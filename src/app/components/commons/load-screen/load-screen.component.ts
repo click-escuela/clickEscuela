@@ -21,7 +21,6 @@ export class LoadScreenComponent implements OnInit {
   constructor( private iconsService: IconGeneratorService) { }
 
   ngOnInit() {
-    console.log(this.messageInfoClass);
   }
 
   cancelRequest() {

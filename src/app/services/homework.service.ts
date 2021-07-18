@@ -22,7 +22,6 @@ export class HomeworkService {
 
   modifyHomework(index: number, homework: Homework) {
     this.homeworkList.splice(index, 1, homework);
-    console.log(this.homeworkList);
   }
   deleteHomework(index) {
     this.homeworkList.splice(index, 1);

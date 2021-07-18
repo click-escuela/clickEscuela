@@ -143,7 +143,6 @@ export class MessageContentComponent implements OnInit {
       this.currentWord++;
     }
 
-    console.log(this.currentWord);
 
     this.clearMarks();
     this.chatContent.nativeElement.scrollTop =
@@ -155,8 +154,6 @@ export class MessageContentComponent implements OnInit {
       '<mark>' + this.lastSearchWord + '</mark>'
     );
 
-    console.log(this.scrollRanges);
-    console.log(this.foundResults);
   }
 
   previousWord() {
@@ -165,7 +162,6 @@ export class MessageContentComponent implements OnInit {
     } else {
       this.currentWord--;
     }
-    console.log(this.currentWord);
     this.clearMarks();
     this.chatContent.nativeElement.scrollTop =
       this.scrollRanges[this.currentWord];
@@ -176,15 +172,12 @@ export class MessageContentComponent implements OnInit {
       '<mark>' + this.lastSearchWord + '</mark>'
     );
 
-    console.log(this.scrollRanges);
-    console.log(this.foundResults);
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    console.log(this.dataSource.filter);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -245,11 +238,9 @@ export class MessageContentComponent implements OnInit {
   }
 
   keySearch($event) {
-    console.log($event);
   }
 
   searchWord(input) {
-    console.log(this.chatContent.nativeElement.clientWidth);
     this.foundResults = [];
     this.scrollRanges = [];
     this.messagesLenght = this.chatmoduleService.messagesLenght;
@@ -286,14 +277,10 @@ export class MessageContentComponent implements OnInit {
           }
         }
 
-        console.log(this.scrollRanges);
-        console.log(this.foundResults);
 
         if (this.foundResults[0] !== undefined) {
           this.chatContent.nativeElement.scrollTop = this.scrollRanges[0];
-          console.log(word);
-          console.log(this.lastSearchWord);
-
+ 
           if (word !== this.lastSearchWord) {
             this.clearMarks();
             this.foundResults[0].content = this.foundResults[0].content.replace(
@@ -373,7 +360,6 @@ export class MessageContentComponent implements OnInit {
   }
 
   scrollVariation(numberMessage, cantMessages) {
-    console.log(numberMessage + '   ' + cantMessages);
 
     const scrollTop = this.chatContent.nativeElement.scrollTop;
     const scrollHeight = this.chatContent.nativeElement.scrollHeight;
@@ -381,14 +367,11 @@ export class MessageContentComponent implements OnInit {
 
     const variation =
       ((scrollHeight - clientHeight) / cantMessages) * (numberMessage + 2);
-    console.log(variation);
     return variation;
   }
 
   viewScroll() {
-    console.log(this.chatContent.nativeElement.scrollTop);
-    console.log(this.chatContent.nativeElement.scrollHeight);
-    console.log(this.chatContent.nativeElement.clientHeight);
+ 
   }
 
   testChat(input) {
@@ -405,7 +388,6 @@ export class MessageContentComponent implements OnInit {
 
       if (regExp.test(inputContent[1])) {
         const num = parseInt(inputContent[1], 10);
-        console.log(num);
 
         if (num > 5000) {
           miliseconds = num;
@@ -464,11 +446,9 @@ export class MessageContentComponent implements OnInit {
 
     this.trimMessages();
 
-    console.log(this.view);
   }
 
   trimMessages() {
-    console.log(this.messageList);
     if (this.currentTab === 'Mensajes') {
       this.messageList = this.messageService.messageList.filter(
         (a) => a.type === this.currentTab.slice(0, -1)
@@ -494,11 +474,9 @@ export class MessageContentComponent implements OnInit {
 
   minimizeChat() {
     if (!this.minimizedChat) {
-      console.log(this.chat.nativeElement.style.height);
       this.chat.nativeElement.style.height = '9vh';
       this.minimizedChat = true;
     } else {
-      console.log(this.chat.nativeElement.style.height);
       this.chat.nativeElement.style.height = '100vh';
       this.minimizedChat = false;
     }
@@ -510,7 +488,6 @@ export class MessageContentComponent implements OnInit {
     this.chatOpen = true;
 
     this.chatItems.forEach((elem) => {
-      console.log(elem.nativeElement.clientHeight);
     });
   }
 
@@ -537,10 +514,8 @@ export class MessageContentComponent implements OnInit {
       this.chatContent.nativeElement.clientHeight;
   }
   showScroll() {
-    console.log(window.innerWidth);
 
     if (this.windowHeight !== window.innerWidth) {
-      console.log(this.scrollRanges);
       this.windowHeight = window.innerWidth;
       this.recalculateScrollRanges();
     }

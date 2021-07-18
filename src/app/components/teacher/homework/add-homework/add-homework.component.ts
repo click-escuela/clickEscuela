@@ -60,15 +60,12 @@ export class AddHomeworkComponent implements OnInit {
 
 
 
-    console.log(this.existData);
   }
 
 
 
   addHomework() {
-    console.log(this.currentHomework);
     this.homeworkService.addHomework(this.currentHomework);
-    console.log(this.homeworkService.homeworkList);
     this.dialogRef.close();
   }
 

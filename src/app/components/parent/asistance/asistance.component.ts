@@ -13,7 +13,6 @@ export class AsistanceParentComponent implements OnInit {
   @Input() route: string;
 
   ngOnInit(): void {
-    console.log('holis se abrior asistencia');
   }
 
 }

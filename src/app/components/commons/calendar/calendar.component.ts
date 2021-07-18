@@ -80,11 +80,9 @@ export class CalendarComponent implements OnInit {
 
     this.currentDay = moment(this.currentDate).format('DD/MM/yyyy');
 
-    console.log(this.currentDay);
   }
 
   selectType(num: number) {
-    console.log(num);
     this.calendarType = num;
   }
 
@@ -190,9 +188,7 @@ export class CalendarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('finish');
-      }
+     
     });
   }
 

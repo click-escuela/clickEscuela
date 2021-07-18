@@ -91,7 +91,6 @@ export class GroupsListComponent implements OnInit {
     this.selectedFiles = [];
     this.selectedFiles.push(this.attachs.nativeElement.files[0]);
 
-    console.log(this.selectedFiles);
 
     const input = this.selectedFiles[0];
     const reader = new FileReader();
@@ -146,7 +145,6 @@ export class GroupsListComponent implements OnInit {
         // En algunos casos el type sale vacio se obtiene la extension mediante el nombre completo del archivo
         case '':
           const splitWord = this.selectedFiles[0].name.split('.');
-          console.log(splitWord);
 
           if (splitWord[splitWord.length - 1] === 'php') {
             this.thumb.nativeElement.src =

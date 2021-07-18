@@ -1,6 +1,6 @@
 import { GradesListComponent } from './grades-list/grades-list.component';
 
-import { ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { QueryList, ViewChildren } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddGradeComponent } from './add-grade/add-grade.component';
@@ -19,7 +19,6 @@ export class GradesComponent implements OnInit {
   }
 
   openDialog(input) {
-    console.log(this.listGrades);
     const dialogRef = this.dialog.open(AddGradeComponent,
       {
         data: input,
@@ -44,7 +43,6 @@ export class GradesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
   }
 
 }

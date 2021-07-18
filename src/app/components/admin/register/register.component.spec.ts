@@ -1,6 +1,15 @@
+import { MatSidenav } from '@angular/material/sidenav';
+import { MaterialModule } from './../../../test-mocks/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
+export class SidenavMock {
+  open() {}
+}
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,7 +17,10 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      imports: [MaterialModule],
+      declarations: [ RegisterComponent],
+      providers: [{provide: MatSidenav, useClass: SidenavMock}],
+      schemas:[NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -16,6 +28,7 @@ describe('RegisterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
+    
     fixture.detectChanges();
   });
 

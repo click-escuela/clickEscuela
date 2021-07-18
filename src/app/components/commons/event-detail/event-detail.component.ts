@@ -45,7 +45,6 @@ export class EventDetailComponent implements OnInit {
     const day = date.day();
     const month = date.month();
     const hour = date.format('HH:mm');
-    console.log(hour);
 
     this.dayName =
       this.week[day] +
@@ -59,6 +58,5 @@ export class EventDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.dayName);
   }
 }

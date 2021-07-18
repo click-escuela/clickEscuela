@@ -47,7 +47,6 @@ export class AddReportCardComponent implements OnInit {
     if (trimes === this.selectedTrimester) { this.selectedTrimester = -1; } else { this.selectedTrimester = trimes; }
 
     this.currentData = this.trimesterService.trimesterList[trimes];
-    console.log(this.trimesterNumber + '   ' + this.selectedTrimester);
 
     switch (this.selectedTrimester) {
       case 0:
@@ -78,10 +77,8 @@ export class AddReportCardComponent implements OnInit {
           a.nameStudent === this.data.component.nameStudent &&
           a.surnameStudent === this.data.component.surname
       );
-      console.log(this.trimesterList.length);
 
       for (let i = 0; i < this.trimesterList.length; i++) {
-        console.log(this.tabs.filter((elem, index) => index === i));
 
         this.tabs.filter(
           (elem, index) => index === i
@@ -98,7 +95,6 @@ export class AddReportCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.existData);
   }
 
   addReportCard(index) {

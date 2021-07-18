@@ -8,4 +8,12 @@ export class MatDialogMock {
         afterClosed: () => Observable
       };
     }
+
+    close() {
+      return true;
+    }
+
+    updateSize(){
+      return true;
+    }
   };

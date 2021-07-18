@@ -62,18 +62,15 @@ export class HomeworkListComponent implements OnInit {
     this.dataSource.data = this.homeworkList;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    console.log(this.homeworkList);
 
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.homeworkList;
   }
 
 
   applyFilter(event: Event) {
-    console.log((event.target as HTMLInputElement).value);
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -89,7 +86,6 @@ export class HomeworkListComponent implements OnInit {
     const inter = setInterval(() => {
       this.progressPercentajeList[index] += Math.floor(Math.random() * (30 - 0)) + 0;
       this.isFinalyload[index] = this.progressPercentajeList[index] < 100;
-      console.log(this.progressPercentajeList[index] + '  ' + this.isFinalyload);
 
       if (this.progressPercentajeList[index] > 100) {
         clearInterval(inter);
@@ -101,7 +97,6 @@ export class HomeworkListComponent implements OnInit {
   }
 
   getPercentaje(index) {
-    console.log(this.progressPercentajeList[index]);
     return this.progressPercentajeList[index];
   }
 
@@ -119,7 +114,6 @@ export class HomeworkListComponent implements OnInit {
   loadFile(index) {
     this.loadIndex.splice(index, 1);
     this.loadAnimation.push(index);
-    console.log(this.loadIndex);
 
   }
 
@@ -127,7 +121,6 @@ export class HomeworkListComponent implements OnInit {
     this.loadIndex.push(index);
 
     this.indexedMap.set(index, ele);
-    console.log(this.loadIndex);
 
 
   }

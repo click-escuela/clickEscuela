@@ -38,11 +38,9 @@ export class LibraryComponent implements OnInit {
 
 
   openFrame(index) {
-    console.log(index);
     this.currentURL = this.sanitazer.bypassSecurityTrustResourceUrl(
       this.canvasList[index].url
     );
-    console.log(this.currentURL);
 
     this.dialog.open(ModalFrameComponent, {
       data: this.currentURL,
@@ -66,7 +64,6 @@ export class LibraryComponent implements OnInit {
         const theViewport = page.getViewport({ scale: 1.5 });
 
         const canvas = that.nativeElement;
-        console.log(canvas);
         const context = canvas.getContext('2d');
         canvas.height = theViewport.height;
         canvas.width = theViewport.width;

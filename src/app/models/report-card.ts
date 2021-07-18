@@ -36,7 +36,6 @@ export class ReportCard {
     }
 
     cleanMatters() {
-        console.log("holis")
         this.matters = new Map()
     }
 

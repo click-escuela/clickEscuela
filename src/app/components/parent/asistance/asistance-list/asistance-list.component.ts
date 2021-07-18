@@ -67,7 +67,6 @@ export class AsistanceListComponent implements OnInit {
     const inter = setInterval(() => {
       this.progressPercentajeList[index] += Math.floor(Math.random() * (30 - 0)) + 0;
       this.isFinalyload[index] = this.progressPercentajeList[index] < 100;
-      console.log(this.progressPercentajeList[index] + '  ' + this.isFinalyload);
 
       if (this.progressPercentajeList[index] > 100) {
         clearInterval(inter);
@@ -79,7 +78,6 @@ export class AsistanceListComponent implements OnInit {
   }
 
   getPercentaje(index) {
-    console.log(this.progressPercentajeList[index]);
     return this.progressPercentajeList[index];
   }
 
@@ -97,7 +95,6 @@ export class AsistanceListComponent implements OnInit {
   loadFile(index) {
     this.loadIndex.splice(index, 1);
     this.loadAnimation.push(index);
-    console.log(this.loadIndex);
 
   }
 
@@ -121,13 +118,11 @@ export class AsistanceListComponent implements OnInit {
     this.loadIndex.push(index);
 
     this.indexedMap.set(index, ele);
-    console.log(this.loadIndex);
 
 
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.asistanceService.asistanceList;
   }
 

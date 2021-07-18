@@ -1,3 +1,4 @@
+import { MaterialModule } from 'src/app/test-mocks/material.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +10,7 @@ import { AccountListComponent } from './account-list.component';
 import {
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 describe('AccountListComponent', () => {
@@ -17,9 +19,10 @@ describe('AccountListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, MatSnackBarModule],
+      imports: [MaterialModule],
       declarations: [ AccountListComponent ],
-      providers: [DecimalPipe]
+      providers: [DecimalPipe],
+      schemas:[NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

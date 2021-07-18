@@ -148,7 +148,7 @@
         <input matInput [(ngModel)]="data.student.adress.street" #adressInput [matAutocomplete]='auto' (keyup)="getNormalizedDirections(adressInput.value)"/>
       </mat-form-field>
 
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto>
         <mat-option *ngFor="let normalizedDirection of normalizedDirections" [value]="normalizedDirection.direccion">
           {{normalizedDirection.direccion}}
         </mat-option>

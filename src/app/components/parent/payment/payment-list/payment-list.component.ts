@@ -28,7 +28,6 @@ export class PaymentListComponent implements OnInit {
 
 
   constructor(private paymentService: AccountService) {
-    console.log(this.paymentList);
   }
 
   getBillName() {
@@ -75,12 +74,9 @@ export class PaymentListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    console.log(this.paymentList);
-    console.log(this.idStudent);
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.paymentService.accountsList.filter(a => a.$titularId === this.idStudent)[0].$payments;
   }
 

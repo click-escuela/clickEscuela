@@ -47,11 +47,9 @@ export class RegisterComponent implements OnInit {
   numberNotifications: number;
 
   constructor(private router: Router) {
-    console.log('register');
   }
 
   ngOnInit() {
-    this.sidenav.open();
   }
 
   changeBlock(newBlock: string) {

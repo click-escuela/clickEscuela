@@ -80,7 +80,6 @@ export class TeacherBaseModelComponent implements OnInit {
   }
 
   deleteTeacher(index, input) {
-    console.log(input);
     this.confirmDialog(
       'Desea eliminar el alumno ' + input.name + ' ' + input.surname,
       index
@@ -88,7 +87,6 @@ export class TeacherBaseModelComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.teachersService.teachersList;
   }
 
@@ -117,9 +115,7 @@ export class TeacherBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('finish');
-      }
+     
     });
   }
 
@@ -132,7 +128,6 @@ export class TeacherBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
         this.refreshTable();
       }

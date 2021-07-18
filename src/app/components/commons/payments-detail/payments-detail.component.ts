@@ -83,7 +83,6 @@ export class PaymentsDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data.payment);
     this.displayedColumns = ['period', 'amount', 'status', 'actions'];
 
     // Assign the data to the data source for the table to render
@@ -177,7 +176,6 @@ export class PaymentsDetailComponent implements OnInit {
 
       const img = new Image();
       img.src = 'assets/images/raggio.png';
-      console.log(img);
       doc.addImage(img, 'PNG', 15, 10, 25, 25);
     } else {
       doc.text('[Nombre de la escuela]', 45, 15);
@@ -187,7 +185,6 @@ export class PaymentsDetailComponent implements OnInit {
 
       const img = new Image();
       img.src = 'assets/images/logo-reduced.png';
-      console.log(img);
       doc.addImage(img, 'PNG', 15, 10, 25, 25);
     }
     doc.setFontSize(20);
@@ -226,9 +223,6 @@ export class PaymentsDetailComponent implements OnInit {
     doc.text('|', 155, 30);
     doc.setFontSize(12);
     doc.text('Fecha', 168.5, 30);
-
-    console.log(doc.getTextWidth('ID. del cliente'));
-    console.log(doc.getTextWidth('Titular'));
 
     doc.text('ID. del cliente', 122.25, 45);
     doc.setFontSize(15);
@@ -284,7 +278,6 @@ export class PaymentsDetailComponent implements OnInit {
     for (let i = 0; i < 15; i++) {
       tableData.push(voidCells);
     }
-    console.log(data);
 
     doc.autoTable(columns, tableData, {
       margin: { top: 60 },
@@ -391,7 +384,6 @@ export class PaymentsDetailComponent implements OnInit {
     containerWidth: number,
     stringWidht: number
   ) {
-    console.log(initialPoint + stringWidht / 2);
     return initialPoint + (containerWidth - stringWidht) / 2;
   }
 
