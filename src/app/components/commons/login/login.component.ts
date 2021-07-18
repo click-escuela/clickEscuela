@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
   ) { this.clickyMessage = 'Bienvenidos';
 
       this.sessions = [];
-      this.sessions.push(new Session('maria12345', 'Maria', 'http://localhost:4200/assets/images/teachers/maria.jpg?'));
-      this.sessions.push(new Session('marcos12345', 'Roberto', 'http://localhost:4200/assets/images/teachers/roberto.jpg?'));
+      this.sessions.push(new Session('maria12345', 'Maria', 'http://click-escuela-develop.herokuapp.com/assets/images/teachers/maria.jpg?'));
+      this.sessions.push(new Session('marcos12345', 'Roberto', 'http://click-escuela-develop.herokuapp.com/assets/images/teachers/roberto.jpg?'));
 
       this.login = {
         user: '',

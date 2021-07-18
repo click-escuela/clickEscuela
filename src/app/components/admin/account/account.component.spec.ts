@@ -1,4 +1,3 @@
-import { MockModule } from 'src/app/test-mocks/mock.module';
 import { DecimalPipe } from '@angular/common';
 import { AccountService } from './../../../services/account.service';
 import { studentService } from './../../../services/student.service';
@@ -20,7 +19,6 @@ describe('AccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MockModule],
       declarations: [AccountComponent],
       providers: [ExpensesService, IconGeneratorService, studentService, AccountService, DecimalPipe]
     }).compileComponents();
