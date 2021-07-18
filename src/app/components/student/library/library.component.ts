@@ -60,14 +60,12 @@ export class LibraryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-     
     });
   }
 
   getPdf(url: string, ind) {
     const that = this.canvasDiv.filter((element, index) => index === ind)[0];
     console.log(that);
-    // console.log(this.canvasDiv);
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       '//cdn.jsdelivr.net/npm/pdfjs-dist@2.6.347/build/pdf.worker.js';
