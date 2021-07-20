@@ -260,7 +260,8 @@ export class AccountComponent implements OnInit {
       {
         data: url,
         width: '90vw',
-        height: '100vh'
+        height: '100vh',
+        panelClass:'url-frame'
       }
     );
   }
