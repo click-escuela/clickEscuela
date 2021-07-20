@@ -56,4 +56,8 @@ export class RegisterComponent implements OnInit {
     this.blockDinamicActually = newBlock;
     this.router.navigate(['/admin/register/' + newBlock]);
   }
+
+  get routerInjected() {
+    return this.router;
+  }
 }

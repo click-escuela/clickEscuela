@@ -79,4 +79,8 @@ export class AddCalendarEventComponent implements OnInit {
     this.calendarService.addEvent(this.newEvent);
     this.dialogRef.close(true);
   }
+
+  getCalendarService() {
+    return this.calendarService;
+  }
 }

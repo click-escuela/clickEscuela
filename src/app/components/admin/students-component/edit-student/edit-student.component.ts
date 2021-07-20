@@ -91,4 +91,12 @@ export class EditStudentComponent implements OnInit {
       }
     );
   }
+
+  get snackbarService$() {
+    return this.snackbarService;
+  }
+
+  get geoRefService$() {
+    return this.geoRefService;
+  }
 }

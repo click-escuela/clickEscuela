@@ -1,3 +1,6 @@
+import { Province } from './../../../../models/province';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogMock } from 'src/app/test-mocks/matDialogmock';
 import { StudentI } from './../../../interfaces/student';
 import { Student } from './../../../../models/student';
 import { DecimalPipe } from '@angular/common';
@@ -8,6 +11,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular
 
 import { EditStudentComponent } from './edit-student.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MESSAGES } from 'src/app/enums/messages-constants';
+import { COMMONS } from 'src/app/enums/commons';
+import { of } from 'rxjs';
 
 describe('EditStudentComponent', () => {
   let component: EditStudentComponent;
@@ -50,10 +56,11 @@ describe('EditStudentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule],
+      imports: [MaterialModule,
+      BrowserAnimationsModule],
       declarations: [ EditStudentComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {}},
+        {provide: MatDialogRef, useClass: MatDialogMock},
         {provide: MAT_DIALOG_DATA, useValue: data},
         DecimalPipe
       ],
@@ -70,5 +77,47 @@ describe('EditStudentComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('onClose method', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onClose();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('addParet method false', () => {
+    component.secondParent = false;
+    const spy = spyOn(component.snackbarService$, 'showSnackBar').and.callThrough();
+    component.addParent();
+    expect(spy).toHaveBeenCalledWith(MESSAGES.PARENT.SUCCES, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
+  });
+
+  it('addParet method true', () => {
+    component.secondParent = true;
+    const spy = spyOn(component.snackbarService$, 'showSnackBar').and.callThrough();
+    component.addParent();
+    expect(spy).toHaveBeenCalledWith(MESSAGES.PARENT.NORMAL, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.NORMAL);
+  });
+
+  it('getAllProvinces', () => {
+    component.provinces = [];
+    const data = {
+      provincias:
+    [
+      {nombre: 'B',
+      id: '2',
+      centroide: {lat: '1', lon: '2'}
+      },
+      {nombre: 'A',
+      id: '2',
+      centroide: {lat: '1', lon: '2'}
+    }
+    ]
+    }; 
+    const spy = spyOn(component.geoRefService$, 'getProvinces').and.returnValue(of(data));
+    component.getAllProvinces();
+    
+    expect(component.provinces[0].nombre).toEqual('A');
+
   });
 });

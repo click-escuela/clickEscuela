@@ -34,6 +34,10 @@ export class ConfigurationComponent implements OnInit {
     this.confService.setEmailSubject(this.emailSubject);
   }
 
+  get configService(): ConfigurationService {
+    return this.confService;
+  }
+
   ngOnInit() {
   }
 }

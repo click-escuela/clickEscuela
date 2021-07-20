@@ -1,3 +1,4 @@
+import { MatDialogMock } from './../../../test-mocks/matDialogmock';
 import { MaterialModule } from './../../../test-mocks/material.module';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -11,14 +12,14 @@ import moment from 'moment';
 describe('AddCalendarEventComponent', () => {
   let component: AddCalendarEventComponent;
   let fixture: ComponentFixture<AddCalendarEventComponent>;
-  let day = {dayObject: moment(new Date())}
+  const day = {dayObject: moment(new Date())};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[MaterialModule],
+      imports: [MaterialModule],
       declarations: [ AddCalendarEventComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {}},
+        {provide: MatDialogRef, useClass: MatDialogMock},
         {provide: MAT_DIALOG_DATA, useValue: day},
       ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
@@ -34,5 +35,18 @@ describe('AddCalendarEventComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should onClose method', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onClose();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should onClose method', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    spyOn(component.getCalendarService(), 'addEvent').and.callThrough();
+    component.saveEvent();
+    expect(spy).toHaveBeenCalled();
   });
 });

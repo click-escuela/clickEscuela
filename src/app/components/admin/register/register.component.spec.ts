@@ -20,7 +20,7 @@ describe('RegisterComponent', () => {
       imports: [MaterialModule],
       declarations: [ RegisterComponent],
       providers: [{provide: MatSidenav, useClass: SidenavMock}],
-      schemas:[NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -28,11 +28,18 @@ describe('RegisterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
-    
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('changeBlock', () => {
+    spyOn(component.routerInjected, 'navigate').and.callThrough();
+    component.blockDinamicActually = 'test';
+    component.changeBlock('new');
+    expect(component.blockDinamicActually).toEqual('new');
   });
 });
