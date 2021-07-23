@@ -54,6 +54,25 @@ GRADES: {
         ERROR: 'Se produjo un error al editar la nota',
         NORMAL: 'No hubo cambios en el editado de la nota'
     }
+},
+ACTIVITY: {
+    GET: {
+        SUCCES: 'Se cargo la lista de Tareas correctamente',
+        ERROR: 'Se produjo un error al intentar obtener las tareas de los cursos asignados',
+        NORMAL: 'Recarga exitosa.'
+    },
+    POST: {
+        SUCCES: 'Se agrego la tarea correctamente.',
+        ERROR: {
+            400: 'No se pudo agregar la tarea. Revise la informacion cargada'
+        },
+        NORMAL: 'Sin cambios en el agregado de tareas'
+    },
+    PUT: {
+        SUCCES: 'Se edito correctamente la tarea',
+        ERROR: 'Se produjo un error al editar la tarea',
+        NORMAL: 'No hubo cambios en el editado de la tarea'
+    }
 }
 
 

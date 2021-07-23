@@ -69,6 +69,10 @@ export class AddStudentComponent implements OnInit {
     });
   }
 
+  get geoRefService$() {
+    return this.geoRefService;
+  }
+
   getNormalizedDirections(direction: string) {
     if (direction.length > 3) {
       this.geoRefService.normalizeDirection(direction).subscribe((data) => {

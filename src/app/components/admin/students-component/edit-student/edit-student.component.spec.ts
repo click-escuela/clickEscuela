@@ -1,14 +1,9 @@
-import { Province } from './../../../../models/province';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogMock } from 'src/app/test-mocks/matDialogmock';
-import { StudentI } from './../../../interfaces/student';
-import { Student } from './../../../../models/student';
 import { DecimalPipe } from '@angular/common';
 import { MaterialModule } from './../../../../test-mocks/material.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EditStudentComponent } from './edit-student.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MESSAGES } from 'src/app/enums/messages-constants';
@@ -113,10 +108,11 @@ describe('EditStudentComponent', () => {
       centroide: {lat: '1', lon: '2'}
     }
     ]
-    }; 
+    };
+
     const spy = spyOn(component.geoRefService$, 'getProvinces').and.returnValue(of(data));
     component.getAllProvinces();
-    
+
     expect(component.provinces[0].nombre).toEqual('A');
 
   });

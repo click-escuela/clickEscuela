@@ -22,31 +22,20 @@ export class TeacherBaseModelComponent implements OnInit {
   displayedColumns: string[];
   dataSource: any;
   teachersArray: Teacher[] = new Array(5);
+  loadTeacherService = false;
+  messageInfo = 'Cargando Lista de profesores';
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private teachersService: TeacherService,
+    public teachersService: TeacherService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<TeacherBaseModelComponent>
   ) {
     this.teachersArray = this.teachersService.teachersList;
-    this.displayedColumns = [
-      'name',
-      'surname',
-      'bornDate',
-      'idNumber',
-      'courses',
-      'actions',
-    ];
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.teachersService.teachersList;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   onClose() {
@@ -57,9 +46,9 @@ export class TeacherBaseModelComponent implements OnInit {
     this.displayedColumns = [
       'name',
       'surname',
-      'bornDate',
+      'birthday',
       'idNumber',
-      'courses',
+      // 'courses',
       'actions',
     ];
 
@@ -68,6 +57,18 @@ export class TeacherBaseModelComponent implements OnInit {
     this.dataSource.data = this.teachersService.teachersList;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    this.getAllTeachers();
+  }
+
+  getAllTeachers() {
+    this.teachersService.getTeachers('12345').subscribe(
+      data => {
+        console.log(data);
+        this.dataSource.data = data;
+        setTimeout(() => {this.loadTeacherService = true; }, 1000);
+      }
+    );
   }
 
   applyFilter(event: Event) {
@@ -115,7 +116,7 @@ export class TeacherBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-     
+
     });
   }
 

@@ -1,3 +1,4 @@
+import { MatDialogMock } from './../../../test-mocks/matDialogmock';
 import { MaterialModule } from './../../../test-mocks/material.module';
 import { DecimalPipe } from '@angular/common';
 import { AccountService } from './../../../services/account.service';
@@ -5,13 +6,14 @@ import { studentService } from './../../../services/student.service';
 import { IconGeneratorService } from 'src/app/services/icon-generator.service';
 import { ExpensesService } from './../../../services/expenses.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AccountComponent } from './account.component';
+import { of } from 'rxjs';
 
 
 describe('AccountComponent', () => {
@@ -22,8 +24,9 @@ describe('AccountComponent', () => {
     TestBed.configureTestingModule({
       imports: [MaterialModule],
       declarations: [AccountComponent],
-      providers: [ExpensesService, IconGeneratorService, studentService, AccountService, DecimalPipe],
-      schemas:[NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      providers: [ExpensesService, IconGeneratorService, studentService, AccountService, DecimalPipe,
+      {provide: MatDialog, useClass: MatDialogMock}],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -35,5 +38,18 @@ describe('AccountComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('generateDebtorsReport', () => {
+    component.generateDebtorsReport(1);
+  });
+
+  it('generateDebtorsReport', () => {
+    spyOn(component, 'arrayObjToCsv').and.callFake(() => {});
+    component.generateDebtorsReport(2);
+  });
+
+  it('generateDebtorsReport', () => {
+    component.generateDebtorsReport(3);
   });
 });

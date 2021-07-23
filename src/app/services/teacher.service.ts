@@ -1,12 +1,16 @@
+import { TeacherI } from './../components/interfaces/teacher';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 import { Teacher } from '../models/teacher';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeacherService {
   teachersList: Teacher[];
-  constructor() {
+  constructor(public connector: HttpClient ) {
     this.teachersList = [];
     this.teacherList.push(
       new Teacher(
@@ -53,8 +57,18 @@ export class TeacherService {
     return this.teachersList;
   }
 
-  addTeacher(teacher: Teacher) {
-    this.teachersList.push(teacher);
+  getTeachers(idSchool): Observable<TeacherI> {
+    const path = environment.TEACHERS_URL.replace('{schoolId}', idSchool);
+    return this.connector.get<any>(path);
+  }
+
+  // addTeacher(teacher: Teacher) {
+  //   this.teachersList.push(teacher);
+  // }
+
+  addTeacher(teacher: TeacherI): Observable<any> {
+    const path = environment.TEACHERS_URL.replace('{schoolId}', environment.schoolId);
+    return this.connector.post<any>(path, teacher);
   }
 
   deleteTeacher(index) {

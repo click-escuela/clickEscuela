@@ -4,23 +4,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { HomeworkComponent } from './homework.component';
+import { HomeworkStudentComponent } from './homework.component';
 
-describe('HomeworkComponent', () => {
-  let component: HomeworkComponent;
-  let fixture: ComponentFixture<HomeworkComponent>;
+describe('HomeworkStudentComponent', () => {
+  let component: HomeworkStudentComponent;
+  let fixture: ComponentFixture<HomeworkStudentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[MaterialModule],
-      declarations: [ HomeworkComponent ],
+      declarations: [ HomeworkStudentComponent ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeworkComponent);
+    fixture = TestBed.createComponent(HomeworkStudentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
