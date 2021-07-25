@@ -27,6 +27,8 @@ constructor(
     iconRegister.addSvgIcon('add-student', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/add-student.svg'));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
+    iconRegister.addSvgIcon('upload', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/upload.svg'));
+
 
   
   }

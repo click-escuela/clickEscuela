@@ -24,7 +24,7 @@ describe('TeacherBaseModelComponent', () => {
   let component: TeacherBaseModelComponent;
   let fixture: ComponentFixture<TeacherBaseModelComponent>;
   const teacher = new Teacher('', '', new Date(), '', '', '', '', '', []);
-  const teacherI ={
+  const teacherI = {
     adress: {
       locality: 'San Miguel',
       number: '1234',
@@ -49,7 +49,7 @@ describe('TeacherBaseModelComponent', () => {
       providers: [
         { provide: MatDialogRef, useClass: MatDialogMock },
         { provide: MatDialog, useClass: MatDialogMock },
-      {provide: SnackBarService, useClass:SnackBarServiceMock},
+      {provide: SnackBarService, useClass: SnackBarServiceMock},
          TeacherService],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
@@ -71,11 +71,6 @@ describe('TeacherBaseModelComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('confirmDialog has called true', () => {
-    const spy = spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(true)} as MatDialogRef<typeof component>);
-    component.deleteTeacher(1, teacher);
-    expect(spy).toHaveBeenCalled();
-  });
 
   it('confirmDialog has called false', () => {
     const spy = spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(false)} as MatDialogRef<typeof component>);
@@ -103,7 +98,7 @@ describe('TeacherBaseModelComponent', () => {
 
   it('getAllTeachers success', () => {
     const spy = spyOn(component.teachersService, 'getTeachers').and.returnValue(of(teacherI));
-    component.getAllTeachers()
+    component.getAllTeachers();
     expect(spy).toHaveBeenCalled();
   });
 

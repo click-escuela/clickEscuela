@@ -1,3 +1,4 @@
+import { IconGeneratorService } from './../../../services/icon-generator.service';
 import {animate, state, style, transition, trigger, } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -25,6 +26,7 @@ import { Router } from '@angular/router';
       transition('notifications-show=>notifications-hide', animate('4000ms')),
     ]),
   ],
+  providers: [IconGeneratorService]
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('drawer', { static: true }) sidenav: MatSidenav;
@@ -46,7 +48,7 @@ export class RegisterComponent implements OnInit {
   isNotification: boolean;
   numberNotifications: number;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private iconService: IconGeneratorService) {
   }
 
   ngOnInit() {

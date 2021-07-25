@@ -1,3 +1,5 @@
+import { StudentLoadComponent } from './mass-additions/student-load/student-load.component';
+import { MassAdditionsComponent } from './mass-additions/mass-additions.component';
 import { AppRoutingModule } from './../../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { ConfigurationComponent } from './configuration/configuration.component';
@@ -60,6 +62,8 @@ import { MatChipsModule } from '@angular/material/chips';
     EditTeacherComponent,
     ConfigurationComponent,
     RangeSelectorComponent,
+    MassAdditionsComponent,
+    StudentLoadComponent
   ],
 
   imports: [
@@ -104,8 +108,7 @@ import { MatChipsModule } from '@angular/material/chips';
     CommonsModule,
     MatAutocompleteModule,
     RouterModule,
-    AppRoutingModule
-    
+    AppRoutingModule,
   ],
   exports: [RegisterComponent],
 })

@@ -1,3 +1,4 @@
+import { MassAdditionsComponent } from './components/admin/mass-additions/mass-additions.component';
 import { LoginComponent } from './components/commons/login/login.component';
 import { AsistanceParentComponent } from './components/parent/asistance/asistance.component';
 import { PaymentComponent } from './components/parent/payment/payment.component';
@@ -51,6 +52,8 @@ const routes: Routes = [
       { path: 'teachers', component: AddTeacherComponent },
       { path: 'calendar', component: CalendarComponent },
       { path: 'configurations', component: ConfigurationComponent },
+      { path: 'mass-upload', component: MassAdditionsComponent},
+
     ],
   },
   {
