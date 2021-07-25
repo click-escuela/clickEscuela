@@ -36,7 +36,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { HomeworkComponent } from './homework/homework.component';
+import { HomeworkStudentComponent } from './homework/homework.component';
 import { HomeworkListComponent } from './homework/homework-list/homework-list.component';
 import { LibraryComponent } from './library/library.component';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
@@ -45,7 +45,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     StudentMenuComponent,
-    HomeworkComponent,
+    HomeworkStudentComponent,
     HomeworkListComponent,
     LibraryComponent,
     GroupsComponent,

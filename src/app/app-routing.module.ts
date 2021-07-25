@@ -8,7 +8,7 @@ import { ConfigurationComponent } from './components/admin/configuration/configu
 import { CalendarComponent } from './components/commons/calendar/calendar.component';
 import { AddTeacherComponent } from './components/admin/teacher-component/add-teacher/add-teacher.component';
 import { AddStudentComponent } from './components/admin/students-component/add-student/add-student.component';
-import { HomeworkComponent } from './components/student/homework/homework.component';
+import { HomeworkStudentComponent } from './components/student/homework/homework.component';
 import { CoursesComponent } from './components/teacher/courses/courses.component';
 import { HomeComponent } from './components/teacher/home/home.component';
 import { Error404Component } from './components/commons/Error404/Error404.component';
@@ -23,6 +23,7 @@ import { ReportCardComponent } from './components/parent/report-card/report-card
 import { AccountComponent } from './components/admin/account/account.component';
 import { LibraryComponent } from './components/student/library/library.component';
 import { GradesResumeComponent } from './components/parent/grades/grades.component';
+import { HomeworkComponent } from './components/teacher/homework/homework.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -59,7 +60,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'reportCard', pathMatch: 'full' },
       { path: 'reportCard', component: ReportCardComponent },
       { path: 'grades', component: GradesResumeComponent },
-      { path: 'homework', component: HomeworkComponent },
+      { path: 'homework', component: HomeworkStudentComponent },
       { path: 'message', component: MessagesComponent },
       { path: 'library', component: LibraryComponent },
       { path: 'groups', component: GroupsComponent },

@@ -1,3 +1,4 @@
+import { AsistanceParent } from './../models/asistance-parent';
 /* tslint:disable:no-unused-variable */
 
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -13,6 +14,8 @@ describe('Service: AsistanceParent', () => {
   });
 
   it('should ...', inject([AsistanceParentService], (service: AsistanceParentService) => {
+    const asistance = service.asistantList;
     expect(service).toBeTruthy();
+    expect(asistance[0] instanceof AsistanceParent).toEqual(true);
   }));
 });
