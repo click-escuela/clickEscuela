@@ -62,7 +62,6 @@ export class ReportCardListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //this.reportCardList[index].load=true;
-        console.log(this.reportCardList)
         this.refreshTable()
 
       }
@@ -70,8 +69,6 @@ export class ReportCardListComponent implements OnInit {
   }
 
   dowloadReportCard(component, index) {
-    console.log(this.reportCardService.reportCardIndex(index))
-    console.log(component)
     const dialogRef = this.dialog.open(AddReportCardComponent,
       {
 
@@ -112,7 +109,6 @@ export class ReportCardListComponent implements OnInit {
   }
 
   openModify(index, component) {
-    console.log(component)
     const dialogRef = this.dialog.open(AddReportCardComponent,
       {
 
@@ -129,7 +125,6 @@ export class ReportCardListComponent implements OnInit {
 
   }
   applyFilter(event: Event) {
-    console.log((event.target as HTMLInputElement).value)
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 

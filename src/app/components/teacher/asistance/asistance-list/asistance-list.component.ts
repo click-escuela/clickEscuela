@@ -100,12 +100,10 @@ export class AsistanceListComponent implements OnInit {
   }
 
   changeTakeAsistance() {
-    console.log(this.asistanceListAux);
     if (!this.takeAsistance) {
       this.takeAsistance = !this.takeAsistance;
       this.paginator.pageSize = this.asistanceListAux.length;
       this.dataSource.data = this.asistanceListAux;
-      console.log(this.paginator);
     } else {
       this.takeAsistance = !this.takeAsistance;
       this.paginator.pageSize = 5;
@@ -119,7 +117,6 @@ export class AsistanceListComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
 
     this.dataSource.data = this.asistanceList;
   }
@@ -134,7 +131,6 @@ export class AsistanceListComponent implements OnInit {
   }
 
   setPresent($event: Event, index: number) {
-    console.log($event);
     const check = ($event.target as HTMLInputElement).checked;
     this.presentsList[index] = check;
   }

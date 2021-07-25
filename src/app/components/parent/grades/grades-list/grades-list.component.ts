@@ -68,7 +68,6 @@ export class GradesListComponent implements OnInit {
       this.displayedColumns = ['description', 'matter', 'grade'];
     }
 
-    console.log(this.displayedColumns);
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
@@ -78,7 +77,6 @@ export class GradesListComponent implements OnInit {
 
     this.applySonFilter();
 
-    console.log(this.routeLink);
 
 
   }
@@ -151,12 +149,10 @@ export class GradesListComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.gradesList;
   }
 
   showSon() {
-    console.log(this.son);
   }
 
 }

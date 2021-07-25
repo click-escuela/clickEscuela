@@ -54,7 +54,6 @@ export class AddCalendarEventComponent implements OnInit {
       'Marcos Lopez'
     );
     this.newEvent.$day = day.dayObject.toDate();
-    console.log(this.newEvent);
     this.setDayName();
   }
 
@@ -74,11 +73,14 @@ export class AddCalendarEventComponent implements OnInit {
       ' de ' +
       this.monthNames[this.currentMoment.month()];
 
-    console.log(this.newEvent);
   }
 
   saveEvent() {
     this.calendarService.addEvent(this.newEvent);
     this.dialogRef.close(true);
+  }
+
+  getCalendarService() {
+    return this.calendarService;
   }
 }

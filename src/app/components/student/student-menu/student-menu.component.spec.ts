@@ -1,7 +1,8 @@
+import { MaterialModule } from './../../../test-mocks/material.module';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { StudentMenuComponent } from './student-menu.component';
 
@@ -11,7 +12,9 @@ describe('StudentMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentMenuComponent ]
+      imports:[MaterialModule],
+      declarations: [ StudentMenuComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

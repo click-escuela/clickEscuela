@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VerticalBarChartComponent } from './vertical-bar-chart.component';
@@ -8,7 +9,8 @@ describe('VerticalBarChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerticalBarChartComponent ]
+      declarations: [ VerticalBarChartComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });

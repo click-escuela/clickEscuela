@@ -1,8 +1,9 @@
+import { MaterialModule } from 'src/app/test-mocks/material.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AsistanceListComponent } from './asistance-list.component';
 
@@ -12,8 +13,9 @@ describe('AsistanceListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[MatSnackBarModule],
-      declarations: [ AsistanceListComponent ]
+      imports:[MaterialModule],
+      declarations: [ AsistanceListComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

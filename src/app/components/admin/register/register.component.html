@@ -1,6 +1,6 @@
 <mat-drawer-container [ngClass]="classMenu" autosize class="h-100">
   <img id="background-img" src="../../../../assets/images/background.png" alt="" />
-  <mat-drawer #drawer class="menu-nav" [ngClass]="sidenavClass" mode="side">
+  <mat-drawer #drawer class="menu-nav" [ngClass]="sidenavClass" mode="side" opened='true'>
     <div id="showButton" *ngIf="showHomeButton" class="row mb-4 px-2 home-button">
       <div class="col-12" (click)="changeBlock('home')">
         <div>

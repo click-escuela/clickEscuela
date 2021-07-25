@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.profiles);
 
     this.checkCredentials();
 
@@ -87,7 +86,6 @@ export class LoginComponent implements OnInit {
 
   toggleHelp() {
     this.help = !this.help;
-    console.log(this.help);
   }
 
   checkCredentials() {
@@ -96,10 +94,8 @@ export class LoginComponent implements OnInit {
     const credential = JSON.parse(localStorage.getItem('token'));
     const authDate = moment(credential.expiration);
 
-   // console.log(credential.id)
     this.currentSession = this.sessions.filter(a => a.token === credential.id)[0];
 
-    console.log(this.currentSession);
 
 
     if (authDate.isBefore(new Date(), 'minutes')) {
@@ -177,7 +173,6 @@ export class LoginComponent implements OnInit {
 
 
     if (session !== null) {
-    console.log(token);
     this.load = true;
 
     setTimeout(() => {

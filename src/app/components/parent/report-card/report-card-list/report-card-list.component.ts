@@ -52,7 +52,6 @@ export class ReportCardListComponent implements OnInit {
     const billname = 'bill' + date.getDate() + date.getHours() + date.getSeconds();
 
     const reportCard = this.reportCardList[index];
-    console.log(reportCard);
 
     const doc = new jsPDF();
 
@@ -70,7 +69,6 @@ export class ReportCardListComponent implements OnInit {
     for (const [clave, valor] of reportCard.matters) {
       data.push([clave, valor]);
     }
-    console.log(data);
 
     doc.autoTable(columns, data,
       { margin: { top: 25 } }
@@ -84,7 +82,6 @@ export class ReportCardListComponent implements OnInit {
   }
 
   confirmDownload(row, index) {
-    console.log(row);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent,
       {

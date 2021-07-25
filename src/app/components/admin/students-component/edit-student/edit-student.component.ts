@@ -37,7 +37,6 @@ export class EditStudentComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data);
     this.secondParent = false;
   }
 
@@ -84,14 +83,20 @@ export class EditStudentComponent implements OnInit {
     this.data.student.schoolId = this.data.schoolId;
     this.studentsService.editStudentPut(this.data.student, this.data.schoolId).subscribe(
       data => {
-        console.log(data);
         this.snackbarService.showSnackBar(MESSAGES.STUDENT.PUT.SUCCES, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
         this.dialogRef.close(false);
       },
       error => {
-        console.log(error);
         this.snackbarService.showSnackBar(MESSAGES.STUDENT.PUT.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
       }
     );
+  }
+
+  get snackbarService$() {
+    return this.snackbarService;
+  }
+
+  get geoRefService$() {
+    return this.geoRefService;
   }
 }

@@ -15,7 +15,6 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.view + ' ' + this.tabs);
     if (this.view === 'student') {
       this.tabs = ['Notificaciones'];
     } else {

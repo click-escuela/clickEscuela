@@ -101,7 +101,6 @@ export class AddStudentComponent implements OnInit {
 
   addStudent() {
     this.addingStudent = true;
-    console.log(this.currentStudent);
     this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent, this.schoolId).subscribe(
       data => {
 
@@ -129,7 +128,6 @@ export class AddStudentComponent implements OnInit {
   }
 
   cancelRequest() {
-    console.log('Se cancelo evento');
     this.serviceRequest.unsubscribe();
     }
 

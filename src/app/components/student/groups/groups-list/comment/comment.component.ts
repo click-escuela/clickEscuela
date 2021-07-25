@@ -50,7 +50,6 @@ export class CommentComponent implements OnInit {
   }
 
   deleteComment(index: any) {
-    console.log(index);
     this.workGroupService.deleteComment(this.currentIndex, index);
     this.addHistory(this.currentIndex, 'Elimino su comentario');
   }
@@ -60,7 +59,6 @@ export class CommentComponent implements OnInit {
     const elementWidth = element.clientWidth;
     const elementHeight = element.clientHeight;
     const elementRect = element.getBoundingClientRect();
-    console.log(elementRect);
 
 
     const dialogRef = this.dialog.open(ModalEditComponent,
@@ -73,9 +71,7 @@ export class CommentComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result !== '') {
-        console.log(result);
         dialogRef.close();
         this.editComment(index, result);
 

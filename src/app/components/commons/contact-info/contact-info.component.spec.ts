@@ -1,8 +1,9 @@
+import { MatDialogMock } from './../../../test-mocks/matDialogmock';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { ContactInfoComponent } from './contact-info.component';
 
@@ -24,9 +25,10 @@ describe('ContactInfoComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ContactInfoComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {}},
+        {provide: MatDialogRef, useClass: MatDialogMock},
         {provide: MAT_DIALOG_DATA, useValue: data}
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

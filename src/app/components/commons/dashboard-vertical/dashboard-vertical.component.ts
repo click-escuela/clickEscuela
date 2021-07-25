@@ -34,7 +34,6 @@ export class DashboardVerticalComponent implements OnInit {
   };
 
   onSelect(event) {
-    console.log(event);
   }
   ngOnInit(): void {
   }

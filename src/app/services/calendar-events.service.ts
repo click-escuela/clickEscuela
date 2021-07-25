@@ -46,7 +46,6 @@ export class CalendarEventsService {
         )
       );
 
-    console.log(this.eventsList[0]);
   }
 
   get eventList() {

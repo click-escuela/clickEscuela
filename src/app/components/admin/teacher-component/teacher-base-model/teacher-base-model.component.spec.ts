@@ -1,9 +1,10 @@
+import { MaterialModule } from './../../../../test-mocks/material.module';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TeacherService } from './../../../../services/teacher.service';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { TeacherBaseModelComponent } from './teacher-base-model.component';
 
@@ -13,9 +14,10 @@ describe('TeacherBaseModelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[TeacherService],
+      imports: [MaterialModule],
       declarations: [ TeacherBaseModelComponent ],
-      providers:[{provide: MatDialogRef,useValue:{}}]
+      providers: [{provide: MatDialogRef, useValue: {}}, TeacherService],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

@@ -41,7 +41,6 @@ export class HomeworkListComponent implements OnInit {
   }
 
   refreshTable() {
-    console.log('Refresh exitoso');
     this.dataSource.data = this.homeworkList;
   }
 
@@ -68,7 +67,6 @@ export class HomeworkListComponent implements OnInit {
   }
 
   openModify(index, homework) {
-    console.log(homework);
     const dialogRef = this.dialog.open(AddHomeworkComponent,
       {
 
@@ -92,7 +90,6 @@ export class HomeworkListComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    console.log((event.target as HTMLInputElement).value);
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 

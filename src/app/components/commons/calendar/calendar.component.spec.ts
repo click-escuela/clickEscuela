@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 describe('CalendarComponent', () => {
@@ -14,7 +15,8 @@ describe('CalendarComponent', () => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [ CalendarComponent ],
-      providers: [CalendarEventsService]
+      providers: [CalendarEventsService],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

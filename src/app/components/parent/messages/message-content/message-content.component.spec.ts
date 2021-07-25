@@ -7,7 +7,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, Renderer2 } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA, Renderer2 } from '@angular/core';
 
 import { MessageContentComponent } from './message-content.component';
 
@@ -21,7 +21,8 @@ describe('MessageContentComponent', () => {
     TestBed.configureTestingModule({
       imports: [MatSnackBarModule, MatDialogModule, MatMenuModule],
       declarations: [ MessageContentComponent ],
-      providers: [ChatmessagesService, MessagesService, Renderer2]
+      providers: [ChatmessagesService, MessagesService, Renderer2],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -30,6 +31,8 @@ describe('MessageContentComponent', () => {
     fixture = TestBed.createComponent(MessageContentComponent);
     component = fixture.componentInstance;
     chatmessage= new ChatMessage('', new Date(), true );
+    component.foundResults.push(chatmessage);
+    component.foundResults.push(chatmessage);
     fixture.detectChanges();
   });
 
@@ -49,35 +52,29 @@ describe('MessageContentComponent', () => {
 
   it('should nextword (if) call', () => {
     component.currentWord = 1;
-    component.foundResults.push(chatmessage);
-    component.foundResults.push(chatmessage);
     component.nextWord();
     expect(component.currentWord).toEqual(0);
   });
 
   it('should nextword (else) call', () => {
-    component.currentWord = 3;
-    component.foundResults.push(chatmessage);
-    component.foundResults.push(chatmessage);
+    component.currentWord = 0;
     component.nextWord();
-    expect(component.currentWord).toEqual(4);
-
+    expect(component.currentWord).toEqual(1);
   });
+
 
   it('should previous word (if) call', () => {
     component.currentWord = 0;
-    component.foundResults.push(chatmessage);
-    component.foundResults.push(chatmessage);
     component.previousWord();
     expect(component.currentWord).toEqual(component.foundResults.length-1);
 
   });
-  it('should previous word (if) call', () => {
-    component.currentWord = 3;
-    // component.foundResults.push(chatmessage);
-    // component.foundResults.push(chatmessage);
+
+  it('should previous word (else) call', () => {
+    component.currentWord = 1;
     component.previousWord();
-    expect(component.currentWord).toEqual(2);
+    expect(component.currentWord).toEqual(0);
 
   });
+
 });

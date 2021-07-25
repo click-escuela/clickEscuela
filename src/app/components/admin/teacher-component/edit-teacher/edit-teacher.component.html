@@ -131,7 +131,7 @@
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             (matChipInputTokenEnd)="add($event)">
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-autocomplete #auto (optionSelected)="selected($event)">
           <mat-option *ngFor="let grade of filteredgrades | async" [value]="grade">
             {{grade}}
           </mat-option>

@@ -112,9 +112,7 @@ export class StudentBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('finish');
-      }
+    
     });
   }
 
@@ -128,7 +126,6 @@ export class StudentBaseModelComponent implements OnInit {
   }
 
   deleteStudent(index, input) {
-    console.log(input);
     this.confirmDialog(
       'Desea eliminar el alumno ' + input.name + ' ' + input.surname,
       index
@@ -154,10 +151,8 @@ export class StudentBaseModelComponent implements OnInit {
             this.reload = false; },
 
           500);
-        console.log(this.loadStudentsService);
       },
       err => {
-        console.log(err);
         this.snackbar.showSnackBar(MESSAGES.STUDENT.GET.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
         this.loadError = true;
         this.messageError = err.message;
@@ -165,7 +160,6 @@ export class StudentBaseModelComponent implements OnInit {
     );
   }
   refreshTable() {
-    console.log('Refresh exitoso');
     this.loadStudentsList();
   }
 
@@ -201,9 +195,7 @@ export class StudentBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log(result);
-      }
+    
     });
   }
 }

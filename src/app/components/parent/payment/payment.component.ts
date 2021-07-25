@@ -67,18 +67,14 @@ export class PaymentComponent implements OnInit {
     const debts = this.paymentList.filter((a) => a.status === false);
     this.faultpayments = debts;
 
-    console.log(debts);
-
     this.paymentDebt = 0;
     for (const elem of debts) {
       this.paymentDebt += elem.amount;
     }
 
-    console.log(this.paymentDebt);
   }
 
   ngOnInit(): void {
     this.getDebt();
-    console.log('EL pago que falta es ' + this.paymentDebt);
   }
 }

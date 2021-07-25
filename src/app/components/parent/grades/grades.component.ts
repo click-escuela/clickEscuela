@@ -17,7 +17,6 @@ export class GradesResumeComponent implements OnInit {
   }
 
   showSon(son: string) {
-    console.log(son);
   }
 
   ngOnInit(): void {

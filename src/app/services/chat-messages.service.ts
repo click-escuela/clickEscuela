@@ -75,7 +75,6 @@ export class ChatmessagesService {
   addChatMessage(message) {
     this.chatmodules[this.chatmodules.length - 1].addChatMessage(
       new ChatMessage(message, new Date(), true));
-    console.log(this.chatmodules);
 
   }
 

@@ -100,9 +100,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sidenav.open();
 
-    console.log(this.router.url);
 
   }
 

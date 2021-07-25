@@ -48,7 +48,6 @@ export class ReportCardService {
 
     }
 
-    console.log(this.reportCardList[index]);
   }
 
   reportCardIndex(index) {
@@ -56,7 +55,6 @@ export class ReportCardService {
   }
 
   deleteReportCard(index) {
-    console.log('Se eliminara ' + index);
     this.reportCardList[index].matters = new Map();
 
   }

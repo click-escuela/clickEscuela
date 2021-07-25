@@ -95,11 +95,9 @@ export class AddGradeComponent implements OnInit {
     this.studentsList = this.studentsService.studentsList.filter(
       a => a.course === this.selectedCourse
     );
-    console.log(this.selectedCourse);
   }
 
   addGrade() {
-    console.log(this.currentGrade);
     this.gradesService.addGrade(this.currentGrade).subscribe(
       data => {
         this.snackBar.showSnackBar(MESSAGES.GRADES.POST.SUCCES, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
@@ -122,7 +120,6 @@ export class AddGradeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data.grade);
   }
 
   onClose() {

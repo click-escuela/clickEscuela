@@ -12,7 +12,6 @@ constructor(public snackBar: MatSnackBar) { }
 showSnackBar(message: string, action: string, type: string) {
 
   this.snackBar.open(
-    
      message,
      action, {
       horizontalPosition: 'end',

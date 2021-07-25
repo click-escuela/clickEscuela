@@ -47,15 +47,17 @@ export class RegisterComponent implements OnInit {
   numberNotifications: number;
 
   constructor(private router: Router) {
-    console.log('register');
   }
 
   ngOnInit() {
-    this.sidenav.open();
   }
 
   changeBlock(newBlock: string) {
     this.blockDinamicActually = newBlock;
     this.router.navigate(['/admin/register/' + newBlock]);
+  }
+
+  get routerInjected() {
+    return this.router;
   }
 }
