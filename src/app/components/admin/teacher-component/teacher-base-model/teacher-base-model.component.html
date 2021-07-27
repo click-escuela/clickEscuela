@@ -4,12 +4,14 @@
 
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" id="input" #input>
 </mat-form-field>
 
 <app-load-screen 
 [loadService]="loadTeacherService" 
 [messageInfo]="messageInfo"
+[messageError]='messageError'
+[loadError]='loadError'
 ></app-load-screen>
 
 <div class="div-content" *ngIf="loadTeacherService">
@@ -51,7 +53,7 @@
           <img src="../../../../assets/images/user.svg" alt="">
         </div>
 
-        <div class="teacher-action" matTooltip="Editar" (click)="editTeacher(index,row)">
+        <div class="teacher-action" matTooltip="Editar" (click)="editTeacher(row)">
 
           <img src="../../../../assets/images/edit.svg" alt="">
         </div>

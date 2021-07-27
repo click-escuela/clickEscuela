@@ -71,7 +71,8 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private calendarService: CalendarEventsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private icons: IconGeneratorService
   ) {
     this.currentDate = new Date();
 

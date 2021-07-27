@@ -1,13 +1,13 @@
+import { TeacherI } from './../../../interfaces/teacher';
+import { MESSAGES } from './../../../../enums/messages-constants';
+import { COMMONS } from './../../../../enums/commons';
+import { SnackBarService } from './../../../../services/snack-bar.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from 'src/app/components/commons/confirm-dialog/confirm-dialog.component';
 import { Teacher } from 'src/app/models/teacher';
 import { EditTeacherComponent } from '../edit-teacher/edit-teacher.component';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,6 +24,8 @@ export class TeacherBaseModelComponent implements OnInit {
   teachersArray: Teacher[] = new Array(5);
   loadTeacherService = false;
   messageInfo = 'Cargando Lista de profesores';
+  loadError = false;
+  messageError = '';
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -32,10 +34,10 @@ export class TeacherBaseModelComponent implements OnInit {
   constructor(
     public teachersService: TeacherService,
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<TeacherBaseModelComponent>
+    public dialogRef: MatDialogRef<TeacherBaseModelComponent>,
+    public snackbar: SnackBarService
   ) {
     this.teachersArray = this.teachersService.teachersList;
-
   }
 
   onClose() {
@@ -62,11 +64,33 @@ export class TeacherBaseModelComponent implements OnInit {
   }
 
   getAllTeachers() {
+    this.loadError = false;
+    this.loadTeacherService = false;
+
     this.teachersService.getTeachers('12345').subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.dataSource.data = data;
-        setTimeout(() => {this.loadTeacherService = true; }, 1000);
+        this.snackbar.showSnackBar(
+          MESSAGES.TEACHER.GET.SUCCES,
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.SUCCES
+        );
+        setTimeout(() => {
+          this.loadTeacherService = true;
+        }, 1000);
+      },
+      (error) => {
+        this.snackbar.showSnackBar(
+          MESSAGES.TEACHER.GET.ERROR,
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.ERROR
+        );
+        setTimeout(() => {
+          this.loadTeacherService = false;
+          this.loadError = true;
+          this.messageError = MESSAGES.TEACHER.GET.ERROR;
+        }, 1000);
       }
     );
   }
@@ -87,10 +111,6 @@ export class TeacherBaseModelComponent implements OnInit {
     );
   }
 
-  refreshTable() {
-    this.dataSource.data = this.teachersService.teachersList;
-  }
-
   confirmDialog(input, index) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: input,
@@ -101,7 +121,7 @@ export class TeacherBaseModelComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.teachersService.deleteTeacher(index);
-        this.refreshTable();
+        this.getAllTeachers();
       }
     });
   }
@@ -115,23 +135,19 @@ export class TeacherBaseModelComponent implements OnInit {
       panelClass: 'contact-info-back',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
-  editTeacher(ind, input) {
+  editTeacher(input) {
     const dialogRef = this.dialog.open(EditTeacherComponent, {
-      data: { teacher: input, index: ind },
+      data: { teacher: input },
       width: '100vw',
       height: '95vh',
       maxWidth: '95vw',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.refreshTable();
-      }
+      this.getAllTeachers();
     });
   }
 }
