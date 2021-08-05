@@ -1,3 +1,4 @@
+import { AddGradeMassiveComponent } from './grades/add-grade-massive/add-grade-massive.component';
 import { AppRoutingModule } from './../../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { CommonsModule } from './../commons/commons.module';
@@ -76,7 +77,8 @@ import { AddGradeComponent } from './grades/add-grade/add-grade.component';
     ReportCardComponent,
     ReportCardListComponent,
     AddReportCardComponent,
-    AddGradeComponent
+    AddGradeComponent,
+    AddGradeMassiveComponent
 
   ],
   imports: [
