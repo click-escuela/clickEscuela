@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { GradeI } from './../components/interfaces/grade';
 import { studentService } from './student.service';
@@ -50,6 +50,7 @@ export class GradesService {
   }
 
   getGradeByStudent(schoolId: string, studentId: string): Observable<GradeI[]> {
+
     const path = environment.STUDENT_URL.replace('{schoolId}', schoolId).replace('{studentId}', studentId);
     return this.connector.get<GradeI[]>(path);
   }

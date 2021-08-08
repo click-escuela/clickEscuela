@@ -17,6 +17,11 @@ export class StudentGradeListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  loadGrades: boolean;
+  messageInfo = 'Cargando calificaciones';
+  loadError = false;
+  messageError = 'Se produjo un error al intentar obtener tus calificaciones';
+
   constructor(private gradeService: GradesService) {
     this.displayedColumns = ['description', 'matter', 'grade'];
    }
@@ -26,13 +31,25 @@ export class StudentGradeListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getGrades();
+    this.loadGrades = false;
   }
 
 
   getGrades() {
+    this.loadGrades = false;
     this.gradeService.getGradeByStudent('12345', '4af08bb0-2c5c-4e5a-bd55-8f0a7189ede2').subscribe(
-    result => {console.log(result); this.dataSource.data = result; });
-
+    result => {
+       
+       setTimeout(() => {
+        this.dataSource.data = result;
+        this.loadGrades = true;
+        }, 2000);
+      }
+      ,
+      error => {
+        this.loadError = true;
+      }
+      );
   }
 
 

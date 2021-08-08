@@ -1,34 +1,35 @@
-<mat-form-field>
+<mat-form-field *ngIf="loadGrades && dataSource.data.length>0">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<app-load-screen
+[messageInfo]="messageInfo"
+[messageError]="messageError"
+[loadError]="loadError"
+*ngIf="!loadGrades"
+>
+</app-load-screen>
+
+<div class="mat-elevation-z8" *ngIf="loadGrades && dataSource.data.length>0">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- ID Column -->
-    <ng-container *ngIf="routeLink==='/parent/menu/grade'" matColumnDef="student">
-      <th id="column1" mat-header-cell *matHeaderCellDef mat-sort-header>Alumno</th>
-      <td mat-cell *matCellDef="let row"> {{row.student}} </td>
-    </ng-container>
-
-
-
+ 
     <!-- Name Column -->
     <ng-container matColumnDef="description">
       <th id="column3" mat-header-cell *matHeaderCellDef mat-sort-header>Descripción Nota</th>
-      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
 
     <!-- Color Column -->
     <ng-container matColumnDef="matter">
       <th id="column4" mat-header-cell *matHeaderCellDef mat-sort-header>Materia</th>
-      <td mat-cell *matCellDef="let row"> {{row.matter}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.subject}} </td>
     </ng-container>
 
     <ng-container matColumnDef="grade">
       <th id="column5" mat-header-cell *matHeaderCellDef mat-sort-header>Nota</th>
-      <td mat-cell *matCellDef="let row; let in=index"> {{row.grade}} </td>
+      <td mat-cell *matCellDef="let row; let in=index"> {{row.number}} </td>
     </ng-container>
 
 
@@ -44,4 +45,10 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<div *ngIf="!loadError && dataSource.data.length === 0" class="not-found-grades justify-content-center text-center">
+  <img width="55px" src="../../../../../assets/images/clicky-anim.svg" alt="">
+  <p class="mt-4">¡Ups! Al parecer, no tienes calificaciones cargadas</p>
+  <button (click)="getGrades()" mat-raised-button color="primary">Volver a cargar</button>
 </div>

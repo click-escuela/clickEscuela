@@ -43,6 +43,7 @@ import { HomeworkListComponent } from './homework/homework-list/homework-list.co
 import { LibraryComponent } from './library/library.component';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CommonsModule } from '../commons/commons.module';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
   ],
   imports: [
     CommonModule,
-    CommonModule,
+    CommonsModule,
     MatSidenavModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -97,7 +98,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ParentModule,
     MatSelectModule,
     MatGridListModule,
-    RouterModule
+    RouterModule,
   ],
 })
 export class StudentModule {}
