@@ -10,8 +10,8 @@ export const environment = {
   GRADES_URL: 'http://3.141.92.8:8081/click-escuela/teacher-core/school/{schoolId}/grade',
   TEACHERS_URL: 'http://3.141.92.8:8080/click-escuela/admin-core/school/{schoolId}/teacher',
   ACTIVITY_URL: 'http://3.141.92.8:8081/click-escuela/teacher-core/school/{schoolId}/activity',
-  COURSE_URL: 'http://3.141.92.8:8081/click-escuela/teacher-core/school/{schoolId}/teacher/6219ad23-cdff-40e7-8462-73e693252f62/courses'
-
+  COURSE_URL: 'http://3.141.92.8:8081/click-escuela/teacher-core/school/{schoolId}/teacher/6219ad23-cdff-40e7-8462-73e693252f62/courses',
+  STUDENT_URL: 'http://18.119.27.164:8095/click-escuela/student-core/{schoolId}/student/{studentId}/grades'
 
 
 };

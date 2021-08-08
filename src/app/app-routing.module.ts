@@ -1,3 +1,4 @@
+import { StudentGradeComponent } from './components/student/student-grade/student-grade.component';
 import { LoginComponent } from './components/commons/login/login.component';
 import { AsistanceParentComponent } from './components/parent/asistance/asistance.component';
 import { PaymentComponent } from './components/parent/payment/payment.component';
@@ -59,7 +60,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'reportCard', pathMatch: 'full' },
       { path: 'reportCard', component: ReportCardComponent },
-      { path: 'grades', component: GradesResumeComponent },
+      { path: 'grades', component: StudentGradeComponent },
       { path: 'homework', component: HomeworkStudentComponent },
       { path: 'message', component: MessagesComponent },
       { path: 'library', component: LibraryComponent },

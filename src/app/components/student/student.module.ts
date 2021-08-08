@@ -1,3 +1,5 @@
+import { StudentGradeListComponent } from './student-grade/student-grade-list/student-grade-list.component';
+import { StudentGradeComponent } from './student-grade/student-grade.component';
 import { RouterModule } from '@angular/router';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { HistoryComponent } from './groups/groups-list/history/history.component';
@@ -53,6 +55,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     CommentComponent,
     HistoryComponent,
     ModalEditComponent,
+    StudentGradeComponent,
+    StudentGradeListComponent
   ],
   imports: [
     CommonModule,
