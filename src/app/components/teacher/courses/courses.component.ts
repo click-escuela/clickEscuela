@@ -1,3 +1,7 @@
+import { SCREEN } from './../../../enums/info-messages';
+import { SnackBarService } from './../../../services/snack-bar.service';
+import { TeacherCourse } from './../../interfaces/teacher-course';
+import { CourseService } from './../../../services/course.service';
 import { Component, OnInit } from '@angular/core';
 import { Dashboardproperties } from 'src/app/models/dashboard-properties';
 import { trabajoPractico } from '../../commons/data';
@@ -15,7 +19,15 @@ export class CoursesComponent implements OnInit {
   dashBoardsProperties2: Dashboardproperties[] = new Array(0);
   nameComponent = 'Cursos';
 
-  constructor() { }
+  teacherCourses: TeacherCourse;
+
+  loadTeacherCourse: boolean;
+  loadError = false;
+  messageInfo = SCREEN.COURSES.INFO;
+  messageError = SCREEN.COURSES.ERROR;
+
+
+  constructor(private courseService: CourseService, private snackbar: SnackBarService) { }
 
   ngOnInit() {
 
@@ -34,6 +46,31 @@ export class CoursesComponent implements OnInit {
     this.dashBoardsProperties2.push(new Dashboardproperties('Asistencia de alumnos', '20/20', 'icon-card-attendance', null, null));
     this.dashBoardsProperties2.push(new Dashboardproperties('Cantidad de aprobados', '15/20', 'icon-card-approved', null, examen));
 
+    this.loadTeacherCourse = false;
+
+    this.getAllCourses();
+  }
+
+  getAllCourses() {
+    this.loadError = false;
+    this.courseService.getAllCourses('1234').subscribe(
+      result => {
+        this.teacherCourses = result;
+        if (result === undefined) {
+          setTimeout(() => {
+            this.loadError = true;
+            this.messageError = SCREEN.COURSES.NOT_ASSIGN;
+          }, 500);
+        } else {
+          setTimeout(() => {
+            this.loadTeacherCourse = true;
+          }, 500);
+        }
+      },
+      error => {
+        this.loadError = true;
+      }
+    );
   }
 
 }

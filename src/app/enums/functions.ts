@@ -1,5 +1,4 @@
-export const FUNCTION =
-{
+export const FUNCTION = {
     SORT:
     {
         BY_NAME: (a, b) => {
@@ -7,4 +6,4 @@ export const FUNCTION =
         if (a.nombre < b.nombre) { return -1; }
         return 0; }
     }
-}
+};

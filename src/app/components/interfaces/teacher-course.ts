@@ -1,6 +1,7 @@
 import { Adress } from './adress';
-export interface TeacherI
-{
+import { CourseI } from './course';
+
+export interface TeacherCourse {
         adress: Adress;
         birthday: string;
         cellPhone: string;
@@ -12,4 +13,5 @@ export interface TeacherI
         name: string;
         schoolId: number;
         surname: string;
+        courses: CourseI[];
 }
