@@ -1,3 +1,5 @@
+import { StudentGradeListComponent } from './student-grade/student-grade-list/student-grade-list.component';
+import { StudentGradeComponent } from './student-grade/student-grade.component';
 import { RouterModule } from '@angular/router';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { HistoryComponent } from './groups/groups-list/history/history.component';
@@ -41,6 +43,7 @@ import { HomeworkListComponent } from './homework/homework-list/homework-list.co
 import { LibraryComponent } from './library/library.component';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CommonsModule } from '../commons/commons.module';
 
 @NgModule({
   declarations: [
@@ -53,10 +56,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
     CommentComponent,
     HistoryComponent,
     ModalEditComponent,
+    StudentGradeComponent,
+    StudentGradeListComponent
   ],
   imports: [
     CommonModule,
-    CommonModule,
+    CommonsModule,
     MatSidenavModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -93,7 +98,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ParentModule,
     MatSelectModule,
     MatGridListModule,
-    RouterModule
+    RouterModule,
   ],
 })
 export class StudentModule {}
