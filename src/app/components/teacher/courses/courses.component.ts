@@ -53,7 +53,7 @@ export class CoursesComponent implements OnInit {
 
   getAllCourses() {
     this.loadError = false;
-    this.courseService.getAllCourses('1234').subscribe(
+    this.courseService.getAllCourses('12345').subscribe(
       result => {
         this.teacherCourses = result;
         if (result === undefined) {
