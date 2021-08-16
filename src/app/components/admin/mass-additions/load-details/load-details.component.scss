@@ -1,0 +1,29 @@
+@import "../../../../stylings/color-pallete";
+
+.mat-icon{
+    width: 25px;
+    height: 25px;
+}
+
+::ng-deep .excel-icon svg path{
+    fill: $custom-blue !important;
+}
+
+.excel-icon{
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.loading{
+    animation: twist 2s ease-in-out infinite;
+}
+
+@keyframes twist {
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

@@ -1,4 +1,5 @@
-import { StudentLoadComponent } from './mass-additions/student-load/student-load.component';
+import { ShowLoadDetailsComponent } from './mass-additions/show-load-details/show-load-details.component';
+import { LoadDetailsComponent } from './mass-additions/load-details/load-details.component';
 import { MassAdditionsComponent } from './mass-additions/mass-additions.component';
 import { AppRoutingModule } from './../../app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -47,6 +48,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ParentModule } from '../parent/parent.module';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -63,7 +66,8 @@ import { MatChipsModule } from '@angular/material/chips';
     ConfigurationComponent,
     RangeSelectorComponent,
     MassAdditionsComponent,
-    StudentLoadComponent
+    LoadDetailsComponent,
+    ShowLoadDetailsComponent
   ],
 
   imports: [
@@ -109,6 +113,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatAutocompleteModule,
     RouterModule,
     AppRoutingModule,
+    MatProgressBarModule
   ],
   exports: [RegisterComponent],
 })

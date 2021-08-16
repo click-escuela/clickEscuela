@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IconGeneratorService } from 'src/app/services/icon-generator.service';
 
 @Component({
   selector: 'app-mass-additions',
@@ -7,14 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MassAdditionsComponent implements OnInit {
 
-  selectedOption = '0';
-  constructor() { }
+  constructor(private iconService: IconGeneratorService) { }
 
   ngOnInit() {
-  }
-
-  selectMenu(menuoption: string) {
-    this.selectedOption = '' + menuoption;
   }
 
 }
