@@ -27,6 +27,8 @@ constructor(
     iconRegister.addSvgIcon('add-student', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/add-student.svg'));
     iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
+    iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/set-pay.svg'));
+
 
   }
 

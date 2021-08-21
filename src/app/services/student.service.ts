@@ -1,3 +1,5 @@
+import { MODEL } from './../enums/ng-models';
+import { StudentFD } from './../components/interfaces/studentFD';
 
 import { environment } from './../../environments/environment';
 import { Parent } from '../models/parent';
@@ -16,6 +18,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { HttpClient } from '@angular/common/http';
 import { StudentI } from '../components/interfaces/student';
 import { id } from '@swimlane/ngx-charts';
+import { Bill } from '../components/interfaces/bill';
 interface SearchResult {
   students: Student[];
   total: number;
@@ -234,17 +237,59 @@ export class studentService {
   // Aca incia el codigo para consumo de api
 
   getStudents(fulldetail: boolean, idSchool: string): Observable<any> {
-    const path = environment.GET_STUDENT_URL.replace('{schoolId}', idSchool).replace('{fullDetail}', fulldetail + '');
+    const path =
+    environment.GET_STUDENT_URL
+    .replace('{schoolId}', idSchool)
+    .replace('{fullDetail}', fulldetail + '');
     return this.connector.get<any>(path);
   }
 
+  getStudentsBills(idSchool: string): Observable<StudentFD[]> {
+    const student = MODEL.CURRENT_STUDENT as StudentFD;
+
+    const bill: Bill[] = [
+      {
+        amount: 6200,
+        file: 'http://Descargar.com',
+        id: '4456456456',
+        period: new Date('12/01/2020'),
+        status: 'COMPLETED'
+      },
+      {
+        amount: 6600,
+        file: 'http://Descargar.com',
+        id: '4456456456',
+        period: new Date('01/01/2021'),
+        status: 'PENDING'
+      }
+    ];
+
+    student.bills = bill;
+
+    const student2 = Object.assign({}, student);
+    student2.name = 'Jazmin';
+    student2.bills = [];
+
+
+    const path =
+    environment.GET_STUDENT_URL
+    .replace('{schoolId}', idSchool)
+    .replace('{fullDetail}', true + '');
+    // return this.connector.get<any>(path);
+    return of([student, student2]);
+  }
+
   addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
-    const path = environment.POST_STUDENT_URL.replace('{schoolId}', idSchool);
+    const path =
+    environment.POST_STUDENT_URL
+    .replace('{schoolId}', idSchool);
     return this.connector.post<StudentI>(path, student);
   }
 
   editStudentPut(student: StudentI, idSchool: string): Observable<StudentI> {
-    const path = environment.POST_STUDENT_URL.replace('{schoolId}', idSchool);
+    const path =
+    environment.POST_STUDENT_URL
+    .replace('{schoolId}', idSchool);
     return this.connector.put<StudentI>(path, student);
   }
 
