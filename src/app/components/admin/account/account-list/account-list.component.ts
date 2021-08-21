@@ -86,6 +86,7 @@ export class AccountListComponent implements OnInit {
 
       },
       error => {
+        this.loadError = true;
         this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
       }
     );

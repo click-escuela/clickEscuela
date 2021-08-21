@@ -245,38 +245,41 @@ export class studentService {
   }
 
   getStudentsBills(idSchool: string): Observable<StudentFD[]> {
-    const student = MODEL.CURRENT_STUDENT as StudentFD;
 
-    const bill: Bill[] = [
-      {
-        amount: 6200,
-        file: 'http://Descargar.com',
-        id: '4456456456',
-        period: new Date('12/01/2020'),
-        status: 'COMPLETED'
-      },
-      {
-        amount: 6600,
-        file: 'http://Descargar.com',
-        id: '4456456456',
-        period: new Date('01/01/2021'),
-        status: 'PENDING'
-      }
-    ];
+    //Se deja mockeo para pruebas
 
-    student.bills = bill;
+    // const student = MODEL.CURRENT_STUDENT as StudentFD;
 
-    const student2 = Object.assign({}, student);
-    student2.name = 'Jazmin';
-    student2.bills = [];
+    // const bill: Bill[] = [
+    //   {
+    //     amount: 6200,
+    //     file: 'http://Descargar.com',
+    //     id: '4456456456',
+    //     period: new Date('12/01/2020'),
+    //     status: 'COMPLETED'
+    //   },
+    //   {
+    //     amount: 6600,
+    //     file: 'http://Descargar.com',
+    //     id: '4456456456',
+    //     period: new Date('01/01/2021'),
+    //     status: 'PENDING'
+    //   }
+    // ];
+
+    // student.bills = bill;
+
+    // const student2 = Object.assign({}, student);
+    // student2.name = 'Jazmin';
+    // student2.bills = [];
 
 
     const path =
     environment.GET_STUDENT_URL
     .replace('{schoolId}', idSchool)
     .replace('{fullDetail}', true + '');
-    // return this.connector.get<any>(path);
-    return of([student, student2]);
+    return this.connector.get<any>(path);
+    //return of([student, student2]);
   }
 
   addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
