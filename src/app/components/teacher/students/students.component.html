@@ -4,7 +4,7 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table *ngIf="students && students.length>0" mat-table [dataSource]="dataSource" matSort>
 
  
 
@@ -18,19 +18,19 @@
       <td mat-cell *matCellDef="let row"> {{row.surname}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="birthDate">
+    <ng-container matColumnDef="birthday">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
-      <td mat-cell *matCellDef="let row"> {{row.birthDate}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.birthday}} </td>
     </ng-container>
 
     <ng-container matColumnDef="absences">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Ausentes </th>
-      <td mat-cell *matCellDef="let row"> {{row.absences}} </td>
+      <td mat-cell *matCellDef="let row" [ngClass]="{'grayish': !row.absences}"> {{row.absences ? row.absenses : 'Sin Información'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="observations">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones</th>
-      <td mat-cell *matCellDef="let row"> {{row.observations}} </td>
+      <td mat-cell *matCellDef="let row" [ngClass]="{'grayish': !row.observations}"> {{row.observations ? row.observations : 'Sin Observaciones'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -41,6 +41,14 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
+
+  <div class="row justify-content-center text-center" *ngIf="students && students.length===0">
+    <div class="col-12">
+      <mat-icon style="color: red;">warning</mat-icon>
+
+      <p>No se ha encontrado Información de alumnos para este curso</p>
+    </div>
+  </div>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

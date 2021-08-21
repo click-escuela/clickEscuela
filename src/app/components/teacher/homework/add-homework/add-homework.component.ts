@@ -1,7 +1,6 @@
 import { SnackBarService } from './../../../../services/snack-bar.service';
 import { HomeworkI } from './../../../interfaces/homework';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { Homework } from '../../../../models/homework';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HomeworkService } from 'src/app/services/homework.service';

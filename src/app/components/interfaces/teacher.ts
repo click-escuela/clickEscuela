@@ -1,5 +1,5 @@
 import { Adress } from './adress';
-export interface TeacherI 
+export interface TeacherI
 {
         adress: Adress;
         birthday: string;

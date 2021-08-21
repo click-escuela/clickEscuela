@@ -62,6 +62,11 @@ export class TeacherService {
     return this.connector.get<any>(path);
   }
 
+  modifyTeacher(teacher: TeacherI): Observable<any> {
+    const path = environment.TEACHERS_URL.replace('{schoolId}', environment.schoolId);
+    return this.connector.put<any>(path, teacher);
+  }
+
   // addTeacher(teacher: Teacher) {
   //   this.teachersList.push(teacher);
   // }

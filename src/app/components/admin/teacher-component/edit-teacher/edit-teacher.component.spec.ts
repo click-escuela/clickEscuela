@@ -1,3 +1,7 @@
+import { MatDialogMock } from './../../../../test-mocks/matDialogmock';
+import { of, throwError } from 'rxjs';
+import { SnackBarServiceMock } from './../../../../test-mocks/snack-bar-mock';
+import { SnackBarService } from './../../../../services/snack-bar.service';
 import { Teacher } from './../../../../models/teacher';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,15 +18,16 @@ describe('EditTeacherComponent', () => {
   let fixture: ComponentFixture<EditTeacherComponent>;
   const messages = ['hola', 'que', 'tal'];
   const teacher = new Teacher('test', 'test', new Date(), '33333333', 'DNI', '', '', '', ['']);
-  const data = {teacher}
+  const data = {teacher};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MaterialModule],
       declarations: [ EditTeacherComponent ],
       providers: [
-        {provide: MatDialogRef, useValue: {}},
+        {provide: MatDialogRef, useClass: MatDialogMock},
         {provide: MAT_DIALOG_DATA, useValue: data},
+        {provide: SnackBarService, useClass: SnackBarServiceMock},
       ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -38,4 +43,13 @@ describe('EditTeacherComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+ 
+
+  it('onClose ', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onClose()
+    expect(spy).toHaveBeenCalled();
+  });
+
 });

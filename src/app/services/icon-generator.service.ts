@@ -33,11 +33,9 @@ constructor(
     iconRegister.addSvgIcon('cancel', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/cancel.svg'));
     iconRegister.addSvgIcon('check', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/accept.svg'));
     iconRegister.addSvgIcon('eye', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/eye.svg'));
+    iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
+    iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
 
-
-
-
-  
   }
 
 

@@ -73,6 +73,25 @@ ACTIVITY: {
         ERROR: 'Se produjo un error al editar la tarea',
         NORMAL: 'No hubo cambios en el editado de la tarea'
     }
+},
+TEACHER: {
+    GET: {
+        SUCCES: 'Se cargo la lista de Docentes correctamente',
+        ERROR: 'Se produjo un error al intentar obtener la lista de docentes',
+        NORMAL: 'Recarga exitosa.'
+    },
+    POST: {
+        SUCCES: 'Se agrego el Docente correctamente.',
+        ERROR: {
+            400: 'No se pudo agregar el Docente. Revise la informacion cargada'
+        },
+        NORMAL: 'Sin cambios en el agregado de Docente'
+    },
+    PUT: {
+        SUCCES: 'Se edito correctamente el Docente',
+        ERROR: 'Se produjo un error al editar al Docente',
+        NORMAL: 'No hubo cambios en el editado del Docente'
+    }
 }
 
 

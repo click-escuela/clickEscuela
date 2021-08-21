@@ -1,3 +1,4 @@
+import { AddGradeMassiveComponent } from './add-grade-massive/add-grade-massive.component';
 import { GradesListComponent } from './grades-list/grades-list.component';
 
 import { QueryList, ViewChildren } from '@angular/core';
@@ -32,6 +33,21 @@ export class GradesComponent implements OnInit {
 
       });
 
+  }
+
+  openAddGradeMassive() {
+    const dialogRef = this.dialog.open(AddGradeMassiveComponent,
+      {
+        width: '100vw',
+        height: '90vh',
+        panelClass: 'add-massive'
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(res => {
+       this.refreshAllChildrens();
+
+      });
   }
 
   refreshAllChildrens() {

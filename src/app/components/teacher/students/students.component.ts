@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { StudentI } from './../../interfaces/student';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,7 +9,7 @@ import { dataStudents } from './students';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css'],
+  styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
   displayedColumns: string[];
@@ -16,8 +17,9 @@ export class StudentsComponent implements OnInit {
   studentsArray: Student[] = new Array(5);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   @ViewChild(MatSort) sort: MatSort;
+
+  @Input() students: StudentI[];
 
   constructor() {}
   ngOnInit(): void {
@@ -25,15 +27,17 @@ export class StudentsComponent implements OnInit {
 
       'name',
       'surname',
-      'birthDate',
+      'birthday',
       'absences',
       'observations',
     ];
 
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = dataStudents;
+    this.dataSource.data = this.students;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    console.log(this.students);
   }
 
   applyFilter(event: Event) {

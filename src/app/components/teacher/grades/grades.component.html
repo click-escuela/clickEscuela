@@ -20,35 +20,19 @@
 			<h5>Listado de calificaciones por curso</h5>
 		</div>
 		<div class="col-4 action-buttons">
-			<div class="action-item" matTooltip="Nueva Nota"  (click)="openDialog('Agregar nueva nota'); appList.refreshTable()">
+			<div class="action-item" matTooltip="Nueva Nota"  (click)="openDialog('Agregar nueva nota')">
 				<img width="20px" src="./assets/images/plus.svg" alt="">
-				</div>
+			</div>
+			
+			<div class="action-item" matTooltip="Nueva Carga Múltiple"  (click)="openAddGradeMassive()">
+				<img width="20px" src="./assets/images/list.svg" alt="">
+			</div>
 			</div>
 		</div>
 		<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
 			<mat-tab label="Curso 3B">
 				<app-grades-list #appList></app-grades-list>
 			</mat-tab>
-			<mat-tab label="Curso 2A">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 5C">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 2C">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 5D">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 5A">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 5B">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
-			<mat-tab label="Curso 4A">
-				<app-grades-list></app-grades-list>
-			</mat-tab>
+		
 		</mat-tab-group>
 	</div>

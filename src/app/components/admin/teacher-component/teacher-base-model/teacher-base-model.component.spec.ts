@@ -5,7 +5,7 @@ import { MatDialogMock } from 'src/app/test-mocks/matDialogmock';
 import { MaterialModule } from './../../../../test-mocks/material.module';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -14,10 +14,10 @@ import {
 } from '@angular/core';
 
 import { TeacherBaseModelComponent } from './teacher-base-model.component';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { SnackBarServiceMock } from 'src/app/test-mocks/snack-bar-mock';
-
+import { MatPaginator } from '@angular/material/paginator';
 
 
 describe('TeacherBaseModelComponent', () => {
@@ -86,21 +86,45 @@ describe('TeacherBaseModelComponent', () => {
 
   it('editTeacher has called false', () => {
     const spy = spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(false)} as MatDialogRef<typeof component>);
-    component.editTeacher(1, teacher);
+    component.editTeacher(teacher);
     expect(spy).toHaveBeenCalled();
   });
 
   it('editTeacher has called true', () => {
     const spy = spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(true)} as MatDialogRef<typeof component>);
-    component.editTeacher(1, teacher);
+    component.editTeacher(teacher);
     expect(spy).toHaveBeenCalled();
   });
 
-  it('getAllTeachers success', () => {
+  it('getAllTeachers success', fakeAsync(() => {
     const spy = spyOn(component.teachersService, 'getTeachers').and.returnValue(of(teacherI));
     component.getAllTeachers();
+    tick(1002);
+    expect(spy).toHaveBeenCalled();
+  }));
+
+  it('getAllTeachers success', fakeAsync(() => {
+    const spy = spyOn(component.teachersService, 'getTeachers').and.returnValue(throwError(''));
+    component.getAllTeachers();
+    tick(1002);
+    expect(spy).toHaveBeenCalled();
+  }));
+
+  it('confirmDialog ', () => {
+    const spy = spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(true)} as MatDialogRef<typeof component>);
+    component.confirmDialog(teacher, 1);
     expect(spy).toHaveBeenCalled();
   });
+
+  it('applyFilter', () => {
+    const spy = spyOn(component, 'applyFilter').and.callThrough();
+    const input = fixture.debugElement.query(By.css('#input')).nativeElement;
+    input.dispatchEvent(new KeyboardEvent('keyup'));
+    expect(spy).toHaveBeenCalled();
+  });
+
+
+
 
 
 

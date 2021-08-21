@@ -48,10 +48,11 @@ export class RegisterComponent implements OnInit {
   isNotification: boolean;
   numberNotifications: number;
 
-  constructor(private router: Router,private iconService: IconGeneratorService) {
+  constructor(private router: Router, public icons: IconGeneratorService) {
   }
 
   ngOnInit() {
+    this.selectedOption();
   }
 
   changeBlock(newBlock: string) {
@@ -61,5 +62,12 @@ export class RegisterComponent implements OnInit {
 
   get routerInjected() {
     return this.router;
+  }
+
+  selectedOption() {
+
+    const parts = this.router.url.split('/');
+    console.log(parts);
+    this.blockDinamicActually = parts[parts.length - 1];
   }
 }
