@@ -1,3 +1,4 @@
+import { Bill } from './../../interfaces/bill';
 import { StudentFullDetail } from '../../interfaces/student-full-detail';
 import { Student } from './../../../models/student';
 import { School } from '../../../models/school';
@@ -155,7 +156,7 @@ export class PaymentsDetailComponent implements OnInit {
     this.snackBar.open(message, 'Aceptar', { duration: 5500 });
   }
 
-  public downloadPdf(payment: Payment, method: number): void {
+  public downloadPdf(payment: Bill, method: number): void {
     const date = new Date();
     const billname =
       'bill' + date.getDate() + date.getHours() + date.getSeconds();
@@ -398,5 +399,9 @@ export class PaymentsDetailComponent implements OnInit {
       value.charAt(0).toUpperCase() +
       value.substring(1, value.length).toLowerCase()
     );
+  }
+
+  get dialog$(){
+    return this.dialog;
   }
 }

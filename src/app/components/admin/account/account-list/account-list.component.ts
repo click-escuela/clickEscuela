@@ -40,7 +40,7 @@ export class AccountListComponent implements OnInit {
 
   constructor(
     private studentsService: studentService,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private icon: IconGeneratorService,
     private snackbar: SnackBarService
@@ -127,9 +127,6 @@ export class AccountListComponent implements OnInit {
       maxWidth: '95vw',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
   }
 
   showSnackBar(message: string) {
@@ -148,5 +145,9 @@ export class AccountListComponent implements OnInit {
       return true;
 
     }
+  }
+
+  get studentsService$(){
+    return this.studentsService;
   }
 }
