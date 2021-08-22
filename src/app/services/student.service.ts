@@ -1,5 +1,5 @@
 import { MODEL } from './../enums/ng-models';
-import { StudentFD } from './../components/interfaces/studentFD';
+import { StudentFullDetail } from '../components/interfaces/student-full-detail';
 
 import { environment } from './../../environments/environment';
 import { Parent } from '../models/parent';
@@ -244,11 +244,11 @@ export class studentService {
     return this.connector.get<any>(path);
   }
 
-  getStudentsBills(idSchool: string): Observable<StudentFD[]> {
+  getStudentsBills(idSchool: string): Observable<StudentFullDetail[]> {
 
     //Se deja mockeo para pruebas
 
-    // const student = MODEL.CURRENT_STUDENT as StudentFD;
+    // const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
 
     // const bill: Bill[] = [
     //   {

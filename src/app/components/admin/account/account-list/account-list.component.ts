@@ -2,7 +2,7 @@ import { SCREEN } from './../../../../enums/info-messages';
 import { MESSAGES } from './../../../../enums/messages-constants';
 import { COMMONS } from './../../../../enums/commons';
 import { SnackBarService } from './../../../../services/snack-bar.service';
-import { StudentFD } from './../../../interfaces/studentFD';
+import { StudentFullDetail } from '../../../interfaces/student-full-detail';
 import { IconGeneratorService } from './../../../../services/icon-generator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -136,7 +136,7 @@ export class AccountListComponent implements OnInit {
     this.snackBar.open(message, 'Aceptar', { duration: 5500 });
   }
 
-  getAccountState(student: StudentFD) {
+  getAccountState(student: StudentFullDetail) {
     if (student.bills.length === 0 ) {
       return true;
     } else {

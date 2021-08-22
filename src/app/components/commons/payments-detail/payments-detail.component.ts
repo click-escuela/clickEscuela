@@ -1,4 +1,4 @@
-import { StudentFD } from './../../interfaces/studentFD';
+import { StudentFullDetail } from '../../interfaces/student-full-detail';
 import { Student } from './../../../models/student';
 import { School } from '../../../models/school';
 import { style } from '@angular/animations';
@@ -51,7 +51,7 @@ export class PaymentsDetailComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<PaymentsDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: StudentFD,
+    @Inject(MAT_DIALOG_DATA) public data: StudentFullDetail,
     private snackBar: MatSnackBar,
     private sanitazer: DomSanitizer,
     private dialog: MatDialog
@@ -97,7 +97,7 @@ export class PaymentsDetailComponent implements OnInit {
   getTotalDebt(data) {
     let debt = 0;
     for (const payment of data) {
-      if (!payment.status) {
+      if (payment.status === 'PENDING') {
         debt += payment.amount;
       }
     }
