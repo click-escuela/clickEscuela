@@ -40,6 +40,7 @@ export class AccountListComponent implements OnInit {
 
   constructor(
     private studentsService: studentService,
+
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private icon: IconGeneratorService,
@@ -126,7 +127,6 @@ export class AccountListComponent implements OnInit {
       height: '95vh',
       maxWidth: '95vw',
     });
-
   }
 
   showSnackBar(message: string) {
@@ -146,8 +146,8 @@ export class AccountListComponent implements OnInit {
 
     }
   }
-
   get studentsService$(){
     return this.studentsService;
   }
+
 }

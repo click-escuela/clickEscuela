@@ -44,19 +44,7 @@ describe('EditTeacherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('modifyTeacher success', () => {
-    const spy = spyOn(component.snackbar, 'showSnackBar').and.callThrough();
-    spyOn(component.teachersService$, 'modifyTeacher').and.returnValue(of(''));
-    component.modifyTeacher();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('modifyTeacher error', () => {
-    const spy = spyOn(component.snackbar, 'showSnackBar').and.callThrough();
-    spyOn(component.teachersService$, 'modifyTeacher').and.returnValue(throwError(''));
-    component.modifyTeacher();
-    expect(spy).toHaveBeenCalled();
-  });
+ 
 
   it('onClose ', () => {
     const spy = spyOn(component.dialogRef, 'close').and.callThrough();

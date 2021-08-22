@@ -17,6 +17,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Bill } from '../../interfaces/bill';
 import { of } from 'rxjs';
 
+
 describe('PaymentsDetailComponent', () => {
   let component: PaymentsDetailComponent;
   let fixture: ComponentFixture<PaymentsDetailComponent>;
@@ -31,6 +32,7 @@ describe('PaymentsDetailComponent', () => {
       period: new Date('12/12/1993')
     }
   ];
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -65,6 +67,7 @@ describe('PaymentsDetailComponent', () => {
   });
 
   it('getTotalDebt with data PENDING', () => {
+
     const bill: Bill = {
       amount: 1500,
       status: 'PENDING',
@@ -147,6 +150,4 @@ describe('PaymentsDetailComponent', () => {
     expect (spy).toHaveBeenCalled();
 
   });
-
-
 });

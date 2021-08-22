@@ -26,6 +26,7 @@ import { Router } from '@angular/router';
       transition('notifications-show=>notifications-hide', animate('4000ms')),
     ]),
   ],
+  providers: [IconGeneratorService]
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('drawer', { static: true }) sidenav: MatSidenav;

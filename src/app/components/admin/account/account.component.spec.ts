@@ -6,15 +6,12 @@ import { AccountService } from './../../../services/account.service';
 import { studentService } from './../../../services/student.service';
 import { IconGeneratorService } from 'src/app/services/icon-generator.service';
 import { ExpensesService } from './../../../services/expenses.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AccountComponent } from './account.component';
-import { of } from 'rxjs';
 import { DAY } from '../type-constants';
 
 
@@ -28,7 +25,6 @@ describe('AccountComponent', () => {
       declarations: [AccountComponent],
       providers: [ExpensesService, IconGeneratorService, studentService, AccountService, DecimalPipe,
       {provide: MatDialog, useClass: MatDialogMock}],
-
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));

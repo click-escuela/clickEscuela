@@ -9,9 +9,9 @@
 
 <app-load-screen 
 [loadService]="loadTeacherService" 
+[loadError]="loadError" 
+[messageError]="messageError"
 [messageInfo]="messageInfo"
-[messageError]='messageError'
-[loadError]='loadError'
 ></app-load-screen>
 
 <div class="div-content" *ngIf="loadTeacherService">
