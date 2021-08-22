@@ -47,7 +47,7 @@ describe('PaymentsDetailComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('getTotalDebt with data', () => {
+  it('getTotalDebt with data PENDING', () => {
     const bill: Bill = {
       amount: 1500,
       status: 'PENDING',
@@ -60,5 +60,20 @@ describe('PaymentsDetailComponent', () => {
     const debt = component.getTotalDebt(bills);
 
     expect(debt).toEqual(3000);
+  });
+
+  it('getTotalDebt with data COMPLETED', () => {
+    const bill: Bill = {
+      amount: 1500,
+      status: 'COMPLETED',
+      file: 'url',
+      id: 'test',
+      period: new Date()
+    };
+    const bills = [bill, bill];
+
+    const debt = component.getTotalDebt(bills);
+
+    expect(debt).toEqual(0);
   });
 });
