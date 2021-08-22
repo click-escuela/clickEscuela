@@ -35,6 +35,8 @@ constructor(
     iconRegister.addSvgIcon('eye', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/eye.svg'));
     iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
+    iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/set-pay.svg'));
+
 
   }
 

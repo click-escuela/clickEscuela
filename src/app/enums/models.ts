@@ -10,6 +10,7 @@ CURRENT_STUDENT: {
     school: 'Raggio',
     schoolId: '',
     division: 'A',
+    bills:[],
     adress:
     {
       street: 'Buenos Aires',
