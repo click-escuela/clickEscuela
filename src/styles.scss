@@ -54,11 +54,7 @@ body { margin: 0;
   filter: grayscale(3);
   transition: 0.5s ease-in-out;
 }
-.button-menu:disabled:hover
-{
-  filter: grayscale(3);
-  transform: rotate(45deg);
-}
+
 
 .form-control{
   width: 95%;
@@ -163,7 +159,9 @@ font-size: 9.5vw !important;
   overflow: auto !important;
 }
 
-
+.coming-soon::before{
+  top: 32px;
+}
 
 
 
@@ -387,6 +385,7 @@ margin: 0;
     .mat-tooltip{
       font-size: 0.70em !important ;
     }
+   
     
   }
 
@@ -445,6 +444,39 @@ margin: 0;
     width: unset !important;
     height: unset !important;
 
+  }
+
+  .coming-soon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+
+  }
+
+  .coming-soon:before{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    height: 1em;
+    width: 100%;
+    position: absolute;
+    content: 'Proximamente';
+    background-color: rgba(253, 253, 2, 0.7);
+    padding: 0.7em;
+    font-size: 0.7em;
+    color: black;
+    z-index: 9999999;
+    left: 0;
+    top: -1em;
+    box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.329);
+    
+  }
+
+  .button-menu:disabled { 
+    
   }
 
  

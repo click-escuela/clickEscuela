@@ -1,3 +1,4 @@
+import { OutReleaseComponent } from './out-release/out-release.component';
 import { DndDirective } from './drag-and-drop/dnd.directive';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { LoginComponent } from './login/login.component';
@@ -97,7 +98,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LoadScreenComponent,
     LoginComponent,
     DragAndDropComponent,
-    DndDirective
+    DndDirective,
+    OutReleaseComponent
 
   ],
   exports: [
@@ -110,7 +112,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DetailStudentComponent,
     LoadScreenComponent,
     LoginComponent,
-    DragAndDropComponent
+    DragAndDropComponent,
+    OutReleaseComponent
   ],
 })
 export class CommonsModule {}
