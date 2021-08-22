@@ -9,10 +9,11 @@
 
 <app-load-screen 
 [loadService]="loadTeacherService" 
+[loadError]="loadError" 
+[messageError]="messageError"
 [messageInfo]="messageInfo"
-[messageError]='messageError'
-[loadError]='loadError'
-></app-load-screen>
+[messageInfoClass]='messageInfoClass'
+(cancel)="cancelRequest()"></app-load-screen>
 
 <div class="div-content" *ngIf="loadTeacherService">
  <div class="mat-elevation-z8">

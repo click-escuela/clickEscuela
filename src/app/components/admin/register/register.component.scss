@@ -44,6 +44,13 @@ menu {
   transform: scale(1.2);
 }
 
+.mat-icon{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .home-button:hover {
   filter: saturate(2.5);
 }

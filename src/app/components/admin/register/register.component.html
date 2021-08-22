@@ -121,6 +121,18 @@
       <mat-divider></mat-divider>
       <mat-list-item class="button-menu-container">
         <button [ngClass]="{
+            'option-selected': blockDinamicActually == 'mass-upload'
+          }" class="button-menu" mat-button color (click)="changeBlock('mass-upload')">
+          
+          <mat-icon class="icon-svg" svgIcon="upload"></mat-icon>
+
+
+          <span>Alta Masiva</span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="button-menu-container">
+        <button [ngClass]="{
             'option-selected': blockDinamicActually == 'configurations'
           }" class="button-menu" mat-button color (click)="changeBlock('configurations')">
           <svg class="icon-svg" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
@@ -139,6 +151,8 @@
           <span>Configuraciones</span>
         </button>
       </mat-list-item>
+
+    
     </mat-list>
   </mat-drawer>
   <div class="sidenav-content">
