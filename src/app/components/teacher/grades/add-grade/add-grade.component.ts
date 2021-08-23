@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { COMMONS } from './../../../../enums/commons';
 import { MESSAGES } from './../../../../enums/messages-constants';
 import { SnackBarService } from './../../../../services/snack-bar.service';
@@ -29,6 +30,8 @@ export class AddGradeComponent implements OnInit {
   localData: any;
   @ViewChild('course') course: MatSelect;
 
+  gradeControl: FormGroup;
+
   courses = ['3B', '2A'];
   matters = [
     'Historia',
@@ -56,7 +59,8 @@ export class AddGradeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private gradesService: GradesService,
     private studentsService: studentService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    private fb: FormBuilder
   ) {
     if (data.grade === undefined) {
       this.currentGrade = {
@@ -88,6 +92,25 @@ export class AddGradeComponent implements OnInit {
     this.existData = !!data.grade;
 
     this.studentsList = [];
+
+    this.buildControl();
+  }
+
+  buildControl() {
+    this.gradeControl = this.fb.group({
+      description : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]),
+      course : new FormControl('', []),
+      subject : new FormControl('', []),
+      type : new FormControl('', []),
+      number: new FormControl('',[Validators.pattern(/[1-9]{1} || [1-9]{1},[1,9]{1}/),Validators.max(10),Validators.min(1)])
+    });
+  }
+
+  showErrors(order:string){
+    console.log(this.gradeControl.get(order).errors);
+    console.log(this.gradeControl.valid);
+    
+
   }
 
   loadStudents() {
