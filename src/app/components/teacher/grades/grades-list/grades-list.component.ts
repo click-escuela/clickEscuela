@@ -1,3 +1,4 @@
+import { id } from '@swimlane/ngx-charts';
 import { COMMONS } from './../../../../enums/commons';
 import { MESSAGES } from './../../../../enums/messages-constants';
 import { SnackBarService } from './../../../../services/snack-bar.service';
@@ -117,6 +118,9 @@ export class GradesListComponent implements OnInit {
   }
 
   openModify(grade) {
+    grade.course = '3B';
+    grade.student = '';
+    delete grade['id'];
     const dialogRef = this.dialog.open(AddGradeComponent,
       {
         data: grade,

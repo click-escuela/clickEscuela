@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export const FORM =
 {
     GRADES_CONTROL: new FormBuilder().group({
-        description : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]),
+        name : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]),
         course : new FormControl('', [Validators.required ]),
         subject : new FormControl('', [Validators.required  ]),
         type : new FormControl('', [Validators.required ]),

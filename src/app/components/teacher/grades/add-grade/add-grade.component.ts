@@ -62,38 +62,16 @@ export class AddGradeComponent implements OnInit {
     private studentsService: studentService,
     private snackBar: SnackBarService
   ) {
-    if (data.grade === undefined) {
-      this.currentGrade = {
-        studentId: '03d0b885-5ffe-4e7a-aa9d-7630a6756e94',
-        name: '',
-        schoolId: '12345',
-        courseId: '27d2217c-d0f4-11eb-aa1f-0237763a7d5e',
-        subject: 'Filosofía',
-        type: '',
-        number: 9
-
-      };
-      this.localData = {
-        grade: {
-          name: '',
-          subject: '',
-          type: '',
-          number: 0
-        },
-        index: 0,
-      };
-
-      this.existData = !!data.grade;
-    } else {
-      this.currentGrade = data.grade;
-      this.localData = data;
-    }
-
-    this.existData = !!data.grade;
-
     this.studentsList = [];
 
     this.gradeControl = FORM.GRADES_CONTROL;
+
+    if (data) {
+      this.existData = true;
+      this.gradeControl.setValue(data);
+    } else {
+      this.gradeControl.reset();
+    }
   }
 
   showErrors(order: string) {

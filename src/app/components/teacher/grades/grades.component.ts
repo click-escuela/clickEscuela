@@ -19,10 +19,9 @@ export class GradesComponent implements OnInit {
   constructor(public dialog: MatDialog) {
   }
 
-  openDialog(input) {
+  openDialog() {
     const dialogRef = this.dialog.open(AddGradeComponent,
       {
-        data: input,
         width: '80%',
         height: '75%'
       }
