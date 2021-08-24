@@ -97,13 +97,6 @@ export class AddGradeComponent implements OnInit {
     this.gradeControl.reset();
   }
 
-  showErrors(order: string) {
-    console.log(this.gradeControl.get(order).errors);
-    console.log(this.gradeControl.valid );
-    console.log(this.gradeControl);
-
-  }
-
   loadStudents() {
 
     this.studentsList = this.studentsService.studentsList.filter(

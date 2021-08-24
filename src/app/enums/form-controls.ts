@@ -10,4 +10,4 @@ export const FORM =
         number: new FormControl('', [Validators.pattern(/[1-9]{1} || [1-9]{1},[1,9]{1}/), Validators.max(10), Validators.min(1)]),
         student: new FormControl('', [Validators.required])
       })
-};
+}

@@ -23,7 +23,7 @@
 
               <textarea matInput type="text" name="description" id="description" class="form-control"
                 placeholder="Ingrese Descripcion..."  formControlName="description"
-                #description required [ngModel]="localData.grade.name" (keyup)="showErrors('description')" maxlength="200"></textarea>
+                #description required [ngModel]="localData.grade.name" maxlength="200"></textarea>
             </mat-form-field>
             <br>
             <mat-hint align="end">{{description.value.length}} / 200</mat-hint>
@@ -99,7 +99,7 @@
 
                 <input matInput type="number" max="10" min="0" name="grade" id="grade" class="form-control"
                   placeholder="Ingrese Nota..." formControlName="number" #grade required
-                  [ngModel]="localData.grade.number" (keyup)="showErrors()" step="0.1" />
+                  [ngModel]="localData.grade.number" step="0.1" />
               </mat-form-field>
               <div class="errors" *ngIf="gradeControl.get('number').touched && gradeControl.get('number').errors ">
                 <mat-error *ngIf="gradeControl.get('number').errors.required || gradeControl.get('number').errors.pattern">
