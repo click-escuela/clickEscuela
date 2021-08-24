@@ -48,25 +48,31 @@
           <div class="col-md-6 col-12">
             <mat-form-field appearance="fill">
               <mat-label>Curso</mat-label>
-              <mat-select [(value)]="selectedCourse" [ngModelOptions]="{ standalone: true }"
+              <mat-select formControlName="course" [ngModelOptions]="{ standalone: true }"
                 (selectionChange)="loadStudents()" #course>
                 <mat-option *ngFor="let course of courses" [value]="course">
                   {{ course }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('course').touched && gradeControl.get('course').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
 
           <div class="col-md-6 col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Materia</mat-label>
-              <mat-select [(ngModel)]="currentGrade.subject" [ngModelOptions]="{ standalone: true }"
+              <mat-select formControlName="subject" [ngModelOptions]="{ standalone: true }"
                 [ngModel]="localData.grade.subject" formControlName="subject">
                 <mat-option *ngFor="let matter of matters" [value]="matter">
                   {{ matter }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('subject').touched && gradeControl.get('subject').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
         </div>
 
@@ -74,13 +80,16 @@
           <div class="col-md-6 col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Tipo de actividad</mat-label>
-              <mat-select [(ngModel)]="currentGrade.type" [ngModelOptions]="{ standalone: true }"
+              <mat-select formControlName="type" [ngModelOptions]="{ standalone: true }"
                 [ngModel]="localData.grade.type">
                 <mat-option *ngFor="let type of types" [value]="type.code">
                   {{ type.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('type').touched && gradeControl.get('type').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
 
           <div class="col-md-6 col-12 form-group">
@@ -115,13 +124,16 @@
           <div class="col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Alumno</mat-label>
-              <mat-select [ngModelOptions]="{ standalone: true }">
+              <mat-select formControlName="student">
                 <mat-option *ngIf="studentsList.length === 0">Seleccione un curso...</mat-option>
                 <mat-option *ngFor="let student of studentsList" [value]="student.name + ' ' + student.surname">
                   {{ student.name + " " + student.surname }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('subject').touched && gradeControl.get('subject').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
         </div>
 
