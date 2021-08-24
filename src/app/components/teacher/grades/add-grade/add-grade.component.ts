@@ -94,6 +94,7 @@ export class AddGradeComponent implements OnInit {
     this.studentsList = [];
 
     this.gradeControl = FORM.GRADES_CONTROL;
+    this.gradeControl.reset();
   }
 
   showErrors(order: string) {
@@ -145,5 +146,6 @@ export class AddGradeComponent implements OnInit {
 
   onClose() {
     this.dialogRef.close(false);
+    
   }
 }
