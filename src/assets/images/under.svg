@@ -1,0 +1,36 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 645.37 58.01">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre);
+      }
+    </style>
+    <radialGradient id="Degradado_sin_nombre" data-name="Degradado sin nombre" cx="311.16" cy="136.18" r="365.12" gradientTransform="matrix(1, 0, 0, -1, 0, 290)" gradientUnits="userSpaceOnUse">
+      <stop offset="0.14" stop-color="#f8c72c"/>
+      <stop offset="0.34" stop-color="#f9c027"/>
+      <stop offset="0.65" stop-color="#fbac18"/>
+      <stop offset="1" stop-color="#ff8d00"/>
+    </radialGradient>
+  </defs>
+  <g>
+    <polygon class="cls-1" points="17.65 58.01 47.1 0 29.46 0 0 58.01 17.65 58.01"/>
+    <polygon class="cls-1" points="50.88 58.01 80.34 0 62.7 0 33.24 58.01 50.88 58.01"/>
+    <polygon class="cls-1" points="84.12 58.01 113.58 0 95.93 0 66.47 58.01 84.12 58.01"/>
+    <polygon class="cls-1" points="117.36 58.01 146.82 0 129.17 0 99.71 58.01 117.36 58.01"/>
+    <polygon class="cls-1" points="150.59 58.01 180.05 0 162.41 0 132.95 58.01 150.59 58.01"/>
+    <polygon class="cls-1" points="183.83 58.01 213.29 0 195.64 0 166.19 58.01 183.83 58.01"/>
+    <polygon class="cls-1" points="217.07 58.01 246.53 0 228.88 0 199.42 58.01 217.07 58.01"/>
+    <polygon class="cls-1" points="250.31 58.01 279.76 0 262.12 0 232.66 58.01 250.31 58.01"/>
+    <polygon class="cls-1" points="283.54 58.01 313 0 295.36 0 265.9 58.01 283.54 58.01"/>
+    <polygon class="cls-1" points="316.78 58.01 346.24 0 328.59 0 299.13 58.01 316.78 58.01"/>
+    <polygon class="cls-1" points="350.02 58.01 379.48 0 361.83 0 332.37 58.01 350.02 58.01"/>
+    <polygon class="cls-1" points="383.26 58.01 412.71 0 395.07 0 365.61 58.01 383.26 58.01"/>
+    <polygon class="cls-1" points="416.49 58.01 445.95 0 428.3 0 398.85 58.01 416.49 58.01"/>
+    <polygon class="cls-1" points="449.73 58.01 479.19 0 461.54 0 432.08 58.01 449.73 58.01"/>
+    <polygon class="cls-1" points="482.97 58.01 512.42 0 494.78 0 465.32 58.01 482.97 58.01"/>
+    <polygon class="cls-1" points="516.2 58.01 545.66 0 528.02 0 498.56 58.01 516.2 58.01"/>
+    <polygon class="cls-1" points="549.44 58.01 578.9 0 561.25 0 531.79 58.01 549.44 58.01"/>
+    <polygon class="cls-1" points="582.68 58.01 612.14 0 594.49 0 565.03 58.01 582.68 58.01"/>
+    <polygon class="cls-1" points="615.92 58.01 645.37 0 627.73 0 598.27 58.01 615.92 58.01"/>
+  </g>
+</svg>

@@ -1,3 +1,6 @@
+import { Bill } from './../../interfaces/bill';
+import { StudentFullDetail } from '../../interfaces/student-full-detail';
+import { Student } from './../../../models/student';
 import { School } from '../../../models/school';
 import { style } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -49,12 +52,12 @@ export class PaymentsDetailComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<PaymentsDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: StudentFullDetail,
     private snackBar: MatSnackBar,
     private sanitazer: DomSanitizer,
     private dialog: MatDialog
   ) {
-    this.totalDebt = this.getTotalDebt(data.payment);
+    this.totalDebt = this.getTotalDebt(data.bills);
     this.years = [];
     this.months = [];
     this.selectedMonth = -1;
@@ -87,7 +90,7 @@ export class PaymentsDetailComponent implements OnInit {
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.data.payment;
+    this.dataSource.data = this.data.bills;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -95,7 +98,7 @@ export class PaymentsDetailComponent implements OnInit {
   getTotalDebt(data) {
     let debt = 0;
     for (const payment of data) {
-      if (!payment.status) {
+      if (payment.status === 'PENDING') {
         debt += payment.amount;
       }
     }
@@ -104,7 +107,7 @@ export class PaymentsDetailComponent implements OnInit {
 
   filterByMonth() {
     if (this.selectedMonth !== -1) {
-      const result = this.data.payment.filter(
+      const result = this.data.bills.filter(
         (a) => a.period.getMonth() === this.selectedMonth - 1
       );
       if (result.length > 0) {
@@ -115,20 +118,20 @@ export class PaymentsDetailComponent implements OnInit {
         );
       } else {
         this.selectedMonth = -1;
-        this.dataSource = this.data.payment;
+        this.dataSource = this.data.bills;
         this.showSnackBar(
           'No se encontraron para facturas para el periodo solicitado'
         );
       }
     } else {
       this.showSnackBar('Selecciones un mes valido');
-      this.dataSource = this.data.payment;
+      this.dataSource = this.data.bills;
     }
   }
 
   filterByYear() {
     if (this.selectedYear !== -1) {
-      const result = this.data.payment.filter(
+      const result = this.data.bills.filter(
         (a) => a.period.getFullYear() === this.selectedYear
       );
       if (result.length > 0) {
@@ -138,14 +141,14 @@ export class PaymentsDetailComponent implements OnInit {
         );
       } else {
         this.selectedMonth = -1;
-        this.dataSource = this.data.payment;
+        this.dataSource = this.data.bills;
         this.showSnackBar(
           'No se encontraron para facturas para el periodo solicitado'
         );
       }
     } else {
       this.showSnackBar('Selecciones un año valido');
-      this.dataSource = this.data.payment;
+      this.dataSource = this.data.bills;
     }
   }
 
@@ -153,7 +156,7 @@ export class PaymentsDetailComponent implements OnInit {
     this.snackBar.open(message, 'Aceptar', { duration: 5500 });
   }
 
-  public downloadPdf(payment: Payment, method: number): void {
+  public downloadPdf(payment: Bill, method: number): void {
     const date = new Date();
     const billname =
       'bill' + date.getDate() + date.getHours() + date.getSeconds();
@@ -207,8 +210,8 @@ export class PaymentsDetailComponent implements OnInit {
 
     doc.setTextColor(0, 0, 0);
 
-    const studentName = this.normalizeString(this.data.student.name);
-    const studentSurname = this.normalizeString(this.data.student.surname);
+    const studentName = this.normalizeString(this.data.name);
+    const studentSurname = this.normalizeString(this.data.surname);
 
     doc.text(studentName + ', ' + studentSurname, 25, 52);
 
@@ -250,8 +253,8 @@ export class PaymentsDetailComponent implements OnInit {
       37
     );
 
-    const titularName = this.data.student.titular;
-    const titularID = this.data.student.idAccount;
+    const titularName = this.data.parent.name + ' ' + this.data.parent.surname;
+    const titularID = this.data.parent.cellPhone;
 
     doc.text(
       titularName,
@@ -396,5 +399,9 @@ export class PaymentsDetailComponent implements OnInit {
       value.charAt(0).toUpperCase() +
       value.substring(1, value.length).toLowerCase()
     );
+  }
+
+  get dialog$(){
+    return this.dialog;
   }
 }

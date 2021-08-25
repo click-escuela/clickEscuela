@@ -1,24 +1,23 @@
-export class School 
+export class School
 {
-    private id:string;
-    private name:string;
-    private adress:string;
-    private city:string;
-    private province:string;
-    private postalCode:string;
-    private telephone:string;
-    private email:string;
+    private id: string;
+    private name: string;
+    private adress: string;
+    private city: string;
+    private province: string;
+    private postalCode: string;
+    private telephone: string;
+    private email: string;
 
 
-	constructor($name: string, $adress: string, $city: string, $province: string, $postalCode: string, $telephone: string,$email:string)
-    {
+	constructor($name: string, $adress: string, $city: string, $province: string, $postalCode: string, $telephone: string, $email: string) {
 		this.name = $name;
 		this.adress = $adress;
 		this.city = $city;
 		this.province = $province;
 		this.postalCode = $postalCode;
 		this.telephone = $telephone;
-        this.email = $email
+  this.email = $email;
 	}
 
 
@@ -38,7 +37,7 @@ export class School
 		return this.email;
 	}
 
-    
+
 
     /**
      * Getter $name

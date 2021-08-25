@@ -1,3 +1,6 @@
+import { OutReleaseComponent } from './out-release/out-release.component';
+import { DndDirective } from './drag-and-drop/dnd.directive';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { LoginComponent } from './login/login.component';
 import { Router, RouterModule } from '@angular/router';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
@@ -82,7 +85,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatGridListModule,
     MatChipsModule,
     MatSelectModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [
     CalendarComponent,
@@ -93,7 +96,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ConfirmDialogComponent,
     DetailStudentComponent,
     LoadScreenComponent,
-    LoginComponent
+    LoginComponent,
+    DragAndDropComponent,
+    DndDirective,
+    OutReleaseComponent
+
   ],
   exports: [
     CalendarComponent,
@@ -104,7 +111,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ConfirmDialogComponent,
     DetailStudentComponent,
     LoadScreenComponent,
-    LoginComponent
+    LoginComponent,
+    DragAndDropComponent,
+    OutReleaseComponent
   ],
 })
 export class CommonsModule {}

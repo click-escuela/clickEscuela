@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../../../test-mocks/material.module';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ describe('StudentGradeListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MaterialModule],
       declarations: [ StudentGradeListComponent ]
     })
     .compileComponents();

@@ -1,3 +1,9 @@
+import { SCREEN } from './../../../../enums/info-messages';
+import { MESSAGES } from './../../../../enums/messages-constants';
+import { COMMONS } from './../../../../enums/commons';
+import { SnackBarService } from './../../../../services/snack-bar.service';
+import { StudentFullDetail } from '../../../interfaces/student-full-detail';
+import { IconGeneratorService } from './../../../../services/icon-generator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountService } from './../../../../services/account.service';
@@ -25,35 +31,26 @@ export class AccountListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   checked: boolean;
 
+  // Valores para el loadScreen
+  messageInfo = SCREEN.ACCOUNTS.INFO;
+  loadAccounts = false;
+  messageError = SCREEN.ACCOUNTS.ERROR;
+  loadError = false;
+
+
   constructor(
     private studentsService: studentService,
-    private accountsService: AccountService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private icon: IconGeneratorService,
+    private snackbar: SnackBarService
   ) {
     this.studentsList = [];
     this.accounts = [];
-
-    this.studentsList = this.studentsService.studentsList;
-
-
     this.checked = false;
 
 
-
-    for (const student of this.studentsService.studentsList) {
-      const account = {
-        name: student.name,
-        surname: student.surname,
-        course: student.course,
-        titular: student.parent1.name + ' ' + student.parent1.surname,
-        titularId: student.id,
-        idAccount: student.parent1.id,
-        state: this.accountsService.accountsList.filter((a) => a.$titularId === student.id)[0].$state
-      };
-
-      this.accounts.push(account);
-    }
   }
 
 
@@ -67,12 +64,33 @@ export class AccountListComponent implements OnInit {
       'actions',
     ];
 
+
+
     // Assign the data to the data source for the table to render
+
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.accounts;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
+    this.getAccounts();
+
+  }
+
+  getAccounts() {
+    this.studentsService.getStudentsBills('12345').subscribe(
+      result => {
+        this.dataSource.data = result;
+        console.log(result);
+        setTimeout(() => {this.loadAccounts = true;
+        }, 600);
+
+      },
+      error => {
+        this.loadError = true;
+        this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
+      }
+    );
   }
 
   showDebtors() {
@@ -101,23 +119,35 @@ export class AccountListComponent implements OnInit {
   }
 
 
-  getPaymentDetail(id: string, student) {
-    const payment = this.accountsService.accountsList.filter(
-      (a) => a.$titularId === id
-    )[0].$payments;
+  getPaymentDetail(student) {
+
     const dialogRef = this.dialog.open(PaymentsDetailComponent, {
-      data: { payment, student },
+      data:   student ,
       width: '100vw',
       height: '95vh',
       maxWidth: '95vw',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      
     });
   }
 
   showSnackBar(message: string) {
     this.snackBar.open(message, 'Aceptar', { duration: 5500 });
   }
+
+  getAccountState(student: StudentFullDetail) {
+    if (student.bills.length === 0 ) {
+      return true;
+    } else {
+      for (const bill of student.bills) {
+         if (bill.status === 'PENDING') {
+          return false;
+         }
+      }
+      return true;
+
+    }
+  }
+  get studentsService$(){
+    return this.studentsService;
+  }
+
 }
