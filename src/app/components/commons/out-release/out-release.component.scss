@@ -1,0 +1,57 @@
+
+@import "../../../stylings/color-pallete.scss";
+
+.background-release{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color:$custom-blue-glass;
+    overflow: hidden;
+}
+
+img{
+    width: 110%;
+}
+
+.clicky{
+    position: absolute;
+    width: 150px;
+    bottom: 120px;
+    right: 2em;
+}
+
+.bottom-img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#map{
+   animation: move-map 3s ease-in-out 1s infinite alternate;
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    
+}
+
+
+#eye{
+    @keyframes move-map {
+        from{
+            transform: rotateX(0deg) perspective(0) translateY(0);
+        }
+    
+        to{
+            transform: rotateX(-60deg) perspective(60px) translateY(60px) scale(1.1);
+        }
+    }
+}
+
+@keyframes move-map {
+    from{
+        transform: rotateX(0deg) perspective(0) translateY(0);
+    }
+
+    to{
+        transform: rotateX(-50deg) perspective(60px) translateY(60px) scaleY(1.1) scaleX(0.8);
+    }
+}

@@ -1,3 +1,5 @@
+import { OutReleaseComponent } from './components/commons/out-release/out-release.component';
+import { ReleaseGuard } from './guards/release.guard';
 import { MassAdditionsComponent } from './components/admin/mass-additions/mass-additions.component';
 import { StudentGradeComponent } from './components/student/student-grade/student-grade.component';
 import { LoginComponent } from './components/commons/login/login.component';
@@ -29,6 +31,7 @@ import { HomeworkComponent } from './components/teacher/homework/homework.compon
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'outRelease', component: OutReleaseComponent },
   {
     path: 'teacher/menu',
     component: MenuComponent,
@@ -36,10 +39,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'course', component: CoursesComponent },
-      { path: 'homework', component: HomeworkComponent },
+      { path: 'homework', component: HomeworkComponent, canActivate: [ReleaseGuard] },
       { path: 'grade', component: GradesComponent },
-      { path: 'reportCard', component: ReportCardComponent },
-      { path: 'asistance', component: AsistanceComponent },
+      { path: 'reportCard', component: ReportCardComponent, canActivate: [ReleaseGuard] },
+      { path: 'asistance', component: AsistanceComponent, canActivate: [ReleaseGuard] },
     ],
   },
   {
@@ -51,8 +54,8 @@ const routes: Routes = [
       { path: 'accounts', component: AccountComponent },
       { path: 'students', component: AddStudentComponent },
       { path: 'teachers', component: AddTeacherComponent },
-      { path: 'calendar', component: CalendarComponent },
-      { path: 'configurations', component: ConfigurationComponent },
+      { path: 'calendar', component: CalendarComponent , canActivate: [ReleaseGuard] },
+      { path: 'configurations', component: ConfigurationComponent , canActivate: [ReleaseGuard] },
       { path: 'mass-upload', component: MassAdditionsComponent},
 
     ],
@@ -62,12 +65,12 @@ const routes: Routes = [
     component: StudentMenuComponent,
     children: [
       { path: '', redirectTo: 'reportCard', pathMatch: 'full' },
-      { path: 'reportCard', component: ReportCardComponent },
+      { path: 'reportCard', component: ReportCardComponent , canActivate: [ReleaseGuard] },
       { path: 'grades', component: StudentGradeComponent },
-      { path: 'homework', component: HomeworkStudentComponent },
-      { path: 'message', component: MessagesComponent },
-      { path: 'library', component: LibraryComponent },
-      { path: 'groups', component: GroupsComponent },
+      { path: 'homework', component: HomeworkStudentComponent , canActivate: [ReleaseGuard] },
+      { path: 'message', component: MessagesComponent , canActivate: [ReleaseGuard] },
+      { path: 'library', component: LibraryComponent , canActivate: [ReleaseGuard] },
+      { path: 'groups', component: GroupsComponent , canActivate: [ReleaseGuard] },
     ],
   },
   {
@@ -75,11 +78,11 @@ const routes: Routes = [
     component: ParentMenuComponent,
     children: [
       { path: '', redirectTo: 'parent-asistance', pathMatch: 'full' },
-      { path: 'parent-asistance', component: AsistanceParentComponent },
+      { path: 'parent-asistance', component: AsistanceParentComponent , canActivate: [ReleaseGuard] },
       { path: 'payment', component: PaymentComponent },
       { path: 'grade', component: GradesResumeComponent },
-      { path: 'message', component: MessagesComponent },
-      { path: 'reportCard', component: ReportCardComponent },
+      { path: 'message', component: MessagesComponent , canActivate: [ReleaseGuard] },
+      { path: 'reportCard', component: ReportCardComponent , canActivate: [ReleaseGuard] },
     ],
   },
   { path: '**', component: Error404Component },
