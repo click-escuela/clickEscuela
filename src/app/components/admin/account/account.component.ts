@@ -325,7 +325,8 @@ export class AccountComponent implements OnInit {
     const dialogRef = this.dialog.open(PaysCentralComponent,
       {
         width: '100vw',
-        height: '100vh'
+        height: '100vh',
+        panelClass:'pays-central'
       }
     );
 

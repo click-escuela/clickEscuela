@@ -1,3 +1,4 @@
+import { TextMaskPipe } from './../../pipes/text-mask.pipe';
 import { PaysCentralComponent } from './pays-central/pays-central.component';
 import { DndDirective } from './drag-and-drop/dnd.directive';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
@@ -43,6 +44,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 @NgModule({
@@ -86,6 +89,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatChipsModule,
     MatSelectModule,
     RouterModule,
+    MatRadioModule
   ],
   declarations: [
     CalendarComponent,
@@ -99,7 +103,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LoginComponent,
     DragAndDropComponent,
     DndDirective,
-    PaysCentralComponent
+    PaysCentralComponent,
+    TextMaskPipe
 
   ],
   exports: [
@@ -113,7 +118,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LoadScreenComponent,
     LoginComponent,
     DragAndDropComponent,
-    PaysCentralComponent
+    PaysCentralComponent,
+    TextMaskPipe
   ],
 })
 export class CommonsModule {}

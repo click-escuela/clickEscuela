@@ -1,9 +1,10 @@
+<h4 class="text-center mb-4">Central de pagos</h4>
 <div class="container">
-  <div class="row">
+  <div class="row card-row" [ngClass]="{'disabled': cash.checked}">
     <div class="col-12">
       <div class="card-container" [ngClass]="{'change-layout': changeCardLayout}">
         
-        <svg class="credit-card"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 196 122.1">
+        <svg class="credit-card"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 207 133.1">
           <defs>
          
             <linearGradient id="linear-gradient" x1="31.78" y1="26.5" x2="31.78" y2="78.63" gradientUnits="userSpaceOnUse">
@@ -31,6 +32,12 @@
               <stop offset="0.85" stop-color="#d7d7d7"/>
               <stop offset="0.89" stop-color="#fff"/>
             </linearGradient>
+            <filter id="shadow" x="0" y="0" width="200" height="200" xlink:href="#shadow" > 
+              <feOffset result="offOut" in="SourceAlpha" dx="4" dy="4" /> 
+              <feColorMatrix result="matrixOut" in="offOut" type="matrix" values=" 0.49 0 0 0 0 0 0.49 0 0 0 0 0 0.49 0 0 0 0 0 0.5 0" /> 
+              <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="5" /> 
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" /> 
+            </filter>
           </defs>
           <g class="cls-1">
             <g id="Layer_1" data-name="Layer 1">
@@ -58,9 +65,9 @@
                 <image width="301" height="54" transform="translate(116.78 6.49) scale(0.24)" preserveAspectRatio="xMinYMin meet"   [attr.href]="'../../../../assets/images/credit-cards/bank/'+selectedImage.bank"></image>
 
               </g>
-              <text class="card-number" transform="translate(16.11 77.66)">{{creditCard.number}}</text>
-              <text class="expiration" transform="translate(147.62 93.16)">01/26</text>
-              <text class="owner" transform="translate(18.74 110.79)">Nombre Apellido</text>
+              <text class="card-number" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(16.11 77.66)">{{creditCard.number | mask : 'credit-card'}}</text>
+              <text class="expiration" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(147.62 93.16)">{{creditCard.expiration.month+'/'+ (creditCard.expiration.year | mask: 'month') }}</text>
+              <text class="owner" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(18.74 110.79)">{{creditCard.owner}}</text>
             </g>
           </g>
         </svg>
@@ -71,11 +78,46 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       <mat-form-field class="example-form-field">
         <mat-label>Numero de tarjeta</mat-label>
-        <input (keyup)="validCard()" matInput type="text" [(ngModel)]="creditCard.number">
+        <input (keyup)="validCard()" matInput type="text" [(ngModel)]="creditCard.number" [disabled]="cash.checked">
       </mat-form-field>
     </div>
+    <div class="col-2">
+       <mat-form-field class="example-form-field">
+        <mat-label>Mes</mat-label>
+        <mat-select [(ngModel)]="creditCard.expiration.month" [disabled]="cash.checked">
+          <mat-option *ngFor="let month of months" [value]="month">
+            {{month}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-form-field">
+        <mat-label>Año</mat-label>
+        <mat-select [(ngModel)]="creditCard.expiration.year" [disabled]="cash.checked">
+          <mat-option *ngFor="let year of years" [value]="year">
+            {{year}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field class="example-form-field">
+        <mat-label>Nombre de la tarjeta</mat-label>
+        <input #owner (focus)="owner.value=''" matInput type="text" [(ngModel)]="creditCard.owner" [disabled]="cash.checked">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-checkbox #cash class="example-margin">Pagó en efectivo</mat-checkbox>
+
+  <div class="row align-center justify-content-center">
+    <button mat-raised-button>Pagar</button>
   </div>
 </div>
