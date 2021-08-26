@@ -1,5 +1,7 @@
+
 import { TextMaskPipe } from './../../pipes/text-mask.pipe';
 import { PaysCentralComponent } from './pays-central/pays-central.component';
+import { OutReleaseComponent } from './out-release/out-release.component';
 import { DndDirective } from './drag-and-drop/dnd.directive';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { LoginComponent } from './login/login.component';
@@ -105,6 +107,8 @@ import {MatRadioModule} from '@angular/material/radio';
     DndDirective,
     PaysCentralComponent,
     TextMaskPipe
+    OutReleaseComponent
+
 
   ],
   exports: [
@@ -120,6 +124,8 @@ import {MatRadioModule} from '@angular/material/radio';
     DragAndDropComponent,
     PaysCentralComponent,
     TextMaskPipe
+    OutReleaseComponent
+
   ],
 })
 export class CommonsModule {}

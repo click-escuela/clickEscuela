@@ -97,11 +97,22 @@
 
       <mat-divider></mat-divider>
 
-      
-
       <mat-list-item class="button-menu-container">
+        <button [ngClass]="{
+            'option-selected': blockDinamicActually == 'mass-upload'
+          }" class="button-menu" mat-button color (click)="changeBlock('mass-upload')">
+          
+          <mat-icon class="icon-svg" svgIcon="upload"></mat-icon>
+
+
+          <span>Alta Masiva</span>
+        </button>
+      </mat-list-item>
+
+      <mat-divider class=""></mat-divider>
+      <mat-list-item class=" coming-soon button-menu-container">
         <button [ngClass]="{ 'option-selected': blockDinamicActually == 'calendar' }" class="button-menu" mat-button
-          color (click)="changeBlock('calendar')">
+          color (click)="changeBlock('calendar')" disabled>
           <svg class="icon-svg" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 272.06 272.06">
             <path class="cls-1"
@@ -118,23 +129,12 @@
           <span>Calendario</span>
         </button>
       </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="button-menu-container">
-        <button [ngClass]="{
-            'option-selected': blockDinamicActually == 'mass-upload'
-          }" class="button-menu" mat-button color (click)="changeBlock('mass-upload')">
-          
-          <mat-icon class="icon-svg" svgIcon="upload"></mat-icon>
-
-
-          <span>Alta Masiva</span>
-        </button>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="button-menu-container">
+      <mat-divider class=""></mat-divider>
+     
+      <mat-list-item class="coming-soon button-menu-container">
         <button [ngClass]="{
             'option-selected': blockDinamicActually == 'configurations'
-          }" class="button-menu" mat-button color (click)="changeBlock('configurations')">
+          }" class="button-menu" mat-button color (click)="changeBlock('configurations')" disabled>
           <svg class="icon-svg" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 276.07 276.08">
             <path class="cls-1"

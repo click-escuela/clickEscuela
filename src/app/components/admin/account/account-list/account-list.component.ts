@@ -41,7 +41,8 @@ export class AccountListComponent implements OnInit {
 
   constructor(
     private studentsService: studentService,
-    private dialog: MatDialog,
+
+    public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private icon: IconGeneratorService,
     private snackbar: SnackBarService
@@ -127,10 +128,6 @@ export class AccountListComponent implements OnInit {
       height: '95vh',
       maxWidth: '95vw',
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
   }
 
   showPayCentral(){
@@ -164,4 +161,8 @@ export class AccountListComponent implements OnInit {
 
     }
   }
+  get studentsService$(){
+    return this.studentsService;
+  }
+
 }
