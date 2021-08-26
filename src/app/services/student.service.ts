@@ -15,7 +15,7 @@ import { SortColumn, SortDirection } from '../components/directives/sortable.dir
 import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import { StudentI } from '../components/interfaces/student';
 import { id } from '@swimlane/ngx-charts';
 import { Bill } from '../components/interfaces/bill';
@@ -246,7 +246,7 @@ export class studentService {
 
   getStudentsBills(idSchool: string): Observable<StudentFullDetail[]> {
 
-    //Se deja mockeo para pruebas
+    // Se deja mockeo para pruebas
 
     // const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
 
@@ -279,7 +279,7 @@ export class studentService {
     .replace('{schoolId}', idSchool)
     .replace('{fullDetail}', true + '');
     return this.connector.get<any>(path);
-    //return of([student, student2]);
+    // return of([student, student2]);
   }
 
   addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
@@ -289,12 +289,33 @@ export class studentService {
     return this.connector.post<StudentI>(path, student);
   }
 
+  uploadBulkFile(idSchool: string, file: File): Observable<HttpEvent<any>> {
+    const path =
+    environment.POST_STUDENT_URL
+    .replace('{schoolId}', idSchool);
+
+    const formData = new FormData();
+    formData.append('upload', file);
+
+    const params = new HttpParams();
+
+    const options = {
+      params,
+      reportProgress: true,
+    };
+
+    const req = new HttpRequest('POST', path, formData, options);
+    return this.connector.request(req);
+  }
+
   editStudentPut(student: StudentI, idSchool: string): Observable<StudentI> {
     const path =
     environment.POST_STUDENT_URL
     .replace('{schoolId}', idSchool);
     return this.connector.put<StudentI>(path, student);
   }
+
+
 
 
 
