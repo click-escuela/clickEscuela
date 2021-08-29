@@ -64,7 +64,7 @@ const routes: Routes = [
     path: 'student/menu',
     component: StudentMenuComponent,
     children: [
-      { path: '', redirectTo: 'reportCard', pathMatch: 'full' },
+      { path: '', redirectTo: 'grades', pathMatch: 'full' },
       { path: 'reportCard', component: ReportCardComponent , canActivate: [ReleaseGuard] },
       { path: 'grades', component: StudentGradeComponent },
       { path: 'homework', component: HomeworkStudentComponent , canActivate: [ReleaseGuard] },
@@ -77,7 +77,7 @@ const routes: Routes = [
     path: 'parent/menu',
     component: ParentMenuComponent,
     children: [
-      { path: '', redirectTo: 'parent-asistance', pathMatch: 'full' },
+      { path: '', redirectTo: 'payment', pathMatch: 'full' },
       { path: 'parent-asistance', component: AsistanceParentComponent , canActivate: [ReleaseGuard] },
       { path: 'payment', component: PaymentComponent },
       { path: 'grade', component: GradesResumeComponent },
