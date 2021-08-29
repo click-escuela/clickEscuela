@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 import { Province } from 'src/app/models/province';
 import { MODEL } from 'src/app/enums/models';
 import { COMMONS } from 'src/app/enums/commons';
+import { STUDENT_CONTROL } from '../../form-control-student';
 
 @Component({
   selector: 'app-add-student',
@@ -32,6 +33,7 @@ export class AddStudentComponent implements OnInit {
 
 
   typeIDs = MODEL.TYPE_ID;
+  controlStudent = STUDENT_CONTROL;
   provinces: Province[];
   districts: Province[];
   selectedProvince: string;
