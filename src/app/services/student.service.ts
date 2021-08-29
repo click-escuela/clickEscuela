@@ -291,7 +291,7 @@ export class studentService {
 
   uploadBulkFile(idSchool: string, file: File): Observable<HttpEvent<any>> {
     const path =
-    environment.POST_STUDENT_URL
+    environment.EXCEL_URL
     .replace('{schoolId}', idSchool);
 
     const formData = new FormData();

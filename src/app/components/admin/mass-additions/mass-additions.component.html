@@ -38,4 +38,9 @@
     
     
   </div>
+  <div class="div" *ngIf="onLoad">
+    <mat-progress-bar mode="determinate" [value]="loadPercentage"></mat-progress-bar>
+    <p class="text-center">Cargando archivo {{fileName}} : {{loadPercentage}} %</p>
+  </div>
+
   <app-load-details></app-load-details>
