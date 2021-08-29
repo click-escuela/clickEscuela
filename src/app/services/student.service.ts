@@ -295,7 +295,7 @@ export class studentService {
     .replace('{schoolId}', idSchool);
 
     const formData = new FormData();
-    formData.append('upload', file);
+    formData.append('file', file);
 
     const params = new HttpParams();
 
