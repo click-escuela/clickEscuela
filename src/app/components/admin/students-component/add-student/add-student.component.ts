@@ -1,5 +1,5 @@
 import { Course } from './../../../../models/course';
-import { COURSES } from './../../../../enums/courses';
+import { COURSES, GENDER } from './../../../../enums/courses';
 import { Adress } from './../../../interfaces/adress';
 
 import { environment } from 'src/environments/environment';
@@ -18,6 +18,7 @@ import { MODEL } from 'src/app/enums/models';
 import { COMMONS } from 'src/app/enums/commons';
 import { STUDENT_CONTROL } from '../../form-control-student';
 import { transform } from 'typescript';
+import moment from 'moment';
 
 @Component({
   selector: 'app-add-student',
@@ -39,7 +40,9 @@ export class AddStudentComponent implements OnInit {
   provinces: Province[];
   districts: Province[];
   selectedProvince: string;
-  normalizedDirections: Adress;
+  studentNormalizedDirections: Adress;
+  parentNormalizedDirections: Adress;
+
 
   messageInfo = 'Espere creando estudiante...';
   messageInfoClass = 'white';
@@ -48,12 +51,14 @@ export class AddStudentComponent implements OnInit {
   courses = COURSES.GRADE;
   divisions = COURSES.DIVISION;
   levels = COURSES.LEVEL;
+  genders = GENDER;
 
   constructor(
     private snackBarService: SnackBarService,
     private matDialogRef: MatDialog,
     private studentsService: studentService,
-    private geoRefService: GeoRefService
+    private geoRefService: GeoRefService,
+    private icon: IconGeneratorService
   ) {
     this.secondParent = false;
     this.resetStudentModel();
@@ -70,8 +75,13 @@ export class AddStudentComponent implements OnInit {
   ngOnInit() {
     this.getAllProvinces();
     this.getAllDistricts(this.selectedProvince);
-    console.log(this.divisions)
-    
+    console.log(this.divisions);
+
+  }
+
+  showErrors(id: string) {
+    console.log(this.controlStudent.get(id).errors);
+    console.log(this.controlStudent.valid);
   }
 
   getAllProvinces() {
@@ -84,10 +94,19 @@ export class AddStudentComponent implements OnInit {
     return this.geoRefService;
   }
 
-  getNormalizedDirections(direction: string) {
+  getStudentNormalizedDirections(direction: string) {
     if (direction.length > 3) {
       this.geoRefService.normalizeDirection(direction).subscribe((data) => {
-        this.normalizedDirections = data.direccionesNormalizadas;
+        this.studentNormalizedDirections = data.direccionesNormalizadas;
+      });
+    }
+    console.log(this.controlStudent.value);
+  }
+
+  getparentNormalizedDirections(direction: string) {
+    if (direction.length > 3) {
+      this.geoRefService.normalizeDirection(direction).subscribe((data) => {
+        this.parentNormalizedDirections = data.direccionesNormalizadas;
       });
     }
     console.log(this.controlStudent.value);
@@ -144,30 +163,38 @@ export class AddStudentComponent implements OnInit {
     const formatedAdress = this.formatDataAdress(
       this.controlStudent.value.adress
     );
+    const parentAdress = this.formatDataAdress(
+      this.controlStudent.value.parent.adress
+    );
+    this.currentStudent.adress = formatedAdress;
+    this.currentStudent.parent.adress = parentAdress;
+    this.currentStudent.schoolId = environment.schoolId;
+
+    this.currentStudent.birthday = moment(this.currentStudent.birthday).format('YYYY-DD-MM');
+    this.currentStudent.parent.birthday = moment(this.currentStudent.parent.birthday).format('YYYY-DD-MM');
     
 
-    this.currentStudent.adress = formatedAdress;
-    console.log(this.controlStudent.value)
-    // this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent, this.schoolId).subscribe(
-    //   data => {
-    //     setTimeout(() => {
-    //       this.addingStudent = false;
-    //       this.snackBarService.showSnackBar(
-    //         MESSAGES.STUDENT.POST.SUCCES,
-    //         COMMONS.SNACK_BAR.ACTION.ACCEPT,
-    //         COMMONS.SNACK_BAR.TYPE.SUCCES); },
-    //       500);
-    //   },
-    //   error => {
-    //     setTimeout(() => {
-    //       this.addingStudent = false;
-    //       this.snackBarService.showSnackBar(
-    //         MESSAGES.STUDENT.POST.ERROR[error.status],
-    //         COMMONS.SNACK_BAR.ACTION.ACCEPT,
-    //         COMMONS.SNACK_BAR.TYPE.ERROR); },
-    //       500);
-    // }
-    // );
+    console.log(this.currentStudent);
+    this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent, this.schoolId).subscribe(
+      data => {
+        setTimeout(() => {
+          this.addingStudent = false;
+          this.snackBarService.showSnackBar(
+            MESSAGES.STUDENT.POST.SUCCES,
+            COMMONS.SNACK_BAR.ACTION.ACCEPT,
+            COMMONS.SNACK_BAR.TYPE.SUCCES); },
+          500);
+      },
+      error => {
+        setTimeout(() => {
+          this.addingStudent = false;
+          this.snackBarService.showSnackBar(
+            MESSAGES.STUDENT.POST.ERROR[error.status],
+            COMMONS.SNACK_BAR.ACTION.ACCEPT,
+            COMMONS.SNACK_BAR.TYPE.ERROR); },
+          500);
+    }
+    );
     this.resetStudentModel();
   }
 

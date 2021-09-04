@@ -4,7 +4,7 @@ CURRENT_STUDENT: {
     surname: 'Lopez',
     birthday: '1993-05-05',
     gender: 'MALE',
-    document: '37984176',
+    document: '37986666',
     level: 'PREESCOLAR',
     grade: '3',
     school: 'Raggio',
