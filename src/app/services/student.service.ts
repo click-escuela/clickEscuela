@@ -1,5 +1,4 @@
 import { MODEL } from './../enums/ng-models';
-import { StudentFullDetail } from '../components/interfaces/student-full-detail';
 
 import { environment } from './../../environments/environment';
 import { Parent } from '../models/parent';
@@ -16,9 +15,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
+import { StudentFullDetail } from '../components/interfaces/student-full-detail';
 import { StudentI } from '../components/interfaces/student';
-import { id } from '@swimlane/ngx-charts';
-import { Bill } from '../components/interfaces/bill';
+
 interface SearchResult {
   students: Student[];
   total: number;
