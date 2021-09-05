@@ -77,6 +77,7 @@ const routes: Routes = [
     path: 'parent/menu',
     component: ParentMenuComponent,
     children: [
+
       { path: '', redirectTo: 'payment', pathMatch: 'full' },
       { path: 'parent-asistance', component: AsistanceParentComponent , canActivate: [ReleaseGuard] },
       { path: 'payment', component: PaymentComponent },
