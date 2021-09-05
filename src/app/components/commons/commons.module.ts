@@ -106,7 +106,7 @@ import {MatRadioModule} from '@angular/material/radio';
     DragAndDropComponent,
     DndDirective,
     PaysCentralComponent,
-    TextMaskPipe
+    TextMaskPipe,
     OutReleaseComponent
   ],
   exports: [
@@ -121,7 +121,7 @@ import {MatRadioModule} from '@angular/material/radio';
     LoginComponent,
     DragAndDropComponent,
     PaysCentralComponent,
-    TextMaskPipe
+    TextMaskPipe,
     OutReleaseComponent
   ],
 })
