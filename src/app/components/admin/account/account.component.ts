@@ -1,3 +1,4 @@
+import { PaysCentralComponent } from './../../commons/pays-central/pays-central.component';
 import { IconGeneratorService } from './../../../services/icon-generator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExpensesService } from './../../../services/expenses.service';
@@ -320,6 +321,19 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  showPayCentral(){
+    const dialogRef = this.dialog.open(PaysCentralComponent,
+      {
+        width: '100vw',
+        height: '100vh',
+        panelClass:'pays-central'
+      }
+    );
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedRange = result;
+      this.getExpensesReport('CUSTOM_PERIOD', result.option);
+    });
+  }
 
 }

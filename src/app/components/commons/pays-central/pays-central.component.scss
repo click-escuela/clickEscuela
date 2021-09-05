@@ -1,0 +1,139 @@
+@import url(../../../stylings/custom-fonts.scss);
+.credit-card{
+    width: 350px;
+    height: auto;
+    z-index: 0;
+   
+}
+
+.card-row{
+  transition: 0.5s ease-in-out;
+}
+
+.disabled{
+  filter: grayscale(2) blur(5px);
+  transform: scale(0.9);
+  
+}
+
+.change-layout::before{
+  position: absolute;
+  z-index: 9;
+  content: "";
+  background: url(../../../../assets/images/shine.svg);
+  width: 150%;
+  height: 189%;
+  top: -70px;
+  background-repeat: no-repeat;
+  background-position-x: 32%; animation: shine 0.5s ease-in-out;
+}
+
+::ng-deep .pays-central .mat-dialog-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes shine {
+  from{
+    background-position-x:32%;
+  } 
+  to{
+    background-position-x: 100%;
+  }
+}
+
+.body{
+  filter: url(#shadow);
+}
+
+.black{
+  fill:black !important
+}
+
+.white{
+  fill:whitesmoke !important
+}
+
+
+.card-container{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cls-1 {
+    isolation: isolate;
+  }
+
+  .body.red {
+    fill: #e70506;
+  }
+
+  .body.blued {
+    fill: #1781b8;
+  }
+
+  .body.default{
+    fill: aliceblue;
+  }
+
+  .cls-3 {
+    fill: url(#linear-gradient);
+  }
+
+  .cls-4, .cls-8 {
+    mix-blend-mode: multiply;
+  }
+
+  .cls-4 {
+    fill: url(#linear-gradient-2);
+  }
+
+  .cls-5, .cls-6 {
+    fill: #d6d6d6;
+  }
+
+  .cls-6 {
+    fill-rule: evenodd;
+  }
+
+  .expiration, .owner, .cls-7, .card-number {
+    fill: #fff;
+    font-family: Kredit;
+    font-weight: bold;
+
+  }
+
+  .cls-8 {
+    opacity: 0.06;
+    fill: url(#linear-gradient-3);
+  }
+
+  .card-number {
+    font-size: 17px;
+  }
+  .expiration {
+    font-size: 14px;
+  }
+ 
+
+  .owner {
+    font-size: 12.39px;
+  }
+
+  .cls-12 {
+    letter-spacing: -0.01em;
+  }
+
+  .cls-13 {
+    letter-spacing: 0em;
+  }
+
+  .cls-14 {
+    letter-spacing: 0em;
+  }
+
+
+  

@@ -5,7 +5,7 @@ import { MassAddition } from './../../../interfaces/mass-addition';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-load-details',
@@ -21,8 +21,8 @@ export class LoadDetailsComponent implements OnInit {
 
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
 
   constructor(private icon: IconGeneratorService, private dialog: MatDialog) {
     this.data = [];
@@ -57,12 +57,18 @@ export class LoadDetailsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  insertRegistry(addition: MassAddition) {
+    this.data.push(addition);
+    this.dataSource.data = this.data;
+    this.table.renderRows();
+  }
+
   openShowDetail() {
     const dialogRef = this.dialog.open(ShowLoadDetailsComponent,
       {
-        width:'40vw',
-        height:'250px'
-      })
+        width: '40vw',
+        height: '250px'
+      });
   }
 
 }

@@ -52,7 +52,7 @@ export class EditTeacherComponent implements OnInit {
 }
 
   ngOnInit() {
-
+    console.log(this.data)
 
   }
 

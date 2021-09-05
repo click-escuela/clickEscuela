@@ -1,0 +1,123 @@
+<h4 class="text-center mb-4">Central de pagos</h4>
+<div class="container">
+  <div class="row card-row" [ngClass]="{'disabled': cash.checked}">
+    <div class="col-12">
+      <div class="card-container" [ngClass]="{'change-layout': changeCardLayout}">
+        
+        <svg class="credit-card"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 207 133.1">
+          <defs>
+         
+            <linearGradient id="linear-gradient" x1="31.78" y1="26.5" x2="31.78" y2="78.63" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#ffca3f"/>
+              <stop offset="0.1" stop-color="#ca7c22"/>
+              <stop offset="0.19" stop-color="#fddb7a"/>
+              <stop offset="0.42" stop-color="#ffad45"/>
+              <stop offset="0.55" stop-color="#a95f0d"/>
+              <stop offset="0.66" stop-color="#ffad45"/>
+              <stop offset="0.79" stop-color="#ffff9b"/>
+              <stop offset="0.87" stop-color="#ffed7c"/>
+              <stop offset="1" stop-color="#ffca3f"/>
+            </linearGradient>
+            <linearGradient id="linear-gradient-2" x1="75.25" y1="99.19" x2="75.25" y2="164.45" xlink:href="#linear-gradient"/>
+            <linearGradient id="linear-gradient-3" x1="237.99" y1="143.87" x2="-56.62" y2="153.69" gradientUnits="userSpaceOnUse">
+              <stop offset="0"/>
+              <stop offset="0.26" stop-color="#020202"/>
+              <stop offset="0.38" stop-color="#0a0a0a"/>
+              <stop offset="0.47" stop-color="#171717"/>
+              <stop offset="0.55" stop-color="#292929"/>
+              <stop offset="0.62" stop-color="#414141"/>
+              <stop offset="0.69" stop-color="#5e5e5e"/>
+              <stop offset="0.74" stop-color="#818181"/>
+              <stop offset="0.8" stop-color="#aaa"/>
+              <stop offset="0.85" stop-color="#d7d7d7"/>
+              <stop offset="0.89" stop-color="#fff"/>
+            </linearGradient>
+            <filter id="shadow" x="0" y="0" width="200" height="200" xlink:href="#shadow" > 
+              <feOffset result="offOut" in="SourceAlpha" dx="4" dy="4" /> 
+              <feColorMatrix result="matrixOut" in="offOut" type="matrix" values=" 0.49 0 0 0 0 0 0.49 0 0 0 0 0 0.49 0 0 0 0 0 0.5 0" /> 
+              <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="5" /> 
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" /> 
+            </filter>
+          </defs>
+          <g class="cls-1">
+            <g id="Layer_1" data-name="Layer 1">
+              <rect class="body" [ngClass]="selectedImage.class" width="196" height="122.1" rx="7.5"/>
+              <g>
+                <rect class="cls-3" x="18.74" y="32.07" width="26.07" height="20.66" rx="3.72"/>
+                <path class="cls-4" d="M88.28,123.89v-.47H83.51v-6H83v6H79.16a4.29,4.29,0,0,0-3.68-3v-3.06H75v3a4.27,4.27,0,0,0-4,3H67.5v-6H67v6H62.21v.47H67v6.76H62.21v.48H67V138h.48v-6.91h3.41a4.3,4.3,0,0,0,4.1,3.33V138h.47v-3.61a4.29,4.29,0,0,0,3.78-3.3H83V138h.48v-6.91h4.77v-.48H85.43v-6.76Zm-17.44,6.76H67.5v-6.76h3.37a4.18,4.18,0,0,0,.93,3.54,4.3,4.3,0,0,0-1,2.75A3.75,3.75,0,0,0,70.84,130.65ZM75.08,134a3.8,3.8,0,0,1-2.79-6.39l.15-.17-.15-.16a3.82,3.82,0,1,1,5.59,0l-.15.16.15.17a3.8,3.8,0,0,1-2.8,6.39ZM85,130.65H79.33c0-.16,0-.31,0-.47a4.3,4.3,0,0,0-1-2.75,4.08,4.08,0,0,0,.92-3.54H85Z" transform="translate(-43.47 -85.32)"/>
+              </g>
+              <g>
+                <path class="cls-5" d="M171.84,173.78h0a.27.27,0,0,1,0-.1l.72-2.33h.34l-.88,2.67h-.42l-.88-2.67h.33l.73,2.33Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M173.19,174l.91-2.67h.45l.93,2.67h-.32l-.2-.56H173.7l-.19.56Zm1.14-2.44h0a.26.26,0,0,1,0,.11l-.51,1.53h1.1l-.52-1.53A.26.26,0,0,1,174.33,171.58Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M177.7,173.75V174h-1.65v-2.67h.32v2.4Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M178.05,171.35h.32V174h-.32Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M179.13,174v-2.67h1.41a.25.25,0,0,1,.18.08l.37.3a.21.21,0,0,1,.09.16v1.59a.24.24,0,0,1-.09.16l-.37.3a.25.25,0,0,1-.18.08Zm1.73-.65V172a.2.2,0,0,0-.09-.15l-.18-.16a.28.28,0,0,0-.19-.07h-1v2.13h1a.29.29,0,0,0,.19-.08l.18-.15A.2.2,0,0,0,180.86,173.37Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M171.35,175.92h2v.26h-.84v2.4h-.32v-2.4h-.84Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M175.42,175.92h.32v2.66h-.32v-1.23H174v1.23h-.33v-2.66H174v1.18h1.38Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M176.5,175.92h1.41a.27.27,0,0,1,.18.07l.09.08a.23.23,0,0,1,.09.19v.89a.27.27,0,0,1-.09.2l-.1.08a.28.28,0,0,1-.17.07h-.21l.39.61s0,.07.06.08l.07.05.05,0,.08.06a1,1,0,0,1,0,.11v.15h-.19a.21.21,0,0,1-.09,0l-.07-.05a.47.47,0,0,1-.14-.14l-.5-.81h-.55v1.06h-.32Zm.32.26v1.07h1l0,0,0,0v-.9l0-.05,0,0h-1Z" transform="translate(-43.47 -85.32)"/>
+                <path class="cls-5" d="M180.77,175.92h.31v2.32a.25.25,0,0,1-.09.19l-.09.08a.27.27,0,0,1-.18.07h-1.29a.3.3,0,0,1-.19-.07l-.09-.08a.25.25,0,0,1-.09-.19v-2.32h.32v2.24s0,.06,0,.07,0,0,0,.05l0,0h1.19l.05,0s0,0,0-.05a.35.35,0,0,0,0-.07Z" transform="translate(-43.47 -85.32)"/>
+              </g>
+              <polygon class="cls-6" points="139.52 86 139.52 89.24 141.96 87.62 139.52 86"/>
+       
+              <path class="cls-8" d="M232,85.32H94.15l72.55,122.1H232a7.5,7.5,0,0,0,7.5-7.5V92.81A7.49,7.49,0,0,0,232,85.32Z" transform="translate(-43.47 -85.32)"/>
+              <g>
+                <image width="189" height="62" transform="translate(145.74 100.35) scale(0.24)" preserveAspectRatio="xMinYMin meet"   [attr.href]="'../../../../assets/images/credit-cards/entity/'+selectedImage.entity"></image>
+                <image width="301" height="54" transform="translate(116.78 6.49) scale(0.24)" preserveAspectRatio="xMinYMin meet"   [attr.href]="'../../../../assets/images/credit-cards/bank/'+selectedImage.bank"></image>
+
+              </g>
+              <text class="card-number" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(16.11 77.66)">{{creditCard.number | mask : 'credit-card'}}</text>
+              <text class="expiration" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(147.62 93.16)">{{creditCard.expiration.month+'/'+ (creditCard.expiration.year | mask: 'month') }}</text>
+              <text class="owner" [ngClass]="{'white': selectedImage.color==='white', 'black': selectedImage.color==='black'}" transform="translate(18.74 110.79)">{{creditCard.owner}}</text>
+            </g>
+          </g>
+        </svg>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <mat-form-field class="example-form-field">
+        <mat-label>Numero de tarjeta</mat-label>
+        <input (keyup)="validCard()" matInput type="text" [(ngModel)]="creditCard.number" [disabled]="cash.checked">
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+       <mat-form-field class="example-form-field">
+        <mat-label>Mes</mat-label>
+        <mat-select [(ngModel)]="creditCard.expiration.month" [disabled]="cash.checked">
+          <mat-option *ngFor="let month of months" [value]="month">
+            {{month}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-form-field">
+        <mat-label>Año</mat-label>
+        <mat-select [(ngModel)]="creditCard.expiration.year" [disabled]="cash.checked">
+          <mat-option *ngFor="let year of years" [value]="year">
+            {{year}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field class="example-form-field">
+        <mat-label>Nombre de la tarjeta</mat-label>
+        <input #owner (focus)="owner.value=''" matInput type="text" [(ngModel)]="creditCard.owner" [disabled]="cash.checked">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-checkbox #cash class="example-margin">Pagó en efectivo</mat-checkbox>
+
+  <div class="row align-center justify-content-center">
+    <button mat-raised-button>Pagar</button>
+  </div>
+</div>

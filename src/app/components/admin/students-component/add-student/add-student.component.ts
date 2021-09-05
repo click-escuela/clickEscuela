@@ -1,9 +1,12 @@
+import { Course } from './../../../../models/course';
+import { COURSES, GENDER } from './../../../../enums/courses';
+import { Adress } from './../../../interfaces/adress';
 
 import { environment } from 'src/environments/environment';
 import { IconGeneratorService } from './../../../../services/icon-generator.service';
 import { FUNCTION } from './../../../../enums/functions';
 import { MESSAGES } from './../../../../enums/messages-constants';
-import { SnackBarService} from '../../../../services/snack-bar.service';
+import { SnackBarService } from '../../../../services/snack-bar.service';
 import { StudentI } from './../../../interfaces/student';
 import { GeoRefService } from '../../../../services/geo-ref.service';
 import { studentService } from '../../../../services/student.service';
@@ -13,6 +16,9 @@ import { Component, OnInit } from '@angular/core';
 import { Province } from 'src/app/models/province';
 import { MODEL } from 'src/app/enums/models';
 import { COMMONS } from 'src/app/enums/commons';
+import { STUDENT_CONTROL } from '../../form-control-student';
+import { transform } from 'typescript';
+import moment from 'moment';
 
 @Component({
   selector: 'app-add-student',
@@ -21,7 +27,6 @@ import { COMMONS } from 'src/app/enums/commons';
   providers: [GeoRefService, IconGeneratorService],
 })
 export class AddStudentComponent implements OnInit {
-
   serviceRequest: any = null;
 
   secondParent: boolean;
@@ -30,21 +35,30 @@ export class AddStudentComponent implements OnInit {
 
   addingStudent: boolean;
 
-
   typeIDs = MODEL.TYPE_ID;
+  controlStudent = STUDENT_CONTROL;
   provinces: Province[];
   districts: Province[];
   selectedProvince: string;
-  normalizedDirections;
+  studentNormalizedDirections: Adress;
+  parentNormalizedDirections: Adress;
+
 
   messageInfo = 'Espere creando estudiante...';
   messageInfoClass = 'white';
+
+  selectedAdress: any;
+  courses = COURSES.GRADE;
+  divisions = COURSES.DIVISION;
+  levels = COURSES.LEVEL;
+  genders = GENDER;
 
   constructor(
     private snackBarService: SnackBarService,
     private matDialogRef: MatDialog,
     private studentsService: studentService,
     private geoRefService: GeoRefService,
+    private icon: IconGeneratorService
   ) {
     this.secondParent = false;
     this.resetStudentModel();
@@ -61,6 +75,13 @@ export class AddStudentComponent implements OnInit {
   ngOnInit() {
     this.getAllProvinces();
     this.getAllDistricts(this.selectedProvince);
+    console.log(this.divisions);
+
+  }
+
+  showErrors(id: string) {
+    console.log(this.controlStudent.get(id).errors);
+    console.log(this.controlStudent.valid);
   }
 
   getAllProvinces() {
@@ -73,18 +94,41 @@ export class AddStudentComponent implements OnInit {
     return this.geoRefService;
   }
 
-  getNormalizedDirections(direction: string) {
+  getStudentNormalizedDirections(direction: string) {
     if (direction.length > 3) {
       this.geoRefService.normalizeDirection(direction).subscribe((data) => {
-        this.normalizedDirections = data.direccionesNormalizadas;
+        this.studentNormalizedDirections = data.direccionesNormalizadas;
       });
     }
+    console.log(this.controlStudent.value);
+  }
+
+  getparentNormalizedDirections(direction: string) {
+    if (direction.length > 3) {
+      this.geoRefService.normalizeDirection(direction).subscribe((data) => {
+        this.parentNormalizedDirections = data.direccionesNormalizadas;
+      });
+    }
+    console.log(this.controlStudent.value);
+  }
+
+  getAdressDirection(adress) {
+    return adress.direccion;
+  }
+
+  getAdress($event) {
+    console.log($event);
+    console.log(this.controlStudent.value);
   }
 
   getAllDistricts(id: string) {
+    console.log(id);
     this.geoRefService.getDistricts(id).subscribe((data) => {
       if (id === '02') {
-        data.municipios.push({ id: '222', nombre: 'Malvinas Argentinas' });
+        data.municipios.push({ id: '222', nombre: 'CABA' });
+      }
+      if (id === '06') {
+        data.municipios.push({ id: '444', nombre: 'Malvinas Argentinas' });
       }
       this.districts = data.municipios.sort(FUNCTION.SORT.BY_NAME);
     });
@@ -94,21 +138,45 @@ export class AddStudentComponent implements OnInit {
     this.secondParent = !this.secondParent;
     this.secondParent
       ? this.snackBarService.showSnackBar(
-        MESSAGES.PARENT.SUCCES,
-        COMMONS.SNACK_BAR.ACTION.ACCEPT,
-        COMMONS.SNACK_BAR.TYPE.SUCCES)
+          MESSAGES.PARENT.SUCCES,
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.SUCCES
+        )
       : this.snackBarService.showSnackBar(
-        MESSAGES.PARENT.NORMAL,
-        COMMONS.SNACK_BAR.ACTION.ACCEPT,
-        COMMONS.SNACK_BAR.TYPE.NORMAL);
+          MESSAGES.PARENT.NORMAL,
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.NORMAL
+        );
+  }
+
+  formatDataAdress(data: any): Adress {
+    return {
+      street: data.nombre_calle,
+      number: data.altura,
+      locality: data.nombre_localidad,
+    };
   }
 
   addStudent() {
-    this.addingStudent = true;
+
+    this.currentStudent = this.controlStudent.value as StudentI;
+    const formatedAdress = this.formatDataAdress(
+      this.controlStudent.value.adress
+    );
+    const parentAdress = this.formatDataAdress(
+      this.controlStudent.value.parent.adress
+    );
+    this.currentStudent.adress = formatedAdress;
+    this.currentStudent.parent.adress = parentAdress;
+    this.currentStudent.schoolId = environment.schoolId;
+
+    this.currentStudent.birthday = moment(this.currentStudent.birthday).format('YYYY-DD-MM');
+    this.currentStudent.parent.birthday = moment(this.currentStudent.parent.birthday).format('YYYY-DD-MM');
+    
+
+    console.log(this.currentStudent);
     this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent, this.schoolId).subscribe(
       data => {
-
-
         setTimeout(() => {
           this.addingStudent = false;
           this.snackBarService.showSnackBar(
@@ -118,7 +186,6 @@ export class AddStudentComponent implements OnInit {
           500);
       },
       error => {
-
         setTimeout(() => {
           this.addingStudent = false;
           this.snackBarService.showSnackBar(
@@ -133,15 +200,15 @@ export class AddStudentComponent implements OnInit {
 
   cancelRequest() {
     this.serviceRequest.unsubscribe();
-    }
-
+  }
 
   cancelAdd() {
     this.resetStudentModel();
     this.snackBarService.showSnackBar(
       MESSAGES.CLEAR_FORMS,
       COMMONS.SNACK_BAR.ACTION.ACCEPT,
-      COMMONS.SNACK_BAR.TYPE.NORMAL);
+      COMMONS.SNACK_BAR.TYPE.NORMAL
+    );
   }
 
   openStudentModelBase() {
@@ -151,5 +218,4 @@ export class AddStudentComponent implements OnInit {
       width: '100vw',
     });
   }
-
 }

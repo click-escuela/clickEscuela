@@ -14,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaymentsDetailComponent } from 'src/app/components/commons/payments-detail/payments-detail.component';
+import { PaysCentralComponent } from 'src/app/components/commons/pays-central/pays-central.component';
 
 @Component({
   selector: 'app-account-list',
@@ -129,6 +130,20 @@ export class AccountListComponent implements OnInit {
     });
   }
 
+  showPayCentral(){
+    const dialogRef = this.dialog.open(PaysCentralComponent,
+      {
+        width: '100vw',
+        height: '100vh',
+        panelClass:'pays-central'
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+    });
+
+  }
 
   showSnackBar(message: string) {
     this.snackBar.open(message, 'Aceptar', { duration: 5500 });

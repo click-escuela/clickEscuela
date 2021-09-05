@@ -15,16 +15,32 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form>
+      <form [formGroup]="gradeControl">
         <div class="row form-group">
           <div class="col-12 form-group">
             <mat-form-field class="example-full-width">
               <mat-label>Descripcion de la nota</mat-label>
 
               <textarea matInput type="text" name="description" id="description" class="form-control"
-                placeholder="Ingrese Descripcion..." [(ngModel)]="currentGrade.name" #description required
-                [ngModel]="localData.grade.name"></textarea>
+                placeholder="Ingrese Descripcion..."  formControlName="description"
+                #description required [ngModel]="localData.grade.name" maxlength="200"></textarea>
             </mat-form-field>
+            <br>
+            <mat-hint align="end">{{description.value.length}} / 200</mat-hint>
+
+            <div class="errors" *ngIf="(gradeControl.get('description').touched || gradeControl.get('description').dirty ) && gradeControl.get('description').errors">
+
+              <mat-error *ngIf="gradeControl.get('description').errors.required">
+                El campo no puede estar vacio
+              </mat-error>
+              <mat-error *ngIf="gradeControl.get('description').errors.minlength">
+                No super el minimo admisible
+              </mat-error>
+
+              <mat-error *ngIf="gradeControl.get('description').errors.maxlength">
+                Supera el maximo admisible
+              </mat-error>
+            </div>
           </div>
         </div>
 
@@ -32,25 +48,31 @@
           <div class="col-md-6 col-12">
             <mat-form-field appearance="fill">
               <mat-label>Curso</mat-label>
-              <mat-select [(value)]="selectedCourse" [ngModelOptions]="{ standalone: true }"
+              <mat-select formControlName="course" [ngModelOptions]="{ standalone: true }"
                 (selectionChange)="loadStudents()" #course>
                 <mat-option *ngFor="let course of courses" [value]="course">
                   {{ course }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('course').touched && gradeControl.get('course').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
 
           <div class="col-md-6 col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Materia</mat-label>
-              <mat-select [(ngModel)]="currentGrade.subject" [ngModelOptions]="{ standalone: true }"
-                [ngModel]="localData.grade.subject">
+              <mat-select formControlName="subject" [ngModelOptions]="{ standalone: true }"
+                [ngModel]="localData.grade.subject" formControlName="subject">
                 <mat-option *ngFor="let matter of matters" [value]="matter">
                   {{ matter }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('subject').touched && gradeControl.get('subject').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
         </div>
 
@@ -58,13 +80,16 @@
           <div class="col-md-6 col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Tipo de actividad</mat-label>
-              <mat-select [(ngModel)]="currentGrade.type" [ngModelOptions]="{ standalone: true }"
+              <mat-select formControlName="type" [ngModelOptions]="{ standalone: true }"
                 [ngModel]="localData.grade.type">
                 <mat-option *ngFor="let type of types" [value]="type.code">
                   {{ type.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('type').touched && gradeControl.get('type').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
 
           <div class="col-md-6 col-12 form-group">
@@ -73,9 +98,24 @@
                 <mat-label>Nota numerica</mat-label>
 
                 <input matInput type="number" max="10" min="0" name="grade" id="grade" class="form-control"
-                  placeholder="Ingrese Nota..." [(ngModel)]="currentGrade.number" #grade required
-                  [ngModel]="localData.grade.number" />
+                  placeholder="Ingrese Nota..." formControlName="number" #grade required
+                  [ngModel]="localData.grade.number" step="0.1" />
               </mat-form-field>
+              <div class="errors" *ngIf="gradeControl.get('number').touched && gradeControl.get('number').errors ">
+                <mat-error *ngIf="gradeControl.get('number').errors.required || gradeControl.get('number').errors.pattern">
+                 Formato de nota invalido
+                </mat-error>
+
+                <mat-error *ngIf="gradeControl.get('number').errors.max">
+                  El numero excede el máximo permitido (10)
+                 </mat-error>
+
+                 <mat-error *ngIf="gradeControl.get('number').errors.min">
+                  El numero excede el mínimo permitido (1)
+                 </mat-error>
+               
+              </div>
+
             </div>
           </div>
         </div>
@@ -84,19 +124,22 @@
           <div class="col-12 form-group">
             <mat-form-field appearance="fill">
               <mat-label>Alumno</mat-label>
-              <mat-select [ngModelOptions]="{ standalone: true }">
+              <mat-select formControlName="student">
                 <mat-option *ngIf="studentsList.length === 0">Seleccione un curso...</mat-option>
                 <mat-option *ngFor="let student of studentsList" [value]="student.name + ' ' + student.surname">
                   {{ student.name + " " + student.surname }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="gradeControl.get('subject').touched && gradeControl.get('subject').errors">
+              Debe seleccionar una Opción
+            </mat-error>
           </div>
         </div>
 
         <div class="row">
           <div class="col-6">
-            <button *ngIf="!existData" class="btn btn-primary btn-block" (click)="addGrade()">
+            <button *ngIf="!existData" class="btn btn-primary btn-block" (click)="addGrade()" [disabled]="!gradeControl.valid">
               Añadir Nota
             </button>
             <button *ngIf="existData" class="btn btn-primary btn-block" (click)="modifyGrade()">
