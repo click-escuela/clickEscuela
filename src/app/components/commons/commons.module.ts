@@ -108,8 +108,6 @@ import {MatRadioModule} from '@angular/material/radio';
     PaysCentralComponent,
     TextMaskPipe
     OutReleaseComponent
-
-
   ],
   exports: [
     CalendarComponent,
@@ -125,7 +123,6 @@ import {MatRadioModule} from '@angular/material/radio';
     PaysCentralComponent,
     TextMaskPipe
     OutReleaseComponent
-
   ],
 })
 export class CommonsModule {}
