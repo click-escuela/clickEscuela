@@ -36,6 +36,27 @@ constructor(
     iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
     iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/set-pay.svg'));
+    iconRegister.addSvgIconLiteral(
+      'thumbs-up',
+      sanitizer.bypassSecurityTrustHtml(SVG_CONST.THUMBUP_ICON)
+    );
+    iconRegister.addSvgIconLiteral(
+      'in-time',
+      sanitizer.bypassSecurityTrustHtml(SVG_CONST.IN_TIME)
+    );
+    iconRegister.addSvgIconLiteral(
+      'over-time',
+      sanitizer.bypassSecurityTrustHtml(SVG_CONST.OVER_TIME)
+    );
+
+    iconRegister.addSvgIconLiteral(
+      'to-do',
+      sanitizer.bypassSecurityTrustHtml(SVG_CONST.TO_DO)
+    );
+    iconRegister.addSvgIconLiteral(
+      'realized',
+      sanitizer.bypassSecurityTrustHtml(SVG_CONST.REALIZED)
+    );
 
 
   }

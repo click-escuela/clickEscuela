@@ -30,7 +30,7 @@
         <td mat-cell *matCellDef="let row">
 
           <mat-icon *ngIf="row.result === 'error'" class="icon-svg" svgIcon="cancel"></mat-icon>
-          <mat-icon matTooltip="Consultar Estado" *ngIf="row.result === 'load'" class="loading" svgIcon="load-progress"
+          <mat-icon matTooltip="Consultar Estado" *ngIf="row.result === 'load'"  svgIcon="in-time"
             style="cursor: pointer;" (click)="openShowDetail()"></mat-icon>
           <mat-icon *ngIf="row.result === 'success'" class="icon-svg" svgIcon="check"></mat-icon>
 

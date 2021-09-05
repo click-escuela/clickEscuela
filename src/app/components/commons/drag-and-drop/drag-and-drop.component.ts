@@ -1,4 +1,4 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, Output, EventEmitter } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,6 +11,7 @@ export class DragAndDropComponent implements OnInit {
 
   constructor() { }
 
+  @Output() startLoad: EventEmitter<any> = new EventEmitter();
   @ViewChild('fileDropRef', { static: false }) fileDropEl: ElementRef;
   files: any[] = [];
   fileSelected = false;
@@ -55,6 +56,12 @@ export class DragAndDropComponent implements OnInit {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  emitEvent($event) {
+    this.startLoad.emit(this.files[0]);
+    this.files = [];
+    this.fileSelected = false;
   }
 
 }

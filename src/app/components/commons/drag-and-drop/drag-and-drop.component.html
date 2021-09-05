@@ -13,7 +13,7 @@
     <img src="../../../../assets/images/accept.svg" alt="">
   </div>
   <label for="fileDropRef">Elegir otro archivo</label>
-  <button mat-raised-button>Iniciar Carga masiva</button>
+  <button mat-raised-button (click)="emitEvent('$event')">Iniciar Carga masiva</button>
   </div>
 
   <div class="load-file" *ngIf="fileSelected && fileRejected">

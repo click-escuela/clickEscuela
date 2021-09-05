@@ -1,3 +1,4 @@
+import { IconGeneratorService } from 'src/app/services/icon-generator.service';
 import { SVG_CONST } from '../../../../enums/svg-constants';
 import { WorkGroupService } from './../../../../services/work-group.service';
 import { WorkGroup } from '../../../../models/work-group';
@@ -23,32 +24,11 @@ export class GroupsListComponent implements OnInit {
   selectedTab: number;
 
   constructor(
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
+    icon: IconGeneratorService,
     private workGroupService: WorkGroupService,
     public dialog: MatDialog
   ) {
-    iconRegistry.addSvgIconLiteral(
-      'thumbs-up',
-      sanitizer.bypassSecurityTrustHtml(SVG_CONST.THUMBUP_ICON)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'in-time',
-      sanitizer.bypassSecurityTrustHtml(SVG_CONST.IN_TIME)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'over-time',
-      sanitizer.bypassSecurityTrustHtml(SVG_CONST.OVER_TIME)
-    );
-
-    iconRegistry.addSvgIconLiteral(
-      'to-do',
-      sanitizer.bypassSecurityTrustHtml(SVG_CONST.TO_DO)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'realized',
-      sanitizer.bypassSecurityTrustHtml(SVG_CONST.REALIZED)
-    );
+    
     this.currentSender = 'Nicolas Lencinas';
     this.selectedTab = 1;
     this.selectedFiles = [];
@@ -66,7 +46,7 @@ export class GroupsListComponent implements OnInit {
     this.workGroupService.addHistory(index, this.currentSender, history);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getConsigns() {
     let wordReturn = '';
