@@ -1,21 +1,23 @@
-import { HomeworkListComponent } from './../homework-list/homework-list.component';
+import { Student } from './../../../models/student';
+import { HomeworkListComponent } from './homework-list/homework-list.component';
 import { Input, QueryList, ViewChildren } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Notification } from '../../interfaces/Notification';
-import { AddHomeworkComponent } from '../add-homework/add-homework.component';
+import { AddHomeworkComponent } from './add-homework/add-homework.component';
 
 
 @Component({
   selector: 'app-homework',
   templateUrl: './homework.component.html',
-  styleUrls: ['./homework.component.css']
+  styleUrls: ['./homework.component.scss']
 })
 export class HomeworkComponent implements OnInit {
 
   @Input() currentNotification: Notification;
   @Input() isNotification: boolean;
   @ViewChildren(HomeworkListComponent) homeworkList: QueryList<HomeworkListComponent>;
+  student: Student;
 
 
   constructor(public dialog: MatDialog) {
@@ -29,15 +31,15 @@ export class HomeworkComponent implements OnInit {
         width: '80%',
         height: '75%'
       }
-    )
+    );
 
-    dialogRef.afterClosed().subscribe(res => { this.refreshAllChildrens() })
+    dialogRef.afterClosed().subscribe(res => { this.refreshAllChildrens(); });
 
   }
 
   refreshAllChildrens() {
-    for (let comp of this.homeworkList) {
-      comp.refreshTable()
+    for (const comp of this.homeworkList) {
+      comp.refreshTable();
     }
 
   }

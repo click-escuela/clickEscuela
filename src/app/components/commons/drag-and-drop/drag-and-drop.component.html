@@ -1,0 +1,41 @@
+<div class="container" appDnd (fileDropped)="onFileDropped($event)">
+  <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+
+  <div class="add-file" *ngIf="!fileSelected">
+  <img width="45px"  src="../../../../assets/images/upload-img.svg" alt="">
+  <h3>Arrastra aqui el archivo a cargar</h3>
+  <h3>o</h3>
+  <label for="fileDropRef">Buscar Archivo</label>
+  </div>
+
+  <div class="load-file" *ngIf="fileSelected && !fileRejected">
+  <div class="img-container justify-content-center">
+    <img src="../../../../assets/images/accept.svg" alt="">
+  </div>
+  <label for="fileDropRef">Elegir otro archivo</label>
+  <button mat-raised-button>Iniciar Carga masiva</button>
+  </div>
+
+  <div class="load-file" *ngIf="fileSelected && fileRejected">
+    <div class="img-container justify-content-center">
+      <img src="../../../../assets/images/cancel.svg" alt="">
+    </div>
+    <label for="fileDropRef">Elegir otro archivo...</label>
+    <p>El tipo de archivo no esta soportado</p>
+    </div>
+  
+</div>
+<div class="files-list">
+  <div class="single-file" *ngFor="let file of files; let i = index">
+    <img src="../../../../assets/images/homework.svg" width="25px" alt="file">
+    <div class="info">
+      <p class="name">
+        {{ file?.name }}
+      </p>
+      <p class="size">
+        {{ formatBytes(file?.size) }}
+      </p>
+    </div>
+    <img src="../../../../assets/images/cancel.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+  </div>
+</div>

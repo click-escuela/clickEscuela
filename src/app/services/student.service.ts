@@ -1,4 +1,8 @@
-import { Parent } from 'src/app/models/Parent';
+import { MODEL } from './../enums/ng-models';
+import { StudentFullDetail } from '../components/interfaces/student-full-detail';
+
+import { environment } from './../../environments/environment';
+import { Parent } from '../models/parent';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Student } from '../models/student';
 import { Subject } from 'rxjs/internal/Subject';
@@ -11,6 +15,10 @@ import { SortColumn, SortDirection } from '../components/directives/sortable.dir
 import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+import { HttpClient } from '@angular/common/http';
+import { StudentI } from '../components/interfaces/student';
+import { id } from '@swimlane/ngx-charts';
+import { Bill } from '../components/interfaces/bill';
 interface SearchResult {
   students: Student[];
   total: number;
@@ -24,7 +32,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string | number | Parent| Date, v2: string | number | Parent| Date) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: string | number | Parent| Date, v2: string | number | Parent| Date) => v1 < v2 ? -1 : (v1 > v2 ? 1 : 0);
 
 function sort(students: Student[], column: SortColumn, direction: string): Student[] {
   if (direction === '' || column === '') {
@@ -46,7 +54,7 @@ function matches(student: Student, term: string, pipe: PipeTransform) {
 
 @Injectable({ providedIn: 'root' })
 export class studentService {
- 
+
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _students$ = new BehaviorSubject<Student[]>([]);
@@ -60,11 +68,13 @@ export class studentService {
     sortDirection: ''
   };
 
-  studentsArray: Student[] = []
+  studentsArray: Student[];
   editCurrentStudent: Student;
 
 
-  constructor(private pipe: DecimalPipe) {
+  constructor(
+    private pipe: DecimalPipe,
+    private connector: HttpClient) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -72,13 +82,99 @@ export class studentService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      console.log(result);
-
-      //this._students$.next(result.students);
-      //this._total$.next(result.total);
     });
 
     this._search$.next();
+    this.studentsArray = [];
+    this.studentsArray[0] = new Student(
+      '1',
+      'OSCAR',
+      'UMBERT',
+      new Date(),
+      12,
+      '',
+      '3B',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+    this.studentsArray[1] = new Student(
+      '2',
+      'CLAUDIO',
+      'GOMEZ',
+      new Date(),
+      5,
+      '',
+      '3B',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+    this.studentsArray[2] = new Student(
+      '3',
+      'FELIPE',
+      'ROMERO',
+      new Date(),
+      0,
+      '',
+      '3B',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+    this.studentsArray[3] = new Student(
+      '4',
+      'OMAR',
+      'GOMEZ',
+      new Date(),
+      18,
+      '',
+      '2A',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+    this.studentsArray[4] = new Student(
+      '5',
+      'MARTA',
+      'GIMENEZ',
+      new Date(),
+      15,
+      '',
+      '2A',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+    this.studentsArray[5] = new Student(
+      '6',
+      'MARIANA',
+      'FERREIRA',
+      new Date(),
+      11,
+      '',
+      '2A',
+      44444444,
+      'Calle Falsa 123',
+      '1566666666',
+      'something@gmail.com'
+    );
+
+    const parent = new Parent('12', 'Daniel', 'Perez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+    const parent2 = new Parent('25', 'Humberto', 'Gomez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+    const parent3 = new Parent('68', 'Osvaldo', 'Ferreira', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+
+    this.studentsArray[0].parent1 = parent;
+    this.studentsArray[1].parent1 = parent2;
+    this.studentsArray[2].parent1 = parent3;
+    this.studentsArray[3].parent1 = parent2;
+    this.studentsArray[4].parent1 = parent2;
+    this.studentsArray[5].parent1 = parent3;
   }
 
   get students$() { return this._students$.asObservable(); }
@@ -104,26 +200,10 @@ export class studentService {
 
 
     // 1. sort
-    this.studentsArray[0] = new Student('1', 'OSCAR', 'UMBERT', new Date(), 12, '', "3B", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-    this.studentsArray[1] = new Student('2', 'CLAUDIO', 'GOMEZ', new Date(), 5, '', "3B", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-    this.studentsArray[2] = new Student('3', 'FELIPE', 'ROMERO', new Date(), 0, '', "3B", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-    this.studentsArray[3] = new Student('4', 'OMAR', 'GOMEZ', new Date(), 18, '', "2A", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-    this.studentsArray[4] = new Student('5', 'MARTA', 'GIMENEZ', new Date(), 15, '', "2A", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-    this.studentsArray[5] = new Student('6', 'MARIANA', 'FERREIRA', new Date(), 11, '', "2A", 44444444, "Calle Falsa 123","1566666666","something@gmail.com");
-
-    let parent = new Parent('12', "Daniel", "Perez", new Date(), 37844777,"Calle falsa 123","1544444444","alguien@hotmail.com")
-    let parent2 = new Parent('25', "Humberto", "Gomez", new Date(), 37844777,"Calle falsa 123","1544444444","alguien@hotmail.com")
-    let parent3 = new Parent('68', "Osvaldo", "Ferreira", new Date(), 37844777,"Calle falsa 123","1544444444","alguien@hotmail.com")
-
-      this.studentsArray[0].parent1=parent;
-      this.studentsArray[1].parent1=parent2;
-      this.studentsArray[2].parent1=parent3;
-      this.studentsArray[3].parent1=parent2;
-      this.studentsArray[4].parent1=parent2;
-      this.studentsArray[5].parent1=parent3;
 
 
-      let students = sort(this.studentsArray, sortColumn, sortDirection);
+
+    let students = sort(this.studentsArray, sortColumn, sortDirection);
 
     // 2. filter
     students = students.filter(student => matches(student, searchTerm, this.pipe));
@@ -135,11 +215,11 @@ export class studentService {
   }
 
   addStudent(student: Student) {
-    this.studentsArray.push(student)
+    this.studentsArray.push(student);
   }
 
   get editStudent() {
-    return this.editCurrentStudent
+    return this.editCurrentStudent;
   }
 
   get studentsList() {
@@ -147,12 +227,76 @@ export class studentService {
   }
 
   deleteStudent(index: number) {
-    this.studentsArray.splice(index, 1)
+    this.studentsArray.splice(index, 1);
   }
 
-  edit(index,data: Student) {
-    this.studentsArray.splice(index,1,data)
+  edit(index, data: Student) {
+    this.studentsArray.splice(index, 1, data);
   }
+
+  // Aca incia el codigo para consumo de api
+
+  getStudents(fulldetail: boolean, idSchool: string): Observable<any> {
+    const path =
+    environment.GET_STUDENT_URL
+    .replace('{schoolId}', idSchool)
+    .replace('{fullDetail}', fulldetail + '');
+    return this.connector.get<any>(path);
+  }
+
+  getStudentsBills(idSchool: string): Observable<StudentFullDetail[]> {
+
+    //Se deja mockeo para pruebas
+
+    // const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
+
+    // const bill: Bill[] = [
+    //   {
+    //     amount: 6200,
+    //     file: 'http://Descargar.com',
+    //     id: '4456456456',
+    //     period: new Date('12/01/2020'),
+    //     status: 'COMPLETED'
+    //   },
+    //   {
+    //     amount: 6600,
+    //     file: 'http://Descargar.com',
+    //     id: '4456456456',
+    //     period: new Date('01/01/2021'),
+    //     status: 'PENDING'
+    //   }
+    // ];
+
+    // student.bills = bill;
+
+    // const student2 = Object.assign({}, student);
+    // student2.name = 'Jazmin';
+    // student2.bills = [];
+
+
+    const path =
+    environment.GET_STUDENT_URL
+    .replace('{schoolId}', idSchool)
+    .replace('{fullDetail}', true + '');
+    return this.connector.get<any>(path);
+    //return of([student, student2]);
+  }
+
+  addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
+    const path =
+    environment.POST_STUDENT_URL
+    .replace('{schoolId}', idSchool);
+    return this.connector.post<StudentI>(path, student);
+  }
+
+  editStudentPut(student: StudentI, idSchool: string): Observable<StudentI> {
+    const path =
+    environment.POST_STUDENT_URL
+    .replace('{schoolId}', idSchool);
+    return this.connector.put<StudentI>(path, student);
+  }
+
+
 
 
 

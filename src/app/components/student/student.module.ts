@@ -1,3 +1,6 @@
+import { StudentGradeListComponent } from './student-grade/student-grade-list/student-grade-list.component';
+import { StudentGradeComponent } from './student-grade/student-grade.component';
+import { RouterModule } from '@angular/router';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { HistoryComponent } from './groups/groups-list/history/history.component';
 import { CommentComponent } from './groups/groups-list/comment/comment.component';
@@ -35,21 +38,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { HomeworkComponent } from './homework/homework.component';
+import { HomeworkStudentComponent } from './homework/homework.component';
 import { HomeworkListComponent } from './homework/homework-list/homework-list.component';
 import { LibraryComponent } from './library/library.component';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
-import {MatGridListModule} from '@angular/material/grid-list';
-
-
-
-
-
+import { MatGridListModule } from '@angular/material/grid-list';
+import { CommonsModule } from '../commons/commons.module';
 
 @NgModule({
-  declarations:[StudentMenuComponent,HomeworkComponent,HomeworkListComponent,LibraryComponent, GroupsComponent,GroupsListComponent, CommentComponent, HistoryComponent, ModalEditComponent],
+  declarations: [
+    StudentMenuComponent,
+    HomeworkStudentComponent,
+    HomeworkListComponent,
+    LibraryComponent,
+    GroupsComponent,
+    GroupsListComponent,
+    CommentComponent,
+    HistoryComponent,
+    ModalEditComponent,
+    StudentGradeComponent,
+    StudentGradeListComponent
+  ],
   imports: [
-    CommonModule,  CommonModule,
+    CommonModule,
+    CommonsModule,
     MatSidenavModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -59,7 +71,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-
     MatTabsModule,
     MatAutocompleteModule,
     MatDividerModule,
@@ -77,7 +88,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatDatepickerModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule, MatMenuModule, MatCheckboxModule, MatTooltipModule, MatProgressSpinnerModule, MatExpansionModule, MatRippleModule, ParentModule, MatSelectModule, MatGridListModule
-  ]
+    MatNativeDateModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatRippleModule,
+    ParentModule,
+    MatSelectModule,
+    MatGridListModule,
+    RouterModule,
+  ],
 })
-export class StudentModule { }
+export class StudentModule {}

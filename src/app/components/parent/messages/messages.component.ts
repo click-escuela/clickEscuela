@@ -11,19 +11,15 @@ export class MessagesComponent implements OnInit {
   @Input() view;
 
   constructor() {
-    
+
   }
 
-  ngOnInit(): void 
-  {
-    console.log(this.view+' '+this.tabs)
-    if (this.view=="student")
-    {
-      this.tabs = ["Notificaciones"]
-    }
-    else{
+  ngOnInit(): void {
+    if (this.view === 'student') {
+      this.tabs = ['Notificaciones'];
+    } else {
 
-      this.tabs = ["Mensajes", "Notificaciones"]
+      this.tabs = ['Mensajes', 'Notificaciones'];
     }
   }
 

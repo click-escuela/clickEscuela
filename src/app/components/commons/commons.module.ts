@@ -1,3 +1,14 @@
+
+import { OutReleaseComponent } from './out-release/out-release.component';
+import { DndDirective } from './drag-and-drop/dnd.directive';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
+import { LoginComponent } from './login/login.component';
+import { Router, RouterModule } from '@angular/router';
+import { LoadScreenComponent } from './load-screen/load-screen.component';
+import { DetailStudentComponent } from './detail-student/detail-student.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
 import { AddCalendarEventComponent } from './add-calendar-event/add-calendar-event.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -33,7 +44,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ParentModule } from '../parent/parent.module';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 @NgModule({
@@ -65,14 +77,48 @@ import { ParentModule } from '../parent/parent.module';
     MatDatepickerModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule, MatMenuModule, MatCheckboxModule, MatTooltipModule, MatProgressSpinnerModule, MatExpansionModule, MatRippleModule, MatSelectModule, MatGridListModule,MatChipsModule,
+    MatNativeDateModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatChipsModule,
+    MatSelectModule,
+    RouterModule,
+    MatRadioModule
   ],
   declarations: [
     CalendarComponent,
     EventDetailComponent,
-    AddCalendarEventComponent
+    AddCalendarEventComponent,
+    PaymentsDetailComponent,
+    ContactInfoComponent,
+    ConfirmDialogComponent,
+    DetailStudentComponent,
+    LoadScreenComponent,
+    LoginComponent,
+    DragAndDropComponent,
+    DndDirective,
+
+    OutReleaseComponent
   ],
-  exports:[CalendarComponent,EventDetailComponent,
-  AddCalendarEventComponent]
+  exports: [
+    CalendarComponent,
+    EventDetailComponent,
+    AddCalendarEventComponent,
+    PaymentsDetailComponent,
+    ContactInfoComponent,
+    ConfirmDialogComponent,
+    DetailStudentComponent,
+    LoadScreenComponent,
+    LoginComponent,
+    DragAndDropComponent,
+
+    OutReleaseComponent
+  ],
 })
-export class CommonsModule { }
+export class CommonsModule {}

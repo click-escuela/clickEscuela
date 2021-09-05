@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddReportCardComponent } from '../add-report-card/add-report-card.component';
+import { AddReportCardComponent } from './add-report-card/add-report-card.component';
 
 @Component({
   selector: 'app-report-card',
@@ -20,9 +20,9 @@ export class ReportCardComponent implements OnInit {
         width: '80%',
         height: '75%'
       }
-    )
+    );
 
-    //dialogRef.afterClosed().subscribe(res =>{this.refreshAllChildrens()})
+    // dialogRef.afterClosed().subscribe(res =>{this.refreshAllChildrens()})
 
   }
 

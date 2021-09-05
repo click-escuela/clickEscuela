@@ -1,26 +1,29 @@
 import { Router } from '@angular/router';
 
-import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, Output, Input } from '@angular/core';
-import { Grade } from 'src/app/models/Grade';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ViewChildren,
+  QueryList,
+  Input,
+} from '@angular/core';
+import { Grade } from 'src/app/models/grade';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { GradesService } from 'src/app/services/grades.service';
 import { ConfirmDialogComponent } from 'src/app/components/commons/confirm-dialog/confirm-dialog.component';
-import { PopupMenuComponent } from 'src/app/components/commons/popupMenu/popupMenu.component';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { MatTabGroupHarness } from '@angular/material/tabs/testing';
-
-
+import { AddGradeComponent } from 'src/app/components/teacher/grades/add-grade/add-grade.component';
 
 @Component({
   selector: 'app-grades-list',
   templateUrl: './grades-list.component.html',
-  styleUrls: ['./grades-list.component.scss']
+  styleUrls: ['./grades-list.component.scss'],
 })
 export class GradesListComponent implements OnInit {
-
   displayedColumns: string[];
   dataSource: any;
   gradesArray: Grade[] = new Array(5);
@@ -34,46 +37,37 @@ export class GradesListComponent implements OnInit {
 
   @Input() son;
 
-  routeLink: string
-
-
+  routeLink: string;
 
   public selectedIndexBinding = 0;
 
-
   gradesList: Grade[];
 
-  constructor(private gradeService: GradesService, public dialog: MatDialog, private router: Router) {
-
+  constructor(
+    private gradeService: GradesService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {
     this.gradesList = new Array();
-    this.gradesList = gradeService.gradesList.filter(a => a.student == "Alberto Sanchez")
-    this.routeLink=this.router.url
-
+    this.gradesList = gradeService.gradesList.filter(
+      (a) => a.student === 'Alberto Sanchez'
+    );
+    this.routeLink = this.router.url;
   }
 
   applySonFilter() {
-    this.gradesList = this.gradeService.gradesList.filter(a => a.student == this.son)
-    this.dataSource = this.gradesList
-
+    this.gradesList = this.gradeService.gradesList.filter(
+      (a) => a.student === this.son
+    );
+    this.dataSource = this.gradesList;
   }
 
-
-
   ngOnInit() {
-
-    if (this.routeLink==="/parent/menu")
-    {
-
+    if (this.routeLink === '/parent/menu/grade') {
       this.displayedColumns = ['student', 'description', 'matter', 'grade'];
-    }
-
-    else
-    {
-
+    } else {
       this.displayedColumns = ['description', 'matter', 'grade'];
     }
-
-    console.log(this.displayedColumns)
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
@@ -81,11 +75,7 @@ export class GradesListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.applySonFilter()
-
-    console.log(this.routeLink)
-
-
+    this.applySonFilter();
   }
 
   applyFilter(event: Event) {
@@ -97,71 +87,53 @@ export class GradesListComponent implements OnInit {
     }
   }
   deleteGrade(index) {
-
     this.gradeService.deleteGrade(index);
-    this.refreshTable()
+    this.refreshTable();
   }
 
-
-
   modifyGrade(index, grade) {
-    this.gradeService.modifyGrade(index, grade)
+    this.gradeService.modifyGrade(index, grade);
   }
 
   confirmDelete(index) {
-    this.confirmDialog("¿Desea eliminar la nota?", index);
+    this.confirmDialog('¿Desea eliminar la nota?', index);
   }
 
   confirmDialog(input, index) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: input,
+      width: '60%',
+      height: '150px',
+    });
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent,
-      {
-        data: input,
-        width: '60%',
-        height: '150px'
-      }
-    )
-
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.deleteGrade(index)
-
+        this.deleteGrade(index);
       }
     });
   }
 
   openModify(index, grade) {
-    const dialogRef = this.dialog.open(PopupMenuComponent,
-      {
+    const dialogRef = this.dialog.open(AddGradeComponent, {
+      data: { grade, index },
+      width: '80%',
+      height: '75%',
+    });
 
-        data: { grade: grade, index: index },
-        width: '80%',
-        height: '75%'
-
-      }
-
-
-    )
-
-    dialogRef.afterClosed().subscribe(res => { this.refreshAllChildrens() })
-
+    dialogRef.afterClosed().subscribe((res) => {
+      this.refreshAllChildrens();
+    });
   }
 
-
   refreshAllChildrens() {
-    for (let comp of this.listGrades) {
-      comp.refreshTable()
+    for (const comp of this.listGrades) {
+      comp.refreshTable();
     }
-
   }
 
   refreshTable() {
-    console.log("Refresh exitoso")
     this.dataSource.data = this.gradesList;
   }
 
-  showSon() {
-    console.log(this.son)
-  }
 
 }

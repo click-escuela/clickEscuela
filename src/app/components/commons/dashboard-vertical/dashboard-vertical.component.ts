@@ -11,7 +11,7 @@ export class DashboardVerticalComponent implements OnInit {
   @Input()
   dashBoardProperties: Dashboardproperties;
   constructor() {
-    Object.assign(this, { single })
+    Object.assign(this, { single });
 
    }
   single: any[];
@@ -34,7 +34,6 @@ export class DashboardVerticalComponent implements OnInit {
   };
 
   onSelect(event) {
-    console.log(event);
   }
   ngOnInit(): void {
   }

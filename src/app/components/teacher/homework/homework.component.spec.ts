@@ -1,9 +1,11 @@
+import { MatDialogModule } from '@angular/material/dialog';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { HomeworkComponent } from './homework.component';
+import { MaterialModule } from 'src/app/test-mocks/material.module';
 
 describe('HomeworkComponent', () => {
   let component: HomeworkComponent;
@@ -11,7 +13,9 @@ describe('HomeworkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeworkComponent ]
+      imports:[MaterialModule],
+      declarations: [ HomeworkComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

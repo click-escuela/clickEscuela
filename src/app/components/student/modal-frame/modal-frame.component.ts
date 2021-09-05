@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-modal-frame',
@@ -8,18 +9,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ModalFrameComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ModalFrameComponent>, @Inject(MAT_DIALOG_DATA) public data: any)
-  {
-   
+  constructor(public dialogRef: MatDialogRef<ModalFrameComponent>, @Inject(MAT_DIALOG_DATA) public data: SafeResourceUrl) {
+
   }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
   }
 
-  onClose(){
-    
-    this.dialogRef.close()
+  onClose() {
+
+    this.dialogRef.close();
   }
 
 }

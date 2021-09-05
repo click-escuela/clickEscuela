@@ -48,7 +48,7 @@ export class MenuComponent implements OnInit {
   routeLink: string;
 
   constructor(private router: Router) {
-    this.routeLink = router.url
+    this.routeLink = router.url;
   }
 
   theEvent$;
@@ -62,6 +62,8 @@ export class MenuComponent implements OnInit {
       this.dinamicDisplay = 'col-10 size-display-dinamic';
       this.home.changeSizeDashboard(false);
     }
+
+
   }
 
 
@@ -84,15 +86,13 @@ export class MenuComponent implements OnInit {
   receiveNotification($event) {
     this.currentNotification = $event;
     this.isNotification = true;
-    this.changeBlock($event.type == 'Tarea' ? 'homework' : 'grade');
+    this.changeBlock($event.type === 'Tarea' ? 'homework' : 'grade');
 
   }
 
   changeBlock(newBlock: string) {
-    console.log(this.showHomeButton);
-    this.showHomeButton = newBlock != 'home' ? true : false;
     this.blockDinamicActually = newBlock;
-    console.log(newBlock)
+    this.router.navigate(['/teacher/menu/' + newBlock]);
   }
 
   notNotification() {
@@ -100,9 +100,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sidenav.open();
 
-    console.log(this.router.url)
 
   }
 

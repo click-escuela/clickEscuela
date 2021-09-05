@@ -1,9 +1,6 @@
-<!-- <mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field> -->
-
-
+<div class="close-mat-dialog" matTooltip="Cerrar" (click)="onClose()">
+  <img src="../../../../../assets/images/cancel.svg" alt="">
+</div>
 
 <div class="row account-state" >
   <div  style="width: 90%;">
@@ -47,24 +44,24 @@
    
     <ng-container matColumnDef="period">
       <th id="period" mat-header-cell *matHeaderCellDef mat-sort-header>Periodo</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': !row.status}"> {{row.period | date: 'MM/yy'}} </td>
+      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': row.status==='PENDING'}"> {{row.period | date: 'MM/yy'}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="amount">
       <th id="amount" mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': !row.status}"> {{row.amount}}$</td>
+      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': row.status==='PENDING'}"> {{row.amount}}$</td>
     </ng-container>
 
     <!-- Color Column -->
     <ng-container matColumnDef="status">
       <th id="st" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': !row.status}">
-        <div matTooltip="Pago" class="img-status" *ngIf="row.status" [ngClass]="{'pay-ok': row.status}">
+      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': row.status==='PENDING'}">
+        <div matTooltip="Pago" class="img-status" *ngIf="row.status==='COMPLETED'" [ngClass]="{'pay-ok': row.status==='COMPLETED'}">
           <img src="../../../../assets/images/payOK.jpg" alt="">
         </div>
 
-        <div matTooltip="Impago" class="img-status" *ngIf="!row.status" [ngClass]="{'pay-fault': !row.status}">
+        <div matTooltip="Impago" class="img-status" *ngIf="row.status === 'PENDING'" [ngClass]="{'pay-fault': !row.status}">
           <img src="../../../../assets/images/payFault.png" alt="">
         </div>
         
@@ -75,7 +72,7 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': !row.status}">
+      <td mat-cell *matCellDef="let row">
         <div class="action-button" matTooltip="Ver Factura" (click)="downloadPdf(row,1)">
           <img src="../../../../assets/images/view-pdf.svg" alt="">
         </div>

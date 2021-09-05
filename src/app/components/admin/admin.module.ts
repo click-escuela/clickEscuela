@@ -1,8 +1,10 @@
-
+import { ShowLoadDetailsComponent } from './mass-additions/show-load-details/show-load-details.component';
+import { LoadDetailsComponent } from './mass-additions/load-details/load-details.component';
+import { MassAdditionsComponent } from './mass-additions/mass-additions.component';
+import { AppRoutingModule } from './../../app-routing.module';
+import { RouterModule } from '@angular/router';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { CommonsModule } from './../commons/commons.module';
-import { EventDetailComponent } from './../commons/event-detail/event-detail.component';
-import { CalendarComponent } from './../commons/calendar/calendar.component';
 import { RangeSelectorComponent } from './../commons/range-selector/range-selector.component';
 import { AccountListComponent } from './account/account-list/account-list.component';
 import { AccountComponent } from './account/account.component';
@@ -46,30 +48,28 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ParentModule } from '../parent/parent.module';
 import { MatChipsModule } from '@angular/material/chips';
-import { ContactInfoComponent } from '../commons/contact-info/contact-info.component';
-import { PaymentsDetailComponent } from '../commons/payments-detail/payments-detail.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
 @NgModule({
-
-
   declarations: [
     RegisterComponent,
-     AddStudentComponent,
-     StudentBaseModelComponent,
-     EditStudentComponent,
-     AccountComponent,
-     AccountListComponent,
-     TeacherBaseModelComponent,
-     AddTeacherComponent,
-     EditTeacherComponent,
-     ContactInfoComponent,
-     PaymentsDetailComponent,
-     ConfigurationComponent,
-     RangeSelectorComponent
-    ],
-  
+    AddStudentComponent,
+    StudentBaseModelComponent,
+    EditStudentComponent,
+    AccountComponent,
+    AccountListComponent,
+    TeacherBaseModelComponent,
+    AddTeacherComponent,
+    EditTeacherComponent,
+    ConfigurationComponent,
+    RangeSelectorComponent,
+    MassAdditionsComponent,
+    LoadDetailsComponent,
+    ShowLoadDetailsComponent
+  ],
+
   imports: [
     CommonModule,
     MatSidenavModule,
@@ -99,17 +99,22 @@ import { PaymentsDetailComponent } from '../commons/payments-detail/payments-det
     MatButtonModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatMenuModule, 
-    MatCheckboxModule, 
+    MatMenuModule,
+    MatCheckboxModule,
     MatTooltipModule,
-    MatProgressSpinnerModule, 
+    MatProgressSpinnerModule,
     MatExpansionModule,
     MatRippleModule,
     ParentModule,
     MatSelectModule,
     MatGridListModule,
     MatChipsModule,
-    CommonsModule  ],
-  exports: [RegisterComponent]
+    CommonsModule,
+    MatAutocompleteModule,
+    RouterModule,
+    AppRoutingModule,
+    MatProgressBarModule
+  ],
+  exports: [RegisterComponent],
 })
-export class AdminModule { }
+export class AdminModule {}

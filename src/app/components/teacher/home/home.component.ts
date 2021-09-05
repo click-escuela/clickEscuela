@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   }
 
   printit(element) {
-    console.log(element)
     element.disabled = false;
   }
 
@@ -34,8 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   extendTab() {
-    console.log(this.extendedTab)
-    this.extendedTab = !this.extendedTab
+    this.extendedTab = !this.extendedTab;
   }
 
 
