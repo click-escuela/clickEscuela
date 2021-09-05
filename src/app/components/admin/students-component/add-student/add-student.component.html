@@ -24,190 +24,462 @@
     </div>
   </div>
 
-  <div class="container" id="studentForm">
-    <div id="buttonsTab" class="row mt-4 mb-4">
-      <div class="col-6 svg-content">
-        <h5>Datos del alumno</h5>
+  <form [formGroup]="controlStudent">
+    <div class="container" id="studentForm">
+      <div id="buttonsTab" class="row mt-4 mb-4">
+        <div class="col-6 svg-content">
+          <h5>Datos del alumno</h5>
+        </div>
+
+        <div class="col-lg-6 col-md-10 col-8 text-center"></div>
       </div>
 
-      <div class="col-lg-6 col-md-10 col-8 text-center"></div>
-    </div>
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" (keyup)="showErrors('name')" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('name').touched && controlStudent.get('name').errors">
+            <mat-error *ngIf="controlStudent.get('name').errors && controlStudent.get('name').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('name').errors && controlStudent.get('name').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Nombre</mat-label>
-          <input matInput [(ngModel)]="currentStudent.name" />
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Apellido</mat-label>
-          <input matInput [(ngModel)]="currentStudent.surname" />
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6">
+        <div class="col-12 col-md-5">
+          <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="surname" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('surname').touched && controlStudent.get('name').errors">
+            <mat-error *ngIf="controlStudent.get('surname').errors && controlStudent.get('surname').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('surname').errors && controlStudent.get('surname').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+          </div>
+        </div>
 
-        <mat-form-field style="width: 40%; padding-right: 15px;">
-          <mat-label>Tipo:</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let type of  typeIDs" [value]="type">
-              {{type}}
+        <div class="col-12 col-md-2">
+          <mat-form-field>
+            <mat-label>Genero</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option *ngFor="let gender of genders"  [value]="gender.value">
+                {{gender.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('gender').touched && controlStudent.get('gender').errors">
+            <mat-error *ngIf="controlStudent.get('gender').errors && controlStudent.get('gender').errors.required">
+              Debe seleccionar una opcion
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field style="width: 40%; padding-right: 15px;">
+            <mat-label>Tipo:</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let type of  typeIDs" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="width: 60%; padding-left: 15px;">
+            <mat-label>Numero de documento</mat-label>
+            <input matInput formControlName="document">
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('document').touched && controlStudent.get('document').errors">
+            <mat-error *ngIf="controlStudent.get('document').errors && controlStudent.get('document').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('document').errors && controlStudent.get('document').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('document').errors && controlStudent.get('document').errors.pattern">
+              El formato de documento no es válido
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="studentBorn" formControlName="birthday" />
+            <mat-datepicker-toggle matSuffix [for]="studentBorn"></mat-datepicker-toggle>
+            <mat-datepicker #studentBorn></mat-datepicker>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('birthday').touched && controlStudent.get('birthday').errors">
+            <mat-error *ngIf="controlStudent.get('birthday').errors && controlStudent.get('birthday').errors.required">
+              Seleccione una fecha valida
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('email').touched && controlStudent.get('email').errors">
+            <mat-error *ngIf="controlStudent.get('email').errors && controlStudent.get('email').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('email').errors && controlStudent.get('email').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('email').errors && controlStudent.get('email').errors.pattern">
+              El formato de email no es válido
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Celular</mat-label>
+            <input matInput formControlName="cellPhone" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('cellPhone').touched && controlStudent.get('cellPhone').errors">
+            <mat-error
+              *ngIf="controlStudent.get('cellPhone').errors && controlStudent.get('cellPhone').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error
+              *ngIf="controlStudent.get('cellPhone').errors && controlStudent.get('cellPhone').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+            <mat-error *ngIf="controlStudent.get('cellPhone').errors && controlStudent.get('cellPhone').errors.pattern">
+              El formato de celular no es válido
+            </mat-error>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <mat-form-field>
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="grade">
+              <mat-option *ngFor="let course of courses" [value]="course">
+                {{course}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('grade').touched && controlStudent.get('grade').errors">
+            <mat-error *ngIf="controlStudent.get('grade').errors && controlStudent.get('grade').errors.required">
+              Debe seleccionar un Curso
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <mat-form-field>
+            <mat-label>Division</mat-label>
+            <mat-select formControlName="division">
+              <mat-option *ngFor="let division of divisions" [value]="division">
+                {{division}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('division').touched && controlStudent.get('division').errors">
+            <mat-error *ngIf="controlStudent.get('division').errors && controlStudent.get('division').errors.required">
+              Debe seleccionar una División
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <mat-form-field>
+            <mat-label>Nivel</mat-label>
+            <mat-select formControlName="level">
+              <mat-option *ngFor="let level of levels" [value]="level">
+                {{level}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('level').touched && controlStudent.get('level').errors">
+            <mat-error *ngIf="controlStudent.get('level').errors && controlStudent.get('level').errors.required">
+              Debe seleccionar un Nivel
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Provincia:</mat-label>
+            <mat-select formControlName="province" (selectionChange)="getAllDistricts($event.value.id)">
+              <mat-option *ngFor="let pr of provinces" [value]="pr">
+                {{pr.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('province').touched && controlStudent.get('province').errors">
+            <mat-error *ngIf="controlStudent.get('province').errors && controlStudent.get('province').errors.required">
+              Debe seleccionar una provincia
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Localidad:</mat-label>
+            <mat-select formControlName="locality">
+              <mat-option *ngFor="let district of districts" [value]="district.nombre">
+                {{district.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('locality').touched && controlStudent.get('locality').errors">
+            <mat-error *ngIf="controlStudent.get('locality').errors && controlStudent.get('locality').errors.required">
+              Debe seleccionar una Localidad
+            </mat-error>
+          </div>
+        </div>
+
+
+      </div> -->
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field>
+            <mat-label>Direccion</mat-label>
+            <input matInput #adressInput [matAutocomplete]='auto' (keyup)="getStudentNormalizedDirections(adressInput.value)"
+              formControlName="adress" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('adress').touched && controlStudent.get('adress').errors">
+            <mat-error *ngIf="controlStudent.get('adress').errors && controlStudent.get('adress').errors.required">
+              Debe seleccionar una direccion
+            </mat-error>
+          </div>
+
+          <mat-autocomplete (optionSelected)="getAdress($event.option.value)" [displayWith]="getAdressDirection" #auto>
+            <mat-option *ngFor="let normalizedDirection of studentNormalizedDirections" [value]="normalizedDirection">
+              {{normalizedDirection.direccion}}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field style="width: 60%; padding-left: 15px;">
-          <mat-label>Numero de documento</mat-label>
-          <input matInput [(ngModel)]="currentStudent.document">
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput [matDatepicker]="studentBorn" ng-model="currentStudent.birthday | date : 'yyyy-dd-mm" />
-          <mat-datepicker-toggle matSuffix [for]="studentBorn"></mat-datepicker-toggle>
-          <mat-datepicker #studentBorn></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput [(ngModel)]="currentStudent.email" />
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field (click)="getAllProvinces()">
-          <mat-label>Grado</mat-label>
-          <input matInput [(ngModel)]="currentStudent.grade" />
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Provincia:</mat-label>
-          <mat-select [(ngModel)]="selectedProvince" (selectionChange)="getAllDistricts(selectedProvince)">
-            <mat-option *ngFor="let pr of provinces" [value]="pr.id">
-              {{pr.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Provincia:</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let district of districts" [value]="district.id">
-              {{district.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Direccion</mat-label>
-          <input matInput [(ngModel)]="currentStudent.adress.street" #adressInput [matAutocomplete]='auto'
-            (keyup)="getNormalizedDirections(adressInput.value)" />
-        </mat-form-field>
-
-        <mat-autocomplete #auto>
-          <mat-option *ngFor="let normalizedDirection of normalizedDirections" [value]="normalizedDirection.direccion">
-            {{normalizedDirection.direccion}}
-          </mat-option>
-        </mat-autocomplete>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" id="firstParentForm">
-    <div id="buttonsTab" class="row mt-4 mb-4">
-      <div class="col-6 svg-content">
-        <h5>Datos de los padres</h5>
-      </div>
-
-      <div class="col-lg-6 col-md-10 col-8 text-center action-buttons">
-        <div class="action-item" matTooltip="Agregar padre" (click)="addParent()">
-          <mat-icon class="option-icon" svgIcon="plus"></mat-icon>
-
+          </mat-autocomplete>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Nombre</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.name" />
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Apellido</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.surname" />
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field style="width: 40%; padding-right: 15px;">
-          <mat-label>Tipo:</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let type of  typeIDs" [value]="type">
-              {{type}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+    <div formGroupName="parent" class="container" id="firstParentForm">
+      <div id="buttonsTab" class="row mt-4 mb-4">
+        <div class="col-6 svg-content">
+          <h5>Datos de los padres</h5>
+        </div>
 
-        <mat-form-field style="width: 60%; padding-left: 15px;">
-          <mat-label>Numero de documento</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.document">
-        </mat-form-field>
+        <div class="col-lg-6 col-md-10 col-8 text-center action-buttons">
+          <div class="action-item" matTooltip="Agregar padre" (click)="addParent()">
+            <mat-icon class="option-icon" svgIcon="plus"></mat-icon>
+
+          </div>
+        </div>
       </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput [matDatepicker]="parentBorn" ng-model="currentStudent.parent.birthday | date: 'yyyy/dd/mm'" />
-          <mat-datepicker-toggle matSuffix [for]="parentBorn"></mat-datepicker-toggle>
-          <mat-datepicker #parentBorn></mat-datepicker>
-        </mat-form-field>
+
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('name').touched && controlStudent.get('parent').get('name').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('name').errors && controlStudent.get('parent').get('name').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('name').errors && controlStudent.get('parent').get('name').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-5">
+          <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="surname" />
+          </mat-form-field>
+
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('surname').touched && controlStudent.get('parent').get('surname').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('surname').errors && controlStudent.get('parent').get('surname').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('surname').errors && controlStudent.get('parent').get('surname').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-2">
+          <mat-form-field>
+            <mat-label>Genero</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option *ngFor="let gender of genders"  [value]="gender.value">
+                {{gender.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('parent').get('gender').touched && controlStudent.get('parent').get('gender').errors">
+            <mat-error *ngIf="controlStudent.get('parent').get('gender').errors && controlStudent.get('parent').get('gender').errors.required">
+              Debe seleccionar una opcion
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field style="width: 40%; padding-right: 15px;">
+            <mat-label>Tipo:</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let type of  typeIDs" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="width: 60%; padding-left: 15px;">
+            <mat-label>Numero de documento</mat-label>
+            <input matInput formControlName="document">
+          </mat-form-field>
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('document').touched && controlStudent.get('parent').get('document').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('document').errors && controlStudent.get('parent').get('document').errors.required">
+              El campo no puede estar vacio
+            </mat-error>
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('document').errors && controlStudent.get('parent').get('document').errors.maxlength">
+              Supero el máximo de caracteres permitido
+            </mat-error>
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('document').errors && controlStudent.get('parent').get('document').errors.pattern">
+              El formato de documento no es válido
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="parentBorn" formControlName="birthday" />
+            <mat-datepicker-toggle matSuffix [for]="parentBorn"></mat-datepicker-toggle>
+            <mat-datepicker #parentBorn></mat-datepicker>
+          </mat-form-field>
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('birthday').touched && controlStudent.get('parent').get('birthday').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('birthday').errors && controlStudent.get('parent').get('birthday').errors.required">
+              Seleccione una fecha válida
+            </mat-error>
+
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Provincia:</mat-label>
+            <mat-select formControlName="province" (selectionChange)="getAllDistricts($event.value.id)">
+              <mat-option *ngFor="let pr of provinces" [value]="pr.nombre">
+                {{pr.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('province').touched && controlStudent.get('parent').get('province').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('province').errors && controlStudent.get('parent').get('province').errors.required">
+              Seleccione una provincia
+            </mat-error>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Localidad:</mat-label>
+            <mat-select formControlName="locality">
+              <mat-option *ngFor="let district of districts" [value]="district.nombre">
+                {{district.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="errors"
+            *ngIf="controlStudent.get('parent').get('locality').touched && controlStudent.get('parent').get('locality').errors">
+            <mat-error
+              *ngIf="controlStudent.get('parent').get('locality').errors && controlStudent.get('parent').get('locality').errors.required">
+              Seleccione una Localidad
+            </mat-error>
+
+          </div>
+        </div>
+
+
+      </div> -->
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field>
+            <mat-label>Direccion</mat-label>
+            <input matInput #adressInput2 [matAutocomplete]='auto2' (keyup)="getparentNormalizedDirections(adressInput2.value)"
+              formControlName="adress" />
+          </mat-form-field>
+          <div class="errors" *ngIf="controlStudent.get('parent').get('adress').touched && controlStudent.get('parent').get('adress').errors">
+            <mat-error *ngIf="controlStudent.get('parent').get('adress').errors && controlStudent.get('parent').get('adress').errors.required">
+              Debe seleccionar una direccion
+            </mat-error>
+          </div>
+
+          <mat-autocomplete (optionSelected)="getAdress($event.option.value)" [displayWith]="getAdressDirection" #auto2>
+            <mat-option *ngFor="let normalizedDirection of parentNormalizedDirections" [value]="normalizedDirection">
+              {{normalizedDirection.direccion}}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+          <div class="errors"
+          *ngIf="controlStudent.get('parent').get('email').touched && controlStudent.get('parent').get('email').errors">
+          <mat-error
+            *ngIf="controlStudent.get('parent').get('email').errors && controlStudent.get('parent').get('email').errors.required">
+            El campo no puede estar vacio
+          </mat-error>
+          <mat-error
+            *ngIf="controlStudent.get('parent').get('email').errors && controlStudent.get('parent').get('email').errors.pattern">
+            El formato de email no es válido
+          </mat-error>
+        </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <mat-form-field>
+            <mat-label>Numero de telefono</mat-label>
+            <input matInput formControlName="cellPhone" />
+          </mat-form-field>
+          <div class="errors"
+          *ngIf="controlStudent.get('parent').get('cellPhone').touched && controlStudent.get('parent').get('cellPhone').errors">
+          <mat-error
+            *ngIf="controlStudent.get('parent').get('cellPhone').errors && controlStudent.get('parent').get('cellPhone').errors.required">
+            El campo no puede estar vacio
+          </mat-error>
+          <mat-error
+            *ngIf="controlStudent.get('parent').get('cellPhone').errors && controlStudent.get('parent').get('cellPhone').errors.pattern">
+            El formato de celular no es válido
+          </mat-error>
+        </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Direccion</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.adress.street" />
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-md-6">
-        <mat-form-field>
-          <mat-label>Numero de telefono</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.cellPhone" />
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput [(ngModel)]="currentStudent.parent.email" />
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
+  </form>
   <div class="container">
     <div class="row" style="justify-content: space-evenly">
-      <button type="button" style="background-color: #9acd8d" class="btn btn-primary" (click)="addStudent()">
+      <button [disabled]='!controlStudent.valid' type="button" style="background-color: #9acd8d" class="btn btn-primary" (click)="addStudent()">
         Aceptar
       </button>
       <button type="button" style="background-color: red" class="btn btn-primary" (click)="cancelAdd()">
