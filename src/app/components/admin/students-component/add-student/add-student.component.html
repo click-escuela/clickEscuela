@@ -42,7 +42,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('name').touched && controlStudent.get('name').errors">
             <mat-error *ngIf="controlStudent.get('name').errors && controlStudent.get('name').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error *ngIf="controlStudent.get('name').errors && controlStudent.get('name').errors.maxlength">
               Supero el máximo de caracteres permitido
@@ -57,7 +57,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('surname').touched && controlStudent.get('name').errors">
             <mat-error *ngIf="controlStudent.get('surname').errors && controlStudent.get('surname').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error *ngIf="controlStudent.get('surname').errors && controlStudent.get('surname').errors.maxlength">
               Supero el máximo de caracteres permitido
@@ -67,7 +67,7 @@
 
         <div class="col-12 col-md-2">
           <mat-form-field>
-            <mat-label>Genero</mat-label>
+            <mat-label>Género</mat-label>
             <mat-select formControlName="gender">
               <mat-option *ngFor="let gender of genders"  [value]="gender.value">
                 {{gender.viewValue}}
@@ -76,7 +76,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('gender').touched && controlStudent.get('gender').errors">
             <mat-error *ngIf="controlStudent.get('gender').errors && controlStudent.get('gender').errors.required">
-              Debe seleccionar una opcion
+              Debe seleccionar una opción
             </mat-error>
           </div>
         </div>
@@ -98,7 +98,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('document').touched && controlStudent.get('document').errors">
             <mat-error *ngIf="controlStudent.get('document').errors && controlStudent.get('document').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error *ngIf="controlStudent.get('document').errors && controlStudent.get('document').errors.maxlength">
               Supero el máximo de caracteres permitido
@@ -131,7 +131,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('email').touched && controlStudent.get('email').errors">
             <mat-error *ngIf="controlStudent.get('email').errors && controlStudent.get('email').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error *ngIf="controlStudent.get('email').errors && controlStudent.get('email').errors.maxlength">
               Supero el máximo de caracteres permitido
@@ -149,7 +149,7 @@
           <div class="errors" *ngIf="controlStudent.get('cellPhone').touched && controlStudent.get('cellPhone').errors">
             <mat-error
               *ngIf="controlStudent.get('cellPhone').errors && controlStudent.get('cellPhone').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error
               *ngIf="controlStudent.get('cellPhone').errors && controlStudent.get('cellPhone').errors.maxlength">
@@ -289,7 +289,7 @@
             *ngIf="controlStudent.get('parent').get('name').touched && controlStudent.get('parent').get('name').errors">
             <mat-error
               *ngIf="controlStudent.get('parent').get('name').errors && controlStudent.get('parent').get('name').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error
               *ngIf="controlStudent.get('parent').get('name').errors && controlStudent.get('parent').get('name').errors.maxlength">
@@ -307,7 +307,7 @@
             *ngIf="controlStudent.get('parent').get('surname').touched && controlStudent.get('parent').get('surname').errors">
             <mat-error
               *ngIf="controlStudent.get('parent').get('surname').errors && controlStudent.get('parent').get('surname').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error
               *ngIf="controlStudent.get('parent').get('surname').errors && controlStudent.get('parent').get('surname').errors.maxlength">
@@ -317,7 +317,7 @@
         </div>
         <div class="col-12 col-md-2">
           <mat-form-field>
-            <mat-label>Genero</mat-label>
+            <mat-label>Género</mat-label>
             <mat-select formControlName="gender">
               <mat-option *ngFor="let gender of genders"  [value]="gender.value">
                 {{gender.viewValue}}
@@ -326,7 +326,7 @@
           </mat-form-field>
           <div class="errors" *ngIf="controlStudent.get('parent').get('gender').touched && controlStudent.get('parent').get('gender').errors">
             <mat-error *ngIf="controlStudent.get('parent').get('gender').errors && controlStudent.get('parent').get('gender').errors.required">
-              Debe seleccionar una opcion
+              Debe seleccionar una opción
             </mat-error>
           </div>
         </div>
@@ -350,7 +350,7 @@
             *ngIf="controlStudent.get('parent').get('document').touched && controlStudent.get('parent').get('document').errors">
             <mat-error
               *ngIf="controlStudent.get('parent').get('document').errors && controlStudent.get('parent').get('document').errors.required">
-              El campo no puede estar vacio
+              El campo no puede estar vacío
             </mat-error>
             <mat-error
               *ngIf="controlStudent.get('parent').get('document').errors && controlStudent.get('parent').get('document').errors.maxlength">
@@ -449,7 +449,7 @@
           *ngIf="controlStudent.get('parent').get('email').touched && controlStudent.get('parent').get('email').errors">
           <mat-error
             *ngIf="controlStudent.get('parent').get('email').errors && controlStudent.get('parent').get('email').errors.required">
-            El campo no puede estar vacio
+            El campo no puede estar vacío
           </mat-error>
           <mat-error
             *ngIf="controlStudent.get('parent').get('email').errors && controlStudent.get('parent').get('email').errors.pattern">
@@ -466,7 +466,7 @@
           *ngIf="controlStudent.get('parent').get('cellPhone').touched && controlStudent.get('parent').get('cellPhone').errors">
           <mat-error
             *ngIf="controlStudent.get('parent').get('cellPhone').errors && controlStudent.get('parent').get('cellPhone').errors.required">
-            El campo no puede estar vacio
+            El campo no puede estar vacío
           </mat-error>
           <mat-error
             *ngIf="controlStudent.get('parent').get('cellPhone').errors && controlStudent.get('parent').get('cellPhone').errors.pattern">
