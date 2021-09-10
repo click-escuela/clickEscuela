@@ -16,7 +16,7 @@ import { AddStudentComponent } from './components/admin/students-component/add-s
 import { HomeworkStudentComponent } from './components/student/homework/homework.component';
 import { CoursesComponent } from './components/teacher/courses/courses.component';
 import { HomeComponent } from './components/teacher/home/home.component';
-import { Error404Component } from './components/commons/Error404/Error404.component';
+import { Error404Component } from './components/commons/error-404/Error404.component';
 import { AsistanceComponent } from './components/teacher/asistance/asistance.component';
 import { StudentMenuComponent } from './components/student/student-menu/student-menu.component';
 import { NgModule } from '@angular/core';

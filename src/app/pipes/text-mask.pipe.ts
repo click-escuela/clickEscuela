@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TextMaskPipe implements PipeTransform {
 
+  
+
   transform(value: string, args?: any): any {
     if (args != null) {
       if (args === 'month') {

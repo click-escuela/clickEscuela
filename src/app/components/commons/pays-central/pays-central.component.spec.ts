@@ -1,3 +1,6 @@
+import { CommonsModule } from './../commons.module';
+import { MaterialModule } from './../../../test-mocks/material.module';
+import { TextMaskPipe } from './../../../pipes/text-mask.pipe';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -11,7 +14,8 @@ describe('PaysCentralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaysCentralComponent ]
+      imports:[MaterialModule,CommonsModule],
+      declarations: [ PaysCentralComponent ],
     })
     .compileComponents();
   }));

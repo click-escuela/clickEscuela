@@ -119,13 +119,16 @@ export class LoginComponent implements OnInit {
       credential = JSON.parse(localStorage.getItem('token'));
     }
 
-    this.load = true;
+    if (credential) {
+      this.load = true;
     this.checkLogin = true;
 
     setTimeout(() => {
       this.load = false;
       this.router.navigate([PROFILE[this.formatRole(credential.role)]]);
     }, 3000);
+    }
+    
   }
 
   setSession() {
