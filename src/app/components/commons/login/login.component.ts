@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
     const credential = JSON.parse(localStorage.getItem('token'));
     this.currentSession = credential;
     const authDate = moment(credential.creationDate);
-    console.log(authDate)
+    console.log(authDate);
 
     if (authDate.isBefore(new Date(), 'minutes')) {
 
@@ -121,14 +121,14 @@ export class LoginComponent implements OnInit {
 
     if (credential) {
       this.load = true;
-    this.checkLogin = true;
+      this.checkLogin = true;
 
-    setTimeout(() => {
+      setTimeout(() => {
       this.load = false;
       this.router.navigate([PROFILE[this.formatRole(credential.role)]]);
     }, 3000);
     }
-    
+
   }
 
   setSession() {
