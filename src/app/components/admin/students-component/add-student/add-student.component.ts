@@ -1,7 +1,6 @@
-import { Course } from './../../../../models/course';
+import { FORM } from './../../../../enums/form-controls';
 import { COURSES, GENDER } from './../../../../enums/courses';
 import { Adress } from './../../../interfaces/adress';
-
 import { environment } from 'src/environments/environment';
 import { IconGeneratorService } from './../../../../services/icon-generator.service';
 import { FUNCTION } from './../../../../enums/functions';
@@ -16,8 +15,6 @@ import { Component, OnInit } from '@angular/core';
 import { Province } from 'src/app/models/province';
 import { MODEL } from 'src/app/enums/models';
 import { COMMONS } from 'src/app/enums/commons';
-import { STUDENT_CONTROL } from '../../form-control-student';
-import { transform } from 'typescript';
 import moment from 'moment';
 
 @Component({
@@ -36,7 +33,7 @@ export class AddStudentComponent implements OnInit {
   addingStudent: boolean;
 
   typeIDs = MODEL.TYPE_ID;
-  controlStudent = STUDENT_CONTROL;
+  controlStudent = FORM.STUDENT_CONTROL;
   provinces: Province[];
   districts: Province[];
   selectedProvince: string;

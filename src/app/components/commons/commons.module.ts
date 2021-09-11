@@ -47,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatRadioModule} from '@angular/material/radio';
+import { Error401Component } from './error-401/error-401.component';
 
 
 
@@ -107,7 +108,9 @@ import {MatRadioModule} from '@angular/material/radio';
     DndDirective,
     PaysCentralComponent,
     TextMaskPipe,
-    OutReleaseComponent
+    OutReleaseComponent,
+    Error401Component
+    
   ],
   exports: [
     CalendarComponent,
@@ -122,7 +125,9 @@ import {MatRadioModule} from '@angular/material/radio';
     DragAndDropComponent,
     PaysCentralComponent,
     TextMaskPipe,
-    OutReleaseComponent
+    OutReleaseComponent,
+    Error401Component
+    
   ],
 })
 export class CommonsModule {}

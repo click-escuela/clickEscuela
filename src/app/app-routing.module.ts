@@ -1,3 +1,4 @@
+import { RouteGuard } from './guards/route.guard';
 import { OutReleaseComponent } from './components/commons/out-release/out-release.component';
 import { ReleaseGuard } from './guards/release.guard';
 import { MassAdditionsComponent } from './components/admin/mass-additions/mass-additions.component';
@@ -15,7 +16,7 @@ import { AddStudentComponent } from './components/admin/students-component/add-s
 import { HomeworkStudentComponent } from './components/student/homework/homework.component';
 import { CoursesComponent } from './components/teacher/courses/courses.component';
 import { HomeComponent } from './components/teacher/home/home.component';
-import { Error404Component } from './components/commons/Error404/Error404.component';
+import { Error404Component } from './components/commons/error-404/Error404.component';
 import { AsistanceComponent } from './components/teacher/asistance/asistance.component';
 import { StudentMenuComponent } from './components/student/student-menu/student-menu.component';
 import { NgModule } from '@angular/core';
@@ -28,13 +29,16 @@ import { AccountComponent } from './components/admin/account/account.component';
 import { LibraryComponent } from './components/student/library/library.component';
 import { GradesResumeComponent } from './components/parent/grades/grades.component';
 import { HomeworkComponent } from './components/teacher/homework/homework.component';
+import { Error401Component } from './components/commons/error-401/error-401.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'outRelease', component: OutReleaseComponent },
+  { path: 'Unauthorized', component: Error401Component },
+
   {
     path: 'teacher/menu',
-    component: MenuComponent,
+    component: MenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_TEACHER]'},
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
@@ -47,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/register',
-    component: RegisterComponent,
+    component: RegisterComponent, canActivate: [RouteGuard], data: {role: '[ROLE_ADMIN]'},
 
     children: [
       { path: '', redirectTo: 'accounts', pathMatch: 'full' },
@@ -62,7 +66,7 @@ const routes: Routes = [
   },
   {
     path: 'student/menu',
-    component: StudentMenuComponent,
+    component: StudentMenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_STUDENT]'},
     children: [
       { path: '', redirectTo: 'grades', pathMatch: 'full' },
       { path: 'reportCard', component: ReportCardComponent , canActivate: [ReleaseGuard] },
@@ -75,7 +79,7 @@ const routes: Routes = [
   },
   {
     path: 'parent/menu',
-    component: ParentMenuComponent,
+    component: ParentMenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_PARENT]'},
     children: [
 
       { path: '', redirectTo: 'payment', pathMatch: 'full' },
