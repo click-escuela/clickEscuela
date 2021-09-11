@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { Session } from './../models/session';
 import { Injectable } from '@angular/core';
 import moment from 'moment';
 import { Token } from '../models/token';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +12,14 @@ import { Token } from '../models/token';
 export class AuthService {
 
 token: Token;
-constructor() {
+constructor(private connector: HttpClient) {
 
 }
 
-getToken(session: Session) {
-  
-  const authDate = moment(new Date().toString());
-  const expiration = authDate.add(1, 'minutes');
-  const token = new Token(session.token, authDate.toString(), expiration.toString(),session.profile);
 
-  return token;
+getToken(credential: Credential): Observable<any> {
+  const path = environment.TOKEN_URL;
+  return this.connector.post<any>( path, credential);
 }
 
 }

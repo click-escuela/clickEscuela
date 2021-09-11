@@ -1,22 +1,21 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { ReleaseGuard } from './release.guard';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouteGuard } from './route.guard';
 
-describe('ReleaseGuard', () => {
-  let guard: ReleaseGuard;
+describe('RouteGuard', () => {
+  let guard: RouteGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+   
+      imports:[RouterTestingModule]
     });
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(ReleaseGuard);
+    guard = TestBed.inject(RouteGuard);
   });
 
   it('should be created', () => {

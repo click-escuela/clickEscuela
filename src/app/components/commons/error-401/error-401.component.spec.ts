@@ -1,25 +1,25 @@
-import { MaterialModule } from './../../../../test-mocks/material.module';
+import { MaterialModule } from './../../../test-mocks/material.module';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LoadDetailsComponent } from './load-details.component';
+import { Error401Component } from './error-401.component';
 
-describe('LoadDetailsComponent', () => {
-  let component: LoadDetailsComponent;
-  let fixture: ComponentFixture<LoadDetailsComponent>;
+describe('Error-401Component', () => {
+  let component: Error401Component;
+  let fixture: ComponentFixture<Error401Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[MaterialModule],
-      declarations: [ LoadDetailsComponent ]
+      declarations: [ Error401Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoadDetailsComponent);
+    fixture = TestBed.createComponent(Error401Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
