@@ -54,6 +54,16 @@
     margin-left: 6px;
 }
 
+.no-result{
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .action-button:hover{
     filter: saturate(2);
     transform: scale(1.2);

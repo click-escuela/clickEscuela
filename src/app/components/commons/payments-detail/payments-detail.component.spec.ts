@@ -29,7 +29,8 @@ describe('PaymentsDetailComponent', () => {
       status: 'PENDING',
       file: 'url',
       id: 'test',
-      period: new Date('12/12/1993')
+      year: 2021,
+      month: 6
     }
   ];
 
@@ -73,7 +74,8 @@ describe('PaymentsDetailComponent', () => {
       status: 'PENDING',
       file: 'url',
       id: 'test',
-      period: new Date()
+      year: 2021,
+      month: 6
     };
     const bills = [bill, bill];
 
@@ -88,7 +90,8 @@ describe('PaymentsDetailComponent', () => {
       status: 'COMPLETED',
       file: 'url',
       id: 'test',
-      period: new Date()
+      year: 2021,
+      month: 6
     };
     const bills = [bill, bill];
 

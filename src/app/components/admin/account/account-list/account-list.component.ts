@@ -15,6 +15,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaymentsDetailComponent } from 'src/app/components/commons/payments-detail/payments-detail.component';
 import { PaysCentralComponent } from 'src/app/components/commons/pays-central/pays-central.component';
+import { Bill } from 'src/app/components/interfaces/bill';
+import { STATUS } from './account-status';
 
 @Component({
   selector: 'app-account-list',
@@ -79,8 +81,9 @@ export class AccountListComponent implements OnInit {
   }
 
   getAccounts() {
-    this.studentsService.getStudentsBills('12345').subscribe(
+    this.studentsService.getStudents(true,'12345').subscribe(
       result => {
+        this.accounts = result;
         this.dataSource.data = result;
         console.log(result);
         setTimeout(() => {this.loadAccounts = true;
@@ -96,7 +99,7 @@ export class AccountListComponent implements OnInit {
 
   showDebtors() {
     if (this.checked) {
-      const accountsDebtor = this.accounts.filter((a) => a.state === false);
+      const accountsDebtor = this.dataSource.data.filter((a) => this.verifyDebtor(a.bills));
       if (accountsDebtor.length > 0) {
         this.dataSource.data = accountsDebtor;
         this.showSnackBar(
@@ -110,6 +113,16 @@ export class AccountListComponent implements OnInit {
       this.dataSource.data = this.accounts;
     }
   }
+
+  verifyDebtor(bills: Bill[]) {
+    for (const bill of bills) {
+      if (bill.status === STATUS.PENDING) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

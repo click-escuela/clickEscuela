@@ -1,3 +1,4 @@
+import { COMMONS } from './../../../enums/commons';
 import { PaysCentralComponent } from './../../commons/pays-central/pays-central.component';
 import { IconGeneratorService } from './../../../services/icon-generator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,6 +14,7 @@ import { ModalFrameComponent } from '../../student/modal-frame/modal-frame.compo
 import moment from 'moment';
 import { RangeSelectorComponent } from '../../commons/range-selector/range-selector.component';
 import { DAY, TYPE, MONTH, WEEK, CUSTOM_PERIOD } from '../type-constants';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 
 @Component({
@@ -35,30 +37,11 @@ export class AccountComponent implements OnInit {
   selectedRange: any;
 
   constructor(
-    private accountsService: AccountService,
-    private studentsService: studentService,
     private iconsService: IconGeneratorService,
     private dialog: MatDialog,
     private expensesService: ExpensesService,
-    private snackBar: MatSnackBar) {
-
-    this.accounts = [];
-
-    this.studentsList = this.studentsService.studentsList;
-
-    for (const student of this.studentsList) {
-
-      const account = {
-        name: student.name,
-        surname: student.surname,
-        course: student.course,
-        titular: student.parent1.name + ' ' + student.parent1.surname,
-        state: this.accountsService.accountsList.filter(a => a.$titularId === student.id)[0].$state,
-        titularID: student.id,
-        idAccount: student.parent1.id
-      };
-      this.accounts.push(account);
-    }
+    private snackBar: SnackBarService,
+    private studentsService: studentService) {
     this.selectedRange = {
         range:
         {
@@ -71,33 +54,39 @@ export class AccountComponent implements OnInit {
   }
 
   generateDebtorsReport(method: number) {
-    const doc = new jsPDF('a4');
-    const columns = ['Nombre', 'Apellido', 'Curso', 'Titular'];
-    const debtors = this.accounts.filter(a => a.state === false);
+    try {
+      const doc = new jsPDF('a4');
+      const columns = ['Nombre', 'Apellido', 'Curso', 'Titular'];
+      const debtors = this.accounts.filter(a => a.state === false);
 
-    const tableData = this.generateTableData(debtors);
-    if (method === 1) {
-      doc.autoTable(columns, tableData,
-        {
-          margin: { top: 60 },
-          styles:
+      const tableData = this.generateTableData(debtors);
+      if (method === 1) {
+        doc.autoTable(columns, tableData,
           {
-            lineWidth: 0.1,
-            lineColor: [60, 60, 60]
-          },
+            margin: { top: 60 },
+            styles:
+            {
+              lineWidth: 0.1,
+              lineColor: [60, 60, 60]
+            },
 
-          headStyles: { fillColor: [45, 92, 132] }
-        }
+            headStyles: { fillColor: [45, 92, 132] }
+          }
 
-      );
-      const uriString = doc.output('datauristring');
-      const url = this.iconsService.sanitizer.bypassSecurityTrustResourceUrl(uriString);
-      this.openModalFrame(url);
-    } else if (method === 2) {
+        );
+        const uriString = doc.output('datauristring');
+        const url = this.iconsService.sanitizer.bypassSecurityTrustResourceUrl(uriString);
+        this.openModalFrame(url);
+      } else if (method === 2) {
 
-      tableData.splice(0, 0, columns);
-      this.arrayObjToCsv(tableData);
+        tableData.splice(0, 0, columns);
+        this.arrayObjToCsv(tableData);
+      }
+    } catch (error) {
+      this.snackBar.showSnackBar('Se produjo un problema al intentar generar el reporte',
+      COMMONS.SNACK_BAR.ACTION.CLOSE, COMMONS.SNACK_BAR.TYPE.ERROR);
     }
+
   }
 
   ngOnInit() {
@@ -173,7 +162,9 @@ export class AccountComponent implements OnInit {
               a.$date.getFullYear() === this.currentDate.getFullYear())
         );
       if (expenses.length === 0) {
-        this.showSnackBar('No encontaron registros para el dia de la fecha: ' + moment(this.currentDate).format('DD/MM/YYYY'));
+        this.snackBar.showSnackBar('No encontaron registros para el dia de la fecha: ' + moment(this.currentDate).format('DD/MM/YYYY'),
+        COMMONS.SNACK_BAR.TYPE.ERROR,
+        COMMONS.SNACK_BAR.ACTION.CLOSE);
       }
     }
     if (period === WEEK) {
@@ -184,10 +175,13 @@ export class AccountComponent implements OnInit {
         ));
 
       if (expenses.length === 0) {
-        this.showSnackBar('No se encontaron ingresos para el periodo: ' +
-          moment(weekDays[0]).format('DD/MM/YYYY') +
-          ' => ' +
-          moment(weekDays[weekDays.length - 1]).format('DD/MM/YYYY'));
+        this.snackBar.showSnackBarWithoutDuration(
+          'No se encontaron ingresos para el periodo: '
+          + moment(weekDays[0]).format('DD/MM/YYYY') +
+          +' => '
+         + moment(weekDays[weekDays.length - 1]).format('DD/MM/YYYY'),
+          COMMONS.SNACK_BAR.TYPE.ERROR,
+          COMMONS.SNACK_BAR.ACTION.CLOSE);
       }
     }
     if (period === MONTH) {
@@ -203,10 +197,13 @@ export class AccountComponent implements OnInit {
         ));
 
       if (expenses.length === 0) {
-        this.showSnackBar('No se encontaron ingresos para el periodo: ' +
+        this.snackBar.showSnackBarWithoutDuration('No se encontaron ingresos para el periodo: ' +
           moment(this.selectedRange.range.start).format('DD/MM/YYYY') +
           ' => ' +
-          moment(this.selectedRange.range.end).format('DD/MM/YYYY'));
+          moment(this.selectedRange.range.end).format('DD/MM/YYYY'),
+          COMMONS.SNACK_BAR.TYPE.ERROR,
+          COMMONS.SNACK_BAR.ACTION.CLOSE
+          );
       }
     }
 
@@ -262,7 +259,7 @@ export class AccountComponent implements OnInit {
         data: url,
         width: '90vw',
         height: '100vh',
-        panelClass:'url-frame'
+        panelClass: 'url-frame'
       }
     );
   }
@@ -281,9 +278,6 @@ export class AccountComponent implements OnInit {
     return tableData;
   }
 
-  showSnackBar(message: string) {
-    this.snackBar.open(message, 'Aceptar', { duration: 5500 });
-  }
 
   getweekstart(current) {
     const week = [];
@@ -321,12 +315,12 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  showPayCentral(){
+  showPayCentral() {
     const dialogRef = this.dialog.open(PaysCentralComponent,
       {
         width: '100vw',
         height: '100vh',
-        panelClass:'pays-central'
+        panelClass: 'pays-central'
       }
     );
 
