@@ -50,7 +50,7 @@ describe('AccountListComponent', () => {
     spyOn(component, 'getPaymentDetail').and.callFake(() => {});
     const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
     student.bills = [];
-    const spy = spyOn(component.studentsService$, 'getStudentsBills').and.returnValue(of([student]));
+    const spy = spyOn(component.studentsService$, 'getStudents').and.returnValue(of([student]));
     component.getAccounts();
 
 });

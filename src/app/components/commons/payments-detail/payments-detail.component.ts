@@ -1,3 +1,4 @@
+import { COMMONS } from './../../../enums/commons';
 import { StudentI } from './../../interfaces/student';
 import { studentService } from 'src/app/services/student.service';
 import { STATUS } from './../../admin/account/account-list/account-status';
@@ -13,6 +14,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalFrameComponent } from '../../student/modal-frame/modal-frame.component';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 @Component({
   selector: 'app-payments-detail',
   templateUrl: './payments-detail.component.html',
@@ -56,7 +58,7 @@ export class PaymentsDetailComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<PaymentsDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: StudentI,
-    private snackBar: MatSnackBar,
+    public snackBar: SnackBarService,
     private sanitazer: DomSanitizer,
     private dialog: MatDialog,
     private studentsService: studentService
@@ -101,10 +103,14 @@ export class PaymentsDetailComponent implements OnInit {
 
       },
       error => {
-        setTimeout(() => {this.errorBills = true; }, 5000);
+        setTimeout(() => {this.errorBills = true; }, 500);
 
       }
     );
+  }
+
+  get studentsService$() {
+    return this.studentsService;
   }
 
   ngOnInit() {
@@ -137,19 +143,25 @@ export class PaymentsDetailComponent implements OnInit {
        );
        if (result.length > 0) {
          this.dataSource = result;
-         this.showSnackBar(
+         this.snackBar.showSnackBar(
            'Estos son los resultados para el mes de ' +
-             this.monthsNames[this.selectedMonth - 1]
+             this.monthsNames[this.selectedMonth - 1],
+             COMMONS.SNACK_BAR.TYPE.SUCCES,
+             COMMONS.SNACK_BAR.ACTION.ACCEPT
          );
        } else {
          this.selectedMonth = -1;
          this.dataSource = this.bills;
-         this.showSnackBar(
-           'No se encontraron para facturas para el periodo solicitado'
+         this.snackBar.showSnackBar(
+           'No se encontraron para facturas para el periodo solicitado',
+           COMMONS.SNACK_BAR.TYPE.ERROR,
+           COMMONS.SNACK_BAR.ACTION.ACCEPT
          );
        }
      } else {
-       this.showSnackBar('Selecciones un mes valido');
+       this.snackBar.showSnackBar('Selecciones un mes valido',
+       COMMONS.SNACK_BAR.TYPE.ERROR,
+       COMMONS.SNACK_BAR.ACTION.ACCEPT);
        this.dataSource = this.bills;
      }
    }
@@ -161,25 +173,29 @@ export class PaymentsDetailComponent implements OnInit {
        );
        if (result.length > 0) {
          this.dataSource = result;
-         this.showSnackBar(
-           'Estos son los resultados para el año ' + this.selectedYear
+         this.snackBar.showSnackBar(
+           'Estos son los resultados para el año ' + this.selectedYear,
+           COMMONS.SNACK_BAR.TYPE.ERROR,
+           COMMONS.SNACK_BAR.ACTION.ACCEPT
          );
        } else {
          this.selectedMonth = -1;
          this.dataSource = this.bills;
-         this.showSnackBar(
-           'No se encontraron para facturas para el periodo solicitado'
+         this.snackBar.showSnackBar(
+           'No se encontraron para facturas para el periodo solicitado',
+           COMMONS.SNACK_BAR.TYPE.ERROR,
+           COMMONS.SNACK_BAR.ACTION.ACCEPT
          );
        }
      } else {
-       this.showSnackBar('Selecciones un año valido');
+       this.snackBar.showSnackBar('Selecciones un año valido',
+       COMMONS.SNACK_BAR.TYPE.ERROR,
+       COMMONS.SNACK_BAR.ACTION.ACCEPT);
        this.dataSource = this.bills;
      }
    }
 
-  showSnackBar(message: string) {
-    this.snackBar.open(message, 'Aceptar', { duration: 5500 });
-  }
+
 
    public downloadPdf(payment: Bill, method: number): void {
      const date = new Date();
@@ -362,9 +378,9 @@ export class PaymentsDetailComponent implements OnInit {
      );
 
      doc.setFontSize(10);
-     const name = this.currentSchool.$name;
-     const email = this.currentSchool.$email;
-     const tel = this.currentSchool.$telephone;
+
+     const email = this.currentSchool ?  this.currentSchool.$email : '[email]';
+     const tel = this.currentSchool ?  this.currentSchool.$telephone : '[telefono]';
 
      const contact = 'Departamento de tesoreria, ' + tel + ', ' + email;
 
@@ -403,7 +419,8 @@ export class PaymentsDetailComponent implements OnInit {
        doc.autoPrint();
        window.open(doc.output('bloburl', { filename: billname }));
      } else if (method === 3) {
-       this.showSnackBar('Funcion a implementar por backend');
+       this.snackBar.showSnackBar('Funcion a implementar por backend', COMMONS.SNACK_BAR.TYPE.NORMAL,
+       COMMONS.SNACK_BAR.ACTION.ACCEPT);
      }
    }
 

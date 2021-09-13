@@ -81,7 +81,9 @@ export class AccountListComponent implements OnInit {
   }
 
   getAccounts() {
-    this.studentsService.getStudents(true,'12345').subscribe(
+    this.loadAccounts = false;
+    this.loadError = false;
+    this.studentsService.getStudents(true, '12345').subscribe(
       result => {
         this.accounts = result;
         this.dataSource.data = result;
@@ -91,8 +93,10 @@ export class AccountListComponent implements OnInit {
 
       },
       error => {
-        this.loadError = true;
-        this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
+        setTimeout(() => {this.loadError = true;
+
+          this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
+        }, 600);
       }
     );
   }
@@ -143,17 +147,17 @@ export class AccountListComponent implements OnInit {
     });
   }
 
-  showPayCentral(){
+  showPayCentral() {
     const dialogRef = this.dialog.open(PaysCentralComponent,
       {
         width: '100vw',
         height: '100vh',
-        panelClass:'pays-central'
+        panelClass: 'pays-central'
       }
     );
 
     dialogRef.afterClosed().subscribe(result => {
-     
+
     });
 
   }
@@ -175,7 +179,7 @@ export class AccountListComponent implements OnInit {
 
     }
   }
-  get studentsService$(){
+  get studentsService$() {
     return this.studentsService;
   }
 

@@ -35,12 +35,13 @@ export class AccountComponent implements OnInit {
   studentsList: Student[];
   currentDate = new Date();
   selectedRange: any;
+  component: { id: string; name: string; surname: string; birthday: string; gender: string; document: string; level: string; grade: string; school: string; schoolId: string; division: string; bills: any[]; adress: { street: string; number: string; locality: string; }; cellPhone: string; email: string; parent: { name: string; surname: string; adress: { street: string; number: string; locality: string; }; cellPhone: string; email: string; gender: string; document: string; birthday: string; }; };
 
   constructor(
     private iconsService: IconGeneratorService,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private expensesService: ExpensesService,
-    private snackBar: SnackBarService,
+    public snackBar: SnackBarService,
     private studentsService: studentService) {
     this.selectedRange = {
         range:
@@ -323,11 +324,6 @@ export class AccountComponent implements OnInit {
         panelClass: 'pays-central'
       }
     );
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.selectedRange = result;
-      this.getExpensesReport('CUSTOM_PERIOD', result.option);
-    });
   }
 
 }
