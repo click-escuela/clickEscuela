@@ -1,7 +1,7 @@
 @import "../../../stylings/color-pallete.scss";
 @import "../../../stylings/custom-fonts.scss";
 
-::ng-deep .mat-dialog-container
+::ng-deep .confirm-dialog > .mat-dialog-container
 {
     background-color: $custom-blue;
     border: 2px solid $custom-blue;

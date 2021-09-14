@@ -134,7 +134,7 @@
           </svg>
         </div>
 
-        <div *ngIf="!student.state" matTooltip='Pagar' class="container-fluid" class="eye" (click)="showPayCentral()">
+        <div *ngIf="!student.state" matTooltip='Pagar' class="container-fluid" class="eye" (click)="showPayCentral(null,student.id)">
           <mat-icon svgIcon="set-pay"></mat-icon>
         </div>
 

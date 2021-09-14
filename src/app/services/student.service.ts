@@ -247,7 +247,6 @@ export class studentService {
     environment.BILLS_URL
     .replace('{schoolId}', idSchool)
     .replace('{studentId}', studentId)
-    .replace('{billStatus}', STATUS.PENDING);
     return this.connector.get<any>(path);
   }
 

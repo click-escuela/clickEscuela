@@ -95,7 +95,7 @@ export class AccountListComponent implements OnInit {
       error => {
         setTimeout(() => {this.loadError = true;
 
-          this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
+                          this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
         }, 600);
       }
     );
@@ -147,9 +147,10 @@ export class AccountListComponent implements OnInit {
     });
   }
 
-  showPayCentral() {
+  showPayCentral(billId: string,studentId:string) {
     const dialogRef = this.dialog.open(PaysCentralComponent,
       {
+        data: {bill: billId , student: studentId},
         width: '100vw',
         height: '100vh',
         panelClass: 'pays-central'
