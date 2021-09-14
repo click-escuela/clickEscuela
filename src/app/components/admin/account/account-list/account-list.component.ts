@@ -156,10 +156,6 @@ export class AccountListComponent implements OnInit {
       }
     );
 
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
-
   }
 
   showSnackBar(message: string) {
