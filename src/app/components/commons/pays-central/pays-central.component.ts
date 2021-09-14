@@ -99,14 +99,15 @@ export class PaysCentralComponent implements OnInit {
 
   payBill() {
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    if (this.data.bill) {
+   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: 'Esta seguro que desea pagar la factura del periodo ' + this.data.bill.month + '/' + this.data.bill.year,
       width: '360px',
       height: '250px',
-      panelClass:'confirm-dialog'
+      panelClass: 'confirm-dialog'
     });
 
-    dialogRef.afterClosed().subscribe(
+   dialogRef.afterClosed().subscribe(
       result => {
         if (result) {
           this.paymentService.pay(this.data.bill.id).subscribe(
@@ -124,6 +125,12 @@ export class PaysCentralComponent implements OnInit {
         }
       }
     );
+    } else {
+      this.snackBar.showSnackBar('No existe información de facturas a pagar',
+      COMMONS.SNACK_BAR.ACTION.ACCEPT,
+      COMMONS.SNACK_BAR.TYPE.ERROR);
+    }
+
   }
 
 }
