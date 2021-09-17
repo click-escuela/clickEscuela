@@ -15,7 +15,6 @@ export class RouteGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const credential = JSON.parse(localStorage.getItem('token'));
-
     if (!credential) {
     this.router.navigate(['/login/']);
     return false;

@@ -113,9 +113,10 @@
      <div class="row justify-content-center">
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input formControlName="password" type="password" matInput placeholder="Ex. pat@example.com" />
+        <input formControlName="password" [type]="viewPassword ? 'text' : 'password'" matInput placeholder="Ex. pat@example.com" />
+        <mat-icon class="password-saver" [ngClass]="{'view': viewPassword, 'no-view':!viewPassword}" svgIcon="password-saver" (click)="toggleViewPassword()"></mat-icon>
       </mat-form-field>
-
+      
       <mat-error *ngIf="loginControl.get('password').touched && loginControl.get('password').errors">
         La contraseña es requerida
       </mat-error> 

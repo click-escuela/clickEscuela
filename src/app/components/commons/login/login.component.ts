@@ -1,3 +1,4 @@
+import { IconGeneratorService } from './../../../services/icon-generator.service';
 import { PROFILE } from './../../../enums/profiles';
 import { FORM } from 'src/app/enums/form-controls';
 import { Session } from './../../../models/session';
@@ -5,7 +6,6 @@ import { COMMONS } from 'src/app/enums/commons';
 import { SnackBarService } from './../../../services/snack-bar.service';
 import { AuthService } from './../../../services/auth.service';
 import { Token } from './../../../models/token';
-import { IconGeneratorService } from 'src/app/services/icon-generator.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import moment from 'moment';
@@ -37,12 +37,14 @@ export class LoginComponent implements OnInit {
   login: any;
 
   loginControl = FORM.LOGIN_CONTROL;
+  viewPassword = false;
 
   clickyMessage: string;
   constructor(
     private router: Router,
     private authService: AuthService,
-    private snackbar: SnackBarService
+    private snackbar: SnackBarService,
+    icon: IconGeneratorService
   ) {
     this.clickyMessage = 'Bienvenidos';
   }
@@ -67,6 +69,9 @@ export class LoginComponent implements OnInit {
 
   toggleHelp() {
     this.help = !this.help;
+  }
+  toggleViewPassword(){
+    this.viewPassword = !this.viewPassword;
   }
 
   checkCredentials() {
@@ -144,10 +149,12 @@ export class LoginComponent implements OnInit {
 
         setTimeout(() => {
           this.load = false;
+          this.checkLogin = false;
           this.router.navigate([PROFILE[this.formatRole(response.role)]]);
         }, 3000);
       },
       (error) => {
+        this.load = false;
         this.checkLogin = false;
         this.countErrors++;
         if (this.countErrors % 2 === 0) {

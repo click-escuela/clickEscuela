@@ -36,6 +36,8 @@ constructor(
     iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
     iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/set-pay.svg'));
+    iconRegister.addSvgIcon('password-saver', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/password-saver.svg'));
+
     iconRegister.addSvgIconLiteral(
       'thumbs-up',
       sanitizer.bypassSecurityTrustHtml(SVG_CONST.THUMBUP_ICON)
