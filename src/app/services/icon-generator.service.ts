@@ -20,23 +20,23 @@ constructor(
     iconRegister.addSvgIconLiteral('weekly', sanitizer.bypassSecurityTrustHtml(SVG_CONST.WEEKLY));
     iconRegister.addSvgIconLiteral('monthly', sanitizer.bypassSecurityTrustHtml(SVG_CONST.MONTHLY));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.CUSTOM_DATE));
-    iconRegister.addSvgIcon('user', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/user.svg'));
-    iconRegister.addSvgIcon('cancel-error', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/error.svg'));
-    iconRegister.addSvgIcon('plus', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/plus.svg'));
-    iconRegister.addSvgIcon('search', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/search.svg'));
-    iconRegister.addSvgIcon('add-student', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/add-student.svg'));
-    iconRegister.addSvgIcon('add-teacher', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/add-teacher.svg'));
+    iconRegister.addSvgIcon('user', sanitizer.bypassSecurityTrustResourceUrl('user.svg'));
+    iconRegister.addSvgIcon('cancel-error', sanitizer.bypassSecurityTrustResourceUrl('error.svg'));
+    iconRegister.addSvgIcon('plus', sanitizer.bypassSecurityTrustResourceUrl('plus.svg'));
+    iconRegister.addSvgIcon('search', sanitizer.bypassSecurityTrustResourceUrl('search.svg'));
+    iconRegister.addSvgIcon('add-student', sanitizer.bypassSecurityTrustResourceUrl('add-student.svg'));
+    iconRegister.addSvgIcon('add-teacher', sanitizer.bypassSecurityTrustResourceUrl('add-teacher.svg'));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
-    iconRegister.addSvgIcon('upload', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/upload.svg'));
-    iconRegister.addSvgIcon('load-progress', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/load-progress.svg'));
-    iconRegister.addSvgIcon('cancel', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/cancel.svg'));
-    iconRegister.addSvgIcon('check', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/accept.svg'));
-    iconRegister.addSvgIcon('eye', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/eye.svg'));
+    iconRegister.addSvgIcon('upload', sanitizer.bypassSecurityTrustResourceUrl('upload.svg'));
+    iconRegister.addSvgIcon('load-progress', sanitizer.bypassSecurityTrustResourceUrl('load-progress.svg'));
+    iconRegister.addSvgIcon('cancel', sanitizer.bypassSecurityTrustResourceUrl('cancel.svg'));
+    iconRegister.addSvgIcon('check', sanitizer.bypassSecurityTrustResourceUrl('accept.svg'));
+    iconRegister.addSvgIcon('eye', sanitizer.bypassSecurityTrustResourceUrl('eye.svg'));
     iconRegister.addSvgIconLiteral('leftSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('rightSvg', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
-    iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/set-pay.svg'));
-    iconRegister.addSvgIcon('password-saver', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/password-saver.svg'));
+    iconRegister.addSvgIcon('set-pay', sanitizer.bypassSecurityTrustResourceUrl('set-pay.svg'));
+    iconRegister.addSvgIcon('password-saver', sanitizer.bypassSecurityTrustResourceUrl('password-saver.svg'));
 
     iconRegister.addSvgIconLiteral(
       'thumbs-up',
