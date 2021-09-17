@@ -28,7 +28,7 @@ constructor(
     iconRegister.addSvgIcon('add-teacher', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/add-teacher.svg'));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.LEFT_ARROW));
     iconRegister.addSvgIconLiteral('custom-date', sanitizer.bypassSecurityTrustHtml(SVG_CONST.RIGHT_ARROW));
-    iconRegister.addSvgIcon('upload', sanitizer.bypassSecurityTrustResourceUrl('../../assets/images/upload.svg'));
+    iconRegister.addSvgIcon('upload', sanitizer.bypassSecurityTrustResourceUrl('upload.svg'));
     iconRegister.addSvgIcon('load-progress', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/load-progress.svg'));
     iconRegister.addSvgIcon('cancel', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/cancel.svg'));
     iconRegister.addSvgIcon('check', sanitizer.bypassSecurityTrustResourceUrl('../assets/images/accept.svg'));
