@@ -3,7 +3,12 @@ import { CourseService } from './../../../../services/course.service';
 import { Course } from './../../../../models/course';
 import { map } from 'rxjs/operators';
 import { StudentI } from './../../../interfaces/student';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { COMMONS } from './../../../../enums/commons';
 import { MESSAGES } from './../../../../enums/messages-constants';
 import { SnackBarService } from './../../../../services/snack-bar.service';
@@ -49,17 +54,14 @@ export class AddGradeComponent implements AfterViewInit {
     'Lengua',
     'Quimica',
   ];
-  types =
-  [
+  types = [
     {
       code: 'HOMEWORK',
-      name: 'Tarea'
-    }
+      name: 'Tarea',
+    },
   ];
 
   selectedCourse = '';
-
-
 
   constructor(
     public dialogRef: MatDialogRef<AddGradeComponent>,
@@ -77,15 +79,14 @@ export class AddGradeComponent implements AfterViewInit {
         courseId: '27d2217c-d0f4-11eb-aa1f-0237763a7d5e',
         subject: 'Filosofía',
         type: '',
-        number: 9
-
+        number: 9,
       };
       this.localData = {
         grade: {
           name: '',
           subject: '',
           type: '',
-          number: 0
+          number: 0,
         },
         index: 0,
       };
@@ -98,7 +99,6 @@ export class AddGradeComponent implements AfterViewInit {
 
     this.existData = !!data.grade;
 
-    
     this.studentsList = [];
     this.gradeControl = FORM.GRADES_CONTROL;
     this.gradeControl.reset();
@@ -109,27 +109,30 @@ export class AddGradeComponent implements AfterViewInit {
   }
 
   getCourseGrades() {
-    this.courseService.getCoursesByTeacher('1234', '8d9c4552-260f-4c27-946f-dcd98d86dfd6').subscribe(
-      result => {
-        this.courses = result.courses;
-      },
-      error => {
-        this.snackBar.showSnackBar('No se pudo obtener la lista de Calificaciones', COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
-      }
-    );
+    this.courseService
+      .getCoursesByTeacher('1234', '8d9c4552-260f-4c27-946f-dcd98d86dfd6')
+      .subscribe(
+        (result) => {
+          this.courses = result.courses;
+        },
+        (error) => {
+          this.snackBar.showSnackBar(
+            'No se pudo obtener la lista de Calificaciones',
+            COMMONS.SNACK_BAR.ACTION.ACCEPT,
+            COMMONS.SNACK_BAR.TYPE.ERROR
+          );
+        }
+      );
   }
 
-  loadStudents(){
-   console.log(this.gradeControl.value)
-    this.studentsList = this.gradeControl.value.course.students
+  loadStudents() {
+    console.log(this.gradeControl.value);
+    this.studentsList = this.gradeControl.value.course.students;
   }
-
-
 
   addGrade() {
     const currentGrade = {} as GradeI;
 
-    // Harcodeo de datos para el alta de notas.
     currentGrade.schoolId = '1234';
     currentGrade.courseId = this.gradeControl.value.course.id;
     currentGrade.studentId = this.gradeControl.value.student;
@@ -138,17 +141,21 @@ export class AddGradeComponent implements AfterViewInit {
     currentGrade.number = this.gradeControl.value.number;
     currentGrade.name = this.gradeControl.value.description;
 
-    
-
-    console.log(currentGrade);
     this.gradesService.addGrade(currentGrade).subscribe(
-      data => {
-        this.snackBar.showSnackBar(MESSAGES.GRADES.POST.SUCCES, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
+      (data) => {
+        this.snackBar.showSnackBar(
+          MESSAGES.GRADES.POST.SUCCES,
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.SUCCES
+        );
         this.dialogRef.close();
-    },
-      error => {
-        this.snackBar.showSnackBar(MESSAGES.GRADES.POST.ERROR[400], COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
-
+      },
+      (error) => {
+        this.snackBar.showSnackBar(
+          MESSAGES.GRADES.POST.ERROR[400],
+          COMMONS.SNACK_BAR.ACTION.ACCEPT,
+          COMMONS.SNACK_BAR.TYPE.ERROR
+        );
       }
     );
   }
@@ -163,6 +170,5 @@ export class AddGradeComponent implements AfterViewInit {
   }
   onClose() {
     this.dialogRef.close(false);
-
   }
 }
