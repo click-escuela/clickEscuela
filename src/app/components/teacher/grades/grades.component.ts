@@ -39,7 +39,7 @@ export class GradesComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(res => {
-       this.refreshAllChildrens();
+       this.getCourseGrades();
 
       });
 
@@ -66,17 +66,9 @@ export class GradesComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(res => {
-       this.refreshAllChildrens();
+       this.getCourseGrades();
 
       });
-  }
-
-  refreshAllChildrens() {
-    for (const comp of this.listGrades) {
-      comp.refreshTable();
-    }
-    return true;
-
   }
 
   

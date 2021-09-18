@@ -49,9 +49,9 @@
             <mat-form-field appearance="fill">
               <mat-label>Curso</mat-label>
               <mat-select formControlName="course" [ngModelOptions]="{ standalone: true }"
-                (selectionChange)="loadStudents()" #course>
+                (selectionChange)="loadStudents(course)" #course>
                 <mat-option *ngFor="let course of courses" [value]="course">
-                  {{ course }}
+                  {{ course.year+course.division }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -125,8 +125,8 @@
             <mat-form-field appearance="fill">
               <mat-label>Alumno</mat-label>
               <mat-select formControlName="student">
-                <mat-option *ngIf="studentsList.length === 0">Seleccione un curso...</mat-option>
-                <mat-option *ngFor="let student of studentsList" [value]="student.name + ' ' + student.surname">
+                <!-- <mat-option *ngIf="studentsList.length === 0">Seleccione un curso...</mat-option> -->
+                <mat-option *ngFor="let student of studentsList" [value]="student.id">
                   {{ student.name + " " + student.surname }}
                 </mat-option>
               </mat-select>
