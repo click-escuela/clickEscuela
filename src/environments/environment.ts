@@ -14,6 +14,7 @@ export const environment = {
   COURSE_URL: 'http://3.141.92.8:8093/click-escuela/teacher-core/school/{schoolId}/teacher/6219ad23-cdff-40e7-8462-73e693252f62/courses',
   STUDENT_URL: 'http://3.141.92.8:8093/click-escuela/student-core/school/{schoolId}/student/{studentId}/grades',
   TOKEN_URL: 'http://3.141.92.8:8093/click-escuela/security/login',
+  COURSES_URL: 'http://3.141.92.8:8093/click-escuela/teacher-core/school/{schoolId}/teacher/{teacherId}/coursesList'
 
 
 };

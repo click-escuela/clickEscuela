@@ -1,3 +1,4 @@
+import { CourseGrade } from './../components/interfaces/course-grade';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { GradeI } from './../components/interfaces/grade';
@@ -53,6 +54,12 @@ export class GradesService {
 
     const path = environment.STUDENT_URL.replace('{schoolId}', schoolId).replace('{studentId}', studentId);
     return this.connector.get<GradeI[]>(path);
+  }
+
+  getGradesByCourse(schoolId: string, teacherId: string): Observable<CourseGrade[]> {
+
+    const path = environment.COURSES_URL.replace('{schoolId}',schoolId).replace('{teacherId}',teacherId)
+    return this.connector.get<CourseGrade[]>(path);
   }
 
   addGrade(grade: GradeI): Observable<GradeI> {
