@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgModule } from '@angular/core';
@@ -70,6 +71,7 @@ import { RouterTestingModule } from '@angular/router/testing';
     MatDatepickerModule,
     MatTabsModule,
     MatTableModule,
+    BrowserAnimationsModule
   ],
 })
 export class MaterialModule { }

@@ -1,3 +1,4 @@
+import { MatTableDataSource } from '@angular/material/table';
 import { SnackBarServiceMock } from './../../../../test-mocks/snack-bar-mock';
 import { MaterialModule } from 'src/app/test-mocks/material.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -17,6 +18,7 @@ import { StudentFullDetail } from 'src/app/components/interfaces/student-full-de
 import { of, throwError } from 'rxjs';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { MatDialogMock } from 'src/app/test-mocks/matDialogmock';
+import { Bill } from 'src/app/components/interfaces/bill';
 
 
 describe('AccountListComponent', () => {
@@ -46,21 +48,87 @@ describe('AccountListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('getAccounts result path ', () => {
+  it('getAccounts result path ', () => {
     spyOn(component, 'getPaymentDetail').and.callFake(() => {});
     const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
-    student.bills = [];
-    const spy = spyOn(component.studentsService$, 'getStudentsBills').and.returnValue(of([student]));
+    const spy = spyOn(component.studentsService$, 'getStudents').and.returnValue(of([student]));
     component.getAccounts();
+    expect(spy).toHaveBeenCalled();
 
 });
 
-  xit('getAccounts error path ', () => {
+  it('getAccounts error path ', () => {
     spyOn(component, 'getPaymentDetail').and.callFake(() => {});
     const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
-    student.bills = [];
-    const spy = spyOn(component.studentsService$, 'getStudentsBills').and.returnValue(throwError('error'));
+    const spy = spyOn(component.studentsService$, 'getStudents').and.returnValue(throwError('error'));
     component.getAccounts();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('openDateRangeSelector', () => {
+    const spy = spyOn(component.dialog, 'open').and.callThrough();
+    component.showPayCentral();
+    expect(spy).toHaveBeenCalled();
+
+  });
+  it('getPaymentDetail', () => {
+    const spy = spyOn(component.dialog, 'open').and.callThrough();
+    component.getPaymentDetail(MODEL.CURRENT_STUDENT);
+    expect(spy).toHaveBeenCalled();
+
+  });
+
+  it('showDebtors', () => {
+    component.checked = true;
+    const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
+    const bill: Bill = {
+      amount: 1500,
+      file: '',
+      id: '',
+      year: 12,
+      month: 12,
+      status: 'PENDING'
+    };
+    student.bills = [bill];
+    component.dataSource = new MatTableDataSource;
+    component.dataSource.data = [student];
+    component.showDebtors();
+
+  });
+
+  it('showDebtors else', () => {
+    component.checked = false;
+    const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
+    const bill: Bill = {
+      amount: 1500,
+      file: '',
+      id: '',
+      year: 12,
+      month: 12,
+      status: 'PENDING'
+    };
+    student.bills = [bill];
+    component.dataSource = new MatTableDataSource;
+    component.dataSource.data = [student];
+    component.showDebtors();
+
+  });
+
+  it('showDebtors else', () => {
+    component.checked = true;
+    const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
+    const bill: Bill = {
+      amount: 1500,
+      file: '',
+      id: '',
+      year: 12,
+      month: 12,
+      status: 'COMPLETE'
+    };
+    student.bills = [bill];
+    component.dataSource = new MatTableDataSource;
+    component.dataSource.data = [student];
+    component.showDebtors();
 
   });
 });

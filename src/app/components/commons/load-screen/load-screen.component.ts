@@ -17,6 +17,7 @@ export class LoadScreenComponent implements OnInit {
   @Input() showCancel: string;
 
   @Output() cancel = new EventEmitter<string>();
+  @Output() reload = new EventEmitter<string>();
 
   constructor( private iconsService: IconGeneratorService) { }
 
@@ -25,6 +26,9 @@ export class LoadScreenComponent implements OnInit {
 
   cancelRequest() {
     this.cancel.emit('Cancelando Evento');
+  }
+  reloadRequest() {
+    this.reload.emit('Cargando nuevamente');
   }
 
 }
