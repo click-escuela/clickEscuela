@@ -12,6 +12,8 @@ export const environment = {
   STUDENT_URL: 'http://3.141.92.8:8093/click-escuela/student-core/school/{schoolId}/student/{studentId}/grades',
   BILLS_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/{schoolId}/bill/student/{studentId}?status={billStatus}',
   TOKEN_URL: 'http://3.141.92.8:8093/click-escuela/security/login',
+  PAYMENT_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/{schoolId}/bill/{billId}'
+
 
 
 

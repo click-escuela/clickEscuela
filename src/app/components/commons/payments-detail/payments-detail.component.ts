@@ -15,6 +15,7 @@ import 'jspdf-autotable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalFrameComponent } from '../../student/modal-frame/modal-frame.component';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { PaysCentralComponent } from '../pays-central/pays-central.component';
 @Component({
   selector: 'app-payments-detail',
   templateUrl: './payments-detail.component.html',
@@ -446,5 +447,18 @@ export class PaymentsDetailComponent implements OnInit {
    get dialog$() {
      return this.dialog;
    }
+
+   showPayCentral(billId: string, studentId: string) {
+    const dialogRef = this.dialog.open(PaysCentralComponent,
+      {
+        data: {bill: billId , student: studentId},
+        width: '100vw',
+        height: '100vh',
+        panelClass: 'pays-central'
+      }
+    );
+
+  }
+
 
 }

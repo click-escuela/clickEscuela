@@ -67,7 +67,7 @@ describe('AccountListComponent', () => {
 
   it('openDateRangeSelector', () => {
     const spy = spyOn(component.dialog, 'open').and.callThrough();
-    component.showPayCentral();
+    component.showPayCentral('', '');
     expect(spy).toHaveBeenCalled();
 
   });

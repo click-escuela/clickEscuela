@@ -88,11 +88,13 @@ messageError="No se pudieron obtener las facturas del alumno"
         </div>
         <div class="action-button" matTooltip="Imprimir" (click)="downloadPdf(row,2)">
           <img src="../../../../assets/images/printer.svg" alt="">
-
         </div>
         <div class="action-button" matTooltip="Reenviar" (click)="downloadPdf(row,3)">
          <img src="../../../../assets/images/resend.svg" alt="">
         </div>
+        <div class="action-button" matTooltip="Ir a la central de pagos" (click)="showPayCentral(row,data.id)">
+          <img src="../../../../assets/images/pay.svg" alt="">
+         </div>
         </td>
     </ng-container>
 
