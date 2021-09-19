@@ -54,3 +54,19 @@
 ::ng-deep .mat-paginator-page-size.ng-star-inserted {
   display: none !important;
 }
+
+.student-grades{
+  padding: 0.7em;
+  background-color: $custom-blue;
+  color: whitesmoke;
+  border-radius: 10px 10px 0 0;
+}
+
+.empty-message{
+  padding: 2em;
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
