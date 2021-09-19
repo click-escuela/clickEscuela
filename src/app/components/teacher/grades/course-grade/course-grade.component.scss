@@ -1,0 +1,25 @@
+@import "../../../../stylings/color-pallete.scss";
+
+.grades-count{
+    padding: 1em;
+    background-color: $custom-blue-glass;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.grades-count.count-zero {
+    background-color: rgba(187, 57, 57, 0.801);
+}
+
+.grades-count:hover{
+    background-color: $custom-blue;
+    transform: scale(1.05);
+}

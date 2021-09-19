@@ -30,8 +30,10 @@
 			</div>
 		</div>
 		<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-			<mat-tab label="Curso 3B">
-				<app-grades-list #appList></app-grades-list>
+			<mat-tab *ngFor="let course of courseList" [label]="'Curso '+ course.year + course.division">
+				<!-- <app-grades-list [courseList] = "course.students" #appList></app-grades-list> -->
+				<app-course-grade [courseList] = "course.students" #appList></app-course-grade>
+
 			</mat-tab>
 		
 		</mat-tab-group>
