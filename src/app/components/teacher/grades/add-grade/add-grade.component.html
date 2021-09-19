@@ -49,7 +49,7 @@
             <mat-form-field appearance="fill">
               <mat-label>Curso</mat-label>
               <mat-select formControlName="course" [ngModelOptions]="{ standalone: true }"
-                (selectionChange)="loadStudents(course)" #course>
+                (selectionChange)="loadStudents()" #course>
                 <mat-option *ngFor="let course of courses" [value]="course">
                   {{ course.year+course.division }}
                 </mat-option>
