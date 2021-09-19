@@ -1,22 +1,36 @@
 @import "../../../stylings/color-pallete.scss";
+@import "../../../stylings/custom-fonts.scss";
 
-::ng-deep .mat-dialog-container
+::ng-deep .confirm-dialog > .mat-dialog-container
 {
-    border: 2px solid $green;
+    background-color: $custom-blue;
+    border: 2px solid $custom-blue;
+    color: whitesmoke;
     padding: 0 !important;
     overflow-x: hidden;
 }
 
-.cancelButton{
-    background-color: rgba(175, 26, 26, 0.651);
-    margin-right: 1em;
+::ng-deep .cancelButton{
+    background-color: rgba(175, 26, 26, 0.4);
+    margin-right: 1.6em;
+    font-family: Bebas !important; 
+    font-weight: bold;
+    
 }
-
-
-.confirmButton
+::ng-deep .confirmButton
 {
-    background-color: $green;
+    background-color: #9acd8d85;
+   
 }
+
+.message-content{
+    padding: 1.6em;
+    font-weight: bold;
+}
+
+
+
+
 
 p{
     margin-top: 24px;

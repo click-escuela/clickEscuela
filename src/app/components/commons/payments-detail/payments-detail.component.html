@@ -2,7 +2,17 @@
   <img src="../../../../../assets/images/cancel.svg" alt="">
 </div>
 
-<div class="row account-state" >
+<app-load-screen *ngIf="loadBills"
+messageInfo="Espere cargando..."
+messageError="No se pudieron obtener las facturas del alumno"
+[loadError]='errorBills'
+>
+
+</app-load-screen>
+
+<div class="bills" *ngIf="!errorBills && !loadBills ">
+  <div class="list" *ngIf="bills.length>0">
+    <div class="row account-state" >
   <div  style="width: 90%;">
     {{ totalDebt>0 ? 'La cuenta presenta saldo a regularizar -- Total Adeudado: '+totalDebt+'$' : 'Cuenta libre de deuda Deuda'}}
   </div>
@@ -44,7 +54,7 @@
    
     <ng-container matColumnDef="period">
       <th id="period" mat-header-cell *matHeaderCellDef mat-sort-header>Periodo</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': row.status==='PENDING'}"> {{row.period | date: 'MM/yy'}} </td>
+      <td mat-cell *matCellDef="let row" [ngClass]="{'light-red': row.status==='PENDING'}"> {{row.month + '-' + row.year}} </td>
     </ng-container>
 
     <!-- Name Column -->
@@ -78,11 +88,13 @@
         </div>
         <div class="action-button" matTooltip="Imprimir" (click)="downloadPdf(row,2)">
           <img src="../../../../assets/images/printer.svg" alt="">
-
         </div>
         <div class="action-button" matTooltip="Reenviar" (click)="downloadPdf(row,3)">
          <img src="../../../../assets/images/resend.svg" alt="">
         </div>
+        <div class="action-button" matTooltip="Ir a la central de pagos" (click)="showPayCentral(row,data.id)">
+          <img src="../../../../assets/images/pay.svg" alt="">
+         </div>
         </td>
     </ng-container>
 
@@ -101,3 +113,13 @@
   <mat-paginator [pageSize]="1000"></mat-paginator>
   
 </div>
+  </div>
+  <div class="no-result" *ngIf="bills.length === 0">
+    <mat-icon>warning</mat-icon>
+
+    <p>El alumno/a {{data.name+ ' '+ data.surname}} no presenta facturas disponibles para la consulta</p>
+  </div>
+
+</div>
+
+

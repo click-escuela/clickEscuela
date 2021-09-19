@@ -1,5 +1,4 @@
-import { MODEL } from './../enums/ng-models';
-
+import { STATUS } from './../components/admin/account/account-list/account-status';
 import { environment } from './../../environments/environment';
 import { Parent } from '../models/parent';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -15,8 +14,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
-import { StudentFullDetail } from '../components/interfaces/student-full-detail';
 import { StudentI } from '../components/interfaces/student';
+import { Bill } from '../components/interfaces/bill';
 
 interface SearchResult {
   students: Student[];
@@ -243,42 +242,12 @@ export class studentService {
     return this.connector.get<any>(path);
   }
 
-  getStudentsBills(idSchool: string): Observable<StudentFullDetail[]> {
-
-    // Se deja mockeo para pruebas
-
-    // const student = MODEL.CURRENT_STUDENT as StudentFullDetail;
-
-    // const bill: Bill[] = [
-    //   {
-    //     amount: 6200,
-    //     file: 'http://Descargar.com',
-    //     id: '4456456456',
-    //     period: new Date('12/01/2020'),
-    //     status: 'COMPLETED'
-    //   },
-    //   {
-    //     amount: 6600,
-    //     file: 'http://Descargar.com',
-    //     id: '4456456456',
-    //     period: new Date('01/01/2021'),
-    //     status: 'PENDING'
-    //   }
-    // ];
-
-    // student.bills = bill;
-
-    // const student2 = Object.assign({}, student);
-    // student2.name = 'Jazmin';
-    // student2.bills = [];
-
-
+  getStudentsBills(idSchool: string, studentId: string): Observable<Bill[]> {
     const path =
-    environment.GET_STUDENT_URL
+    environment.BILLS_URL
     .replace('{schoolId}', idSchool)
-    .replace('{fullDetail}', true + '');
+    .replace('{studentId}', studentId)
     return this.connector.get<any>(path);
-    // return of([student, student2]);
   }
 
   addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
@@ -313,11 +282,4 @@ export class studentService {
     .replace('{schoolId}', idSchool);
     return this.connector.put<StudentI>(path, student);
   }
-
-
-
-
-
-
-
 }

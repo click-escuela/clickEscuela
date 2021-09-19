@@ -96,32 +96,39 @@
 </mat-menu>
 
     <div class="container" *ngIf="!validCredentials">
-      <div class="row">
-        <form class="example-form">
+      
+        <form [formGroup]="loginControl" style="width:100%">
+          <div class="container justify-content-center">
+
+          
+          <div class="row justify-content-center">
       <mat-form-field class="example-full-width">
         <mat-label>Nombre de usuario</mat-label>
-        <input type="email" [(ngModel)]="login.user"  [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. pat@example.com" />
+        <input formControlName="user" type="email"  matInput placeholder="Ex. pat@example.com" />
       </mat-form-field>
+      <mat-error *ngIf="loginControl.get('user').touched && loginControl.get('user').errors">
+        El Usuario es requerido
+      </mat-error> 
+     </div>
+     <div class="row justify-content-center">
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input type="password" [(ngModel)]="login.password" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. pat@example.com" />
+        <input formControlName="password" [type]="viewPassword ? 'text' : 'password'" matInput placeholder="Ex. pat@example.com" />
+        <mat-icon class="password-saver" [ngClass]="{'view': viewPassword, 'no-view':!viewPassword}" svgIcon="password-saver" (click)="toggleViewPassword()"></mat-icon>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Perfil</mat-label>
-        <mat-select [(ngModel)]="login.profile" [ngModelOptions]="{standalone: true}">
-          <mat-option *ngFor="let profile of profiles" [value]="profile.value">
-            {{profile.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      
+      <mat-error *ngIf="loginControl.get('password').touched && loginControl.get('password').errors">
+        La contraseña es requerida
+      </mat-error> 
+</div>
 
-
+</div>
 
     </form>
-    </div>
+    
 
-    <div class="row justify-content-center mt-4">
-        <button (click)="setSession()" mat-raised-button color="primary">Ingresar</button>
+    <div [ngClass]="{'show': loginControl.valid}" class="login-button row justify-content-center mt-4">
+        <button [disabled]="!loginControl.valid"  (click)="setSession()" mat-raised-button color="primary">Ingresar</button>
 
     </div>  
 
@@ -130,14 +137,20 @@
     </div>
     </div>
 
-    <div class="container" style="margin-top: 3em;" *ngIf="validCredentials">
+    <ng-container #sessionToken>
+      <div class="container" style="margin-top: 3em;" *ngIf="validCredentials">
 
       <div class="row justify-content-center mt-4">
         <div class="avatar">
-          <img [src]='currentSession.avatarImage' alt="">
+          <img *ngIf="currentSession.user;else defaultAvatar" [src]='currentSession.avatarImage' alt="">
+          <ng-template #defaultAvatar>
+            <img src="../../../../assets/images/user.svg" alt="">
+
+          </ng-template>
+          
         </div>
       </div>
-      <div class="row justify-content-center mt-4">
+      <div *ngIf="currentSession" class="row justify-content-center mt-4">
        {{ 'Bienvenido/a de nuevo '+ currentSession.user}}
       </div>
 
@@ -152,6 +165,9 @@
       <app-load-screen *ngIf="load" style="width: 18%" [showCancel]='false' ></app-load-screen>
     </div>
     </div>
+    </ng-container>
+
+    
     
     
   </div>

@@ -66,6 +66,7 @@ export class GradesListComponent implements OnInit {
   getAllGrades() {
     this.gradeService.getGrades(this.idSchool).subscribe(
       data => {
+        console.log(data)
         this.dataSource.data = data;
         this.gradesList = data;
         setTimeout(() => this.loadScreen = false, 500);

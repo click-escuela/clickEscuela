@@ -55,6 +55,11 @@ export class GradesService {
     return this.connector.get<GradeI[]>(path);
   }
 
+  getGradesByCourse(schoolId: string, teacherId: string) {
+    const path = environment.TEACHERS_URL.replace('{schoolId}', schoolId) + '/' + teacherId + '/coursesList';
+    return this.connector.get<GradeI>(path);
+  }
+
   addGrade(grade: GradeI): Observable<GradeI> {
     const path = environment.GRADES_URL.replace('{schoolId}', SCHOOL.ID);
     return this.connector.post<GradeI>(path, grade);
