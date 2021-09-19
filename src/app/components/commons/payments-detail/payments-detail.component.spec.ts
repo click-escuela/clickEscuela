@@ -1,3 +1,7 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { studentService } from 'src/app/services/student.service';
+import { StudentI } from './../../interfaces/student';
+import { DecimalPipe } from '@angular/common';
 import { MatDialogMock } from './../../../test-mocks/matDialogmock';
 import { jsPDFMock } from './../../../test-mocks/jsPDFMock';
 import { jsPDF } from 'jspdf';
@@ -8,28 +12,30 @@ import { StudentFullDetail } from '../../interfaces/student-full-detail';
 import { MODEL } from './../../../enums/ng-models';
 import { MaterialModule } from 'src/app/test-mocks/material.module';
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { PaymentsDetailComponent } from './payments-detail.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Bill } from '../../interfaces/bill';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 
 describe('PaymentsDetailComponent', () => {
   let component: PaymentsDetailComponent;
   let fixture: ComponentFixture<PaymentsDetailComponent>;
 
-  const data =  MODEL.CURRENT_STUDENT as StudentFullDetail;
-  data.bills = [
+  const data =  MODEL.CURRENT_STUDENT as StudentI;
+
+  const bills = [
     {
       amount: 1500,
       status: 'PENDING',
       file: 'url',
       id: 'test',
-      period: new Date('12/12/1993')
+      year: 2021,
+      month: 6
     }
   ];
 
@@ -41,9 +47,10 @@ describe('PaymentsDetailComponent', () => {
       providers: [
         {provide: MatDialogRef, useClass: MatDialogMock},
         {provide: MAT_DIALOG_DATA, useValue: data},
-        {provide: MatDialog,useClass: MatDialogMock},
+        {provide: MatDialog, useClass: MatDialogMock},
         {provide: SnackBarService, useClass: SnackBarServiceMock},
-        {provide: jsPDF, useClass: jsPDFMock}
+        {provide: jsPDF, useClass: jsPDFMock},
+        DecimalPipe
       ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -53,12 +60,74 @@ describe('PaymentsDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentsDetailComponent);
     component = fixture.componentInstance;
+    component.bills = bills;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('getBills succes', () => {
+    spyOn(component.studentsService$, 'getStudentsBills').and.returnValue(of(bills));
+    component.ngOnInit();
+    expect(component.bills[0].file).toEqual(bills[0].file);
+  });
+
+  it('getBills error', fakeAsync(() => {
+    spyOn(component.studentsService$, 'getStudentsBills').and.returnValue(throwError('error'));
+    component.ngOnInit();
+    tick(501);
+    expect(component.errorBills).toEqual(true);
+  }));
+
+  it('FilterByMonth if length > 0 ', () => {
+   component.bills = bills;
+   component.selectedMonth = 6;
+   const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+   component.filterByMonth();
+   expect (spy).toHaveBeenCalled();
+  });
+
+  it('FilterByMonth else length > 0 ', () => {
+    component.bills = bills;
+    component.selectedMonth = 7;
+    const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+    component.filterByMonth();
+    expect (spy).toHaveBeenCalled();
+   });
+
+  it('FilterByMonth error ', () => {
+    component.bills = bills;
+    component.selectedMonth = -1;
+    const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+    component.filterByMonth();
+    expect (spy).toHaveBeenCalled();
+   });
+
+  it('FilterByYear if length > 0 ', () => {
+    component.bills = bills;
+    component.selectedYear = 2021;
+    const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+    component.filterByYear();
+    expect (spy).toHaveBeenCalled();
+   });
+
+  it('FilterByYear else length > 0 ', () => {
+     component.bills = bills;
+     component.selectedYear = 7;
+     const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+     component.filterByYear();
+     expect (spy).toHaveBeenCalled();
+    });
+
+  it('FilterByYear error ', () => {
+     component.bills = bills;
+     component.selectedYear = -1;
+     const spy  = spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+     component.filterByYear();
+     expect (spy).toHaveBeenCalled();
+    });
 
   it('onclose Dialog ', () => {
     const spy = spyOn(component.dialogRef, 'close').and.callThrough();
@@ -73,7 +142,8 @@ describe('PaymentsDetailComponent', () => {
       status: 'PENDING',
       file: 'url',
       id: 'test',
-      period: new Date()
+      year: 2021,
+      month: 6
     };
     const bills = [bill, bill];
 
@@ -88,7 +158,8 @@ describe('PaymentsDetailComponent', () => {
       status: 'COMPLETED',
       file: 'url',
       id: 'test',
-      period: new Date()
+      year: 2021,
+      month: 6
     };
     const bills = [bill, bill];
 
@@ -97,57 +168,32 @@ describe('PaymentsDetailComponent', () => {
     expect(debt).toEqual(0);
   });
 
-  it('filterByMonth happy path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedMonth = 12;
-    component.filterByMonth();
-    expect (component.dataSource[0].amount).toEqual(data.bills[0].amount);
-  });
-
-  it('filterByMonth happy else path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedMonth = -1;
-    component.filterByMonth();
-    expect (component.dataSource[0].amount).toEqual(data.bills[0].amount);
-  });
-
-  it('filterByMonth wrong path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedMonth = 2;
-    component.filterByMonth();
-    expect (component.dataSource.length).toEqual(1);
-  });
-
-  it('filterByYear happy path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedYear = 12;
-    component.filterByYear();
-    expect (component.dataSource[0].amount).toEqual(data.bills[0].amount);
-  });
-
-  it('filterByYear happy else path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedYear = -1;
-    component.filterByYear();
-    expect (component.dataSource[0].amount).toEqual(data.bills[0].amount);
-  });
-
-  it('filterByYear wrong path', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
-    component.selectedYear = 2;
-    component.filterByYear();
-    expect (component.dataSource.length).toEqual(1);
-  });
 
   it('downloadPDf ', () => {
-    spyOn(component, 'showSnackBar').and.callFake(() => {});
+    spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
     spyOn(window, 'open');
 
     const spy = spyOn(component.dialog$, 'open').and.returnValue({afterClosed: () => of(false)} as MatDialogRef<typeof component>);
-    component.downloadPdf(data.bills[0], 0);
-    component.downloadPdf(data.bills[0], 1);
-    component.downloadPdf(data.bills[0], 2);
+    component.downloadPdf(component.bills[0], 0);
+    component.downloadPdf(component.bills[0], 1);
+    component.downloadPdf(component.bills[0], 2);
+    component.downloadPdf(component.bills[0], 3);
     expect (spy).toHaveBeenCalled();
 
   });
+
+  it('downloadPDf school undefined ', () => {
+    component.currentSchool = undefined;
+    spyOn(component.snackBar, 'showSnackBar').and.callFake(() => {});
+    spyOn(window, 'open');
+
+    const spy = spyOn(component.dialog$, 'open').and.returnValue({afterClosed: () => of(false)} as MatDialogRef<typeof component>);
+    component.downloadPdf(component.bills[0], 0);
+    component.downloadPdf(component.bills[0], 1);
+    component.downloadPdf(component.bills[0], 2);
+    expect (spy).toHaveBeenCalled();
+
+  });
+
+  
 });

@@ -9,7 +9,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 })
 export class ModalFrameComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ModalFrameComponent>, @Inject(MAT_DIALOG_DATA) public data: SafeResourceUrl) {
+  constructor(public dialogRef: MatDialogRef<ModalFrameComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
 

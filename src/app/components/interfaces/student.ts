@@ -1,7 +1,7 @@
 import { Adress } from './adress';
 import { ParentI } from './parent';
 export interface StudentI {
-
+    id: string;
     name: string;
     surname: string;
     document: string;

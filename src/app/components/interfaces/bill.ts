@@ -2,6 +2,7 @@ export interface Bill {
     amount: number;
     file: string;
     id: string;
-    period: Date;
+    year: number;
+    month: number;
     status: string;
 }
