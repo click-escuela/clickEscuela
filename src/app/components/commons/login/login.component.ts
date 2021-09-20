@@ -149,12 +149,10 @@ export class LoginComponent implements OnInit {
 
         setTimeout(() => {
           this.load = false;
-          this.checkLogin = false;
           this.router.navigate([PROFILE[this.formatRole(response.role)]]);
         }, 3000);
       },
       (error) => {
-        this.load = false;
         this.checkLogin = false;
         this.countErrors++;
         if (this.countErrors % 2 === 0) {

@@ -16,8 +16,9 @@
   height: 120px;
 }
 
-.click-escuela img {
-  width: fit-content;
+.click-escuela{
+    width: auto;
+    height: 120px;
 }
 
 .login-container {
@@ -35,10 +36,25 @@
   transform: scale(0.8);
 }
 
-.login-button.show {
-  transform: scale(1);
+.login-button{
+    transition: 0.5s ease-in-out;
+    transform: scale(0.8);
 }
 
+.login-button.show{
+    transform: scale(1);
+}
+
+.login-box{
+    position: relative;
+    width: 350px;
+    height: 450px;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    z-index: 99;
+    margin-top: 2em;
+    box-shadow: 2px 2px 12px 3px rgba(0, 0, 0, 0.205);
+}
 .login-box {
   position: relative;
   width: 350px;
@@ -200,4 +216,9 @@ g#hand.animate-clicky {
   to {
     stroke-dashoffset: 0;
   }
+}
+.avatar img{
+    position: absolute;
+    width: 100%;
+    height: 110%;
 }

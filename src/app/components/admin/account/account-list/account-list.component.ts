@@ -94,8 +94,8 @@ export class AccountListComponent implements OnInit {
       },
       error => {
         setTimeout(() => {this.loadError = true;
+          this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
 
-                          this.snackbar.showSnackBar(SCREEN.ACCOUNTS.ERROR, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
         }, 600);
       }
     );

@@ -1,3 +1,4 @@
+import { StudentGrade } from './../../../interfaces/student-grade';
 import { COMMONS } from './../../../../enums/commons';
 import { MESSAGES } from './../../../../enums/messages-constants';
 import { SnackBarService } from './../../../../services/snack-bar.service';
@@ -5,24 +6,31 @@ import { environment } from './../../../../../environments/environment.prod';
 import { GradeI } from './../../../interfaces/grade';
 import { ConfirmDialogComponent } from '../../../commons/confirm-dialog/confirm-dialog.component';
 import { GradesService } from '../../../../services/grades.service';
-import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ViewChildren,
+  QueryList,
+  Input,
+  Inject,
+  AfterViewInit,
+} from '@angular/core';
 import { Grade } from 'src/app/models/grade';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddGradeComponent } from '../add-grade/add-grade.component';
 import { SCHOOL } from 'src/environments/school-data';
-
-
 
 @Component({
   selector: 'app-grades-list',
   templateUrl: './grades-list.component.html',
-  styleUrls: ['./grades-list.component.scss']
+  styleUrls: ['./grades-list.component.scss'],
 })
-export class GradesListComponent implements OnInit {
-
+export class GradesListComponent implements AfterViewInit {
   displayedColumns: string[];
   dataSource: any;
   idSchool = SCHOOL.ID;
@@ -35,47 +43,24 @@ export class GradesListComponent implements OnInit {
   @ViewChildren(GradesListComponent) listGrades: QueryList<GradesListComponent>;
 
   gradesList: GradeI[];
+
   loadScreen: boolean;
   messageInfoClass = 'black';
   messageInfo = 'Cargando lista de notas';
 
-  constructor(private gradeService: GradesService, public dialog: MatDialog, private snackbar: SnackBarService) {
-
-    this.gradesList = [];
-    this.loadScreen = true;
-  }
-
-
-
-  ngOnInit() {
-
-    this.displayedColumns = ['student', 'description', 'matter', 'grade', 'actions'];
-
+  constructor(
+    private gradeService: GradesService,
+    public dialog: MatDialog,
+    private snackbar: SnackBarService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+  ngAfterViewInit() {
+    console.log(this.data);
+    this.displayedColumns = ['description', 'matter', 'grade', 'actions'];
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.gradesList;
+    this.dataSource.data = this.data.grades;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-
-  }
-
-  ngAfterViewInit() {
-    this.getAllGrades();
-  }
-
-  getAllGrades() {
-    this.gradeService.getGrades(this.idSchool).subscribe(
-      data => {
-        console.log(data)
-        this.dataSource.data = data;
-        this.gradesList = data;
-        setTimeout(() => this.loadScreen = false, 500);
-      },
-      error => {
-        this.snackbar.showSnackBar(error.message, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR);
-        setTimeout(() => this.loadScreen = false, 500);
-      }
-    );
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -86,7 +71,6 @@ export class GradesListComponent implements OnInit {
     }
   }
   deleteGrade(index) {
-
     this.gradeService.deleteGrade(index);
     this.refreshTable();
   }
@@ -100,46 +84,40 @@ export class GradesListComponent implements OnInit {
   }
 
   confirmDialog(input, index) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: input,
+      width: '60%',
+      height: '150px',
+      panelClass: 'confirm-dialog',
+    });
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent,
-      {
-        data: input,
-        width: '60%',
-        height: '150px'
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteGrade(index);
-
       }
     });
   }
 
   openModify(grade) {
-    const dialogRef = this.dialog.open(AddGradeComponent,
-      {
-        data: grade,
-        width: '80%',
-        height: '75%'
-      }
-    );
+    const dialogRef = this.dialog.open(AddGradeComponent, {
+      data: grade,
+      width: '80%',
+      height: '75%',
+    });
 
-    dialogRef.afterClosed().subscribe(res => { this.refreshAllChildrens(); });
-
+    dialogRef.afterClosed().subscribe((res) => {
+      this.refreshAllChildrens();
+    });
   }
-
 
   refreshAllChildrens() {
     for (const comp of this.listGrades) {
       comp.refreshTable();
     }
-
   }
 
   refreshTable() {
     this.loadScreen = true;
-    this.getAllGrades();
+    // this.getAllGrades();
   }
 }
