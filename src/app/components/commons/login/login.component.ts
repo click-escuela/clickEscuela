@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   toggleHelp() {
     this.help = !this.help;
   }
-  toggleViewPassword(){
+  toggleViewPassword() {
     this.viewPassword = !this.viewPassword;
   }
 
@@ -136,6 +136,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  showHolis(holis) {
+    console.log(holis);
+  }
+
   setSession() {
     this.checkLogin = true;
     let token: Token = null;
@@ -154,6 +158,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.checkLogin = false;
+        this.load = false;
         this.countErrors++;
         if (this.countErrors % 2 === 0) {
         this.tooltip.show();

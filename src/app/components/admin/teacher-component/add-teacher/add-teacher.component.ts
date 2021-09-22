@@ -10,13 +10,15 @@ import { Observable } from 'rxjs';
 
 // Imports para chips
 
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, CONTROL, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, startWith } from 'rxjs/operators';
 import { Teacher } from 'src/app/models/teacher';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { MODEL } from 'src/app/enums/models';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { FORM } from 'src/app/enums/form-controls';
+import { GENDER } from 'src/app/enums/courses';
 
 @Component({
   selector: 'app-add-teacher',
@@ -40,6 +42,10 @@ export class AddTeacherComponent implements OnInit {
   allgrades: string[] = [];
 
   gradeChar = ['A', 'B', 'C', 'D'];
+
+  teacherControl = FORM.TEACHER_CONTROL;
+  genders = GENDER;
+
 
 
 
