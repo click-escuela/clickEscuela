@@ -59,7 +59,6 @@ export class AddTeacherComponent implements OnInit {
   constructor(private snackBar: SnackBarService, public matDialogRef: MatDialog, private teachersService: TeacherService) {
     this.secondParent = false;
     this.resetModelTeacher();
-
     this.typeIDs = MODEL.TYPE_ID;
     // this.filteredgrades = this.gradeCtrl.valueChanges.pipe(
     //   // tslint:disable-next-line: deprecation
@@ -142,10 +141,13 @@ export class AddTeacherComponent implements OnInit {
   }
 
   openTeacherModelBase() {
-    this.matDialogRef.open(TeacherBaseModelComponent, {
+    const dialogRef = this.matDialogRef.open(TeacherBaseModelComponent, {
       height: '90vh',
       width: '100vw'
     });
+    dialogRef.afterClosed().subscribe(
+      result => { this.teacherControl.reset(); });
+
   }
 
   // showSnackBar(message: string) {
