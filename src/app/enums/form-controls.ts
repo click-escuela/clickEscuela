@@ -64,7 +64,10 @@ export const FORM = {
           document: new FormControl('', [Validators.required, Validators.pattern('[0-9]{6,13}'), Validators.maxLength(13)]),
           documentType: new FormControl('', [Validators.required]),
           email: new FormControl('', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]),
-          gender: new FormControl('', [Validators.required])
+          gender: new FormControl('', [Validators.required]),
+          id: new FormControl(''),
+          genderType: new FormControl(''),
+          schoolId: new FormControl('')
 
     })
 };
