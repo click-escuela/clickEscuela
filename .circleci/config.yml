@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/Escuela2
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: Escuela2-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: Escuela2-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run: npm install karma karma-coverage --save-dev
+      - sonarcloud/scan:
+          cache_version: 2 
+          sonar_token_variable_name: SONAR_TOKEN   
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
