@@ -37,10 +37,7 @@ export class HomeworkListComponent implements OnInit {
   progressPercentaje: number;
   isFinalyload: boolean[];
 
-  constructor(private homeworkService: HomeworkService, public dialog: MatDialog) {
-    this.homeworkList = this.homeworkService.homeworkList;
-
-
+  constructor(public dialog: MatDialog) {
     this.currentFile = '';
     this.loadIndex = [];
     this.loadAnimation = [];

@@ -1,8 +1,4 @@
-import { StudentGrade } from './../../../interfaces/student-grade';
-import { COMMONS } from './../../../../enums/commons';
-import { MESSAGES } from './../../../../enums/messages-constants';
 import { SnackBarService } from './../../../../services/snack-bar.service';
-import { environment } from './../../../../../environments/environment.prod';
 import { GradeI } from './../../../interfaces/grade';
 import { ConfirmDialogComponent } from '../../../commons/confirm-dialog/confirm-dialog.component';
 import { GradesService } from '../../../../services/grades.service';
@@ -13,7 +9,6 @@ import {
   ElementRef,
   ViewChildren,
   QueryList,
-  Input,
   Inject,
   AfterViewInit,
 } from '@angular/core';
@@ -70,14 +65,6 @@ export class GradesListComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  deleteGrade(index) {
-    this.gradeService.deleteGrade(index);
-    this.refreshTable();
-  }
-
-  modifyGrade(index, grade) {
-    this.gradeService.modifyGrade(index, grade);
-  }
 
   confirmDelete(index) {
     this.confirmDialog('¿Desea eliminar la nota?', index);
@@ -91,11 +78,7 @@ export class GradesListComponent implements AfterViewInit {
       panelClass: 'confirm-dialog',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteGrade(index);
-      }
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openModify(grade) {
