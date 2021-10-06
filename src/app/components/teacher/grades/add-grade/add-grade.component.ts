@@ -160,14 +160,7 @@ export class AddGradeComponent implements AfterViewInit {
     );
   }
 
-  modifyGrade() {
-    if (this.currentGrade.name === '') {
-      // tslint:disable-next-line: no-unused-expression
-      this.currentGrade.name === this.data.name;
-    }
-    this.gradesService.modifyGrade(this.data.index, this.data.grade);
-    this.dialogRef.close();
-  }
+
   onClose() {
     this.dialogRef.close(false);
   }

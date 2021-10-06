@@ -8,7 +8,7 @@ export const COURSES = {
 };
 
 export const GENDER = [
-  {value: 'MALE', viewValue: 'Maculino'},
+  {value: 'MALE', viewValue: 'Masculino'},
   {value: 'FEMALE', viewValue: 'Femenino'},
   {value: 'OTHER', viewValue: 'Otro'},
 

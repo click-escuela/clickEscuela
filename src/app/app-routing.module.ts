@@ -1,4 +1,3 @@
-import { RouteGuard } from './guards/route.guard';
 import { OutReleaseComponent } from './components/commons/out-release/out-release.component';
 import { ReleaseGuard } from './guards/release.guard';
 import { MassAdditionsComponent } from './components/admin/mass-additions/mass-additions.component';
@@ -30,6 +29,7 @@ import { LibraryComponent } from './components/student/library/library.component
 import { GradesResumeComponent } from './components/parent/grades/grades.component';
 import { HomeworkComponent } from './components/teacher/homework/homework.component';
 import { Error401Component } from './components/commons/error-401/error-401.component';
+import { TokenGuard } from './guards/token.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +38,7 @@ const routes: Routes = [
 
   {
     path: 'teacher/menu',
-    component: MenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_TEACHER]'},
+    component: MenuComponent, canActivate: [TokenGuard], data: {role: '[ROLE_TEACHER]'},
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
@@ -51,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/register',
-    component: RegisterComponent, canActivate: [RouteGuard], data: {role: '[ROLE_ADMIN]'},
+    component: RegisterComponent, canActivate: [TokenGuard], data: {role: '[ROLE_ADMIN]'},
 
     children: [
       { path: '', redirectTo: 'accounts', pathMatch: 'full' },
@@ -66,7 +66,7 @@ const routes: Routes = [
   },
   {
     path: 'student/menu',
-    component: StudentMenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_STUDENT]'},
+    component: StudentMenuComponent, canActivate: [TokenGuard], data: {role: '[ROLE_STUDENT]'},
     children: [
       { path: '', redirectTo: 'grades', pathMatch: 'full' },
       { path: 'reportCard', component: ReportCardComponent , canActivate: [ReleaseGuard] },
@@ -79,7 +79,7 @@ const routes: Routes = [
   },
   {
     path: 'parent/menu',
-    component: ParentMenuComponent, canActivate: [RouteGuard], data: {role: '[ROLE_PARENT]'},
+    component: ParentMenuComponent, canActivate: [TokenGuard], data: {role: '[ROLE_PARENT]'},
     children: [
 
       { path: '', redirectTo: 'payment', pathMatch: 'full' },

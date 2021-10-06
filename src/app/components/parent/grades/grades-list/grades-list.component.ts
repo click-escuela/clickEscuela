@@ -48,18 +48,8 @@ export class GradesListComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router
   ) {
-    this.gradesList = new Array();
-    this.gradesList = gradeService.gradesList.filter(
-      (a) => a.student === 'Alberto Sanchez'
-    );
+  
     this.routeLink = this.router.url;
-  }
-
-  applySonFilter() {
-    this.gradesList = this.gradeService.gradesList.filter(
-      (a) => a.student === this.son
-    );
-    this.dataSource = this.gradesList;
   }
 
   ngOnInit() {
@@ -75,7 +65,6 @@ export class GradesListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.applySonFilter();
   }
 
   applyFilter(event: Event) {
@@ -86,15 +75,6 @@ export class GradesListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  deleteGrade(index) {
-    this.gradeService.deleteGrade(index);
-    this.refreshTable();
-  }
-
-  modifyGrade(index, grade) {
-    this.gradeService.modifyGrade(index, grade);
-  }
-
   confirmDelete(index) {
     this.confirmDialog('¿Desea eliminar la nota?', index);
   }
@@ -107,9 +87,6 @@ export class GradesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteGrade(index);
-      }
     });
   }
 

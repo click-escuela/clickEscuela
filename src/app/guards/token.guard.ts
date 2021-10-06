@@ -1,4 +1,4 @@
-import { PROFILE } from './../enums/profiles';
+import { PROFILE } from '../enums/profiles';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RouteGuard implements CanActivate {
+export class TokenGuard implements CanActivate {
   constructor(private router: Router, private activated: ActivatedRoute) {
 
   }

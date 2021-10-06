@@ -181,6 +181,15 @@ font-size: 9.5vw !important;
   fill:#9ACD8D;
 }
 
+.mat-error{
+  font-size: 0.8em;
+}
+
+.mat-error::before{
+content: '*';
+font-size: 1.5em;
+}
+
 .mat-tab-group
 {
   border-radius: 1.5em;
