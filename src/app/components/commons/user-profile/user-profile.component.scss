@@ -1,0 +1,22 @@
+@import "../../../stylings/color-pallete";
+
+
+.circle-user {
+    width: 40%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 2px 1px 13px 1px #00000066;
+    opacity: 0.7;
+    background-color: whitesmoke;
+  }
+  
+  
+  .circle-user:hover {
+    width: 50%;
+    border: 6px solid $custom-blue;
+    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.253);
+    opacity: 1;
+  }
