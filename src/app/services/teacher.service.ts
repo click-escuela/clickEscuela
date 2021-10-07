@@ -19,7 +19,11 @@ export class TeacherService {
     this.authToken =  this.authService.getAuthToken();
   }
 
-  getTeachers(idSchool): Observable<TeacherI> {
+  getTeachers(idSchool): Observable<any> {
+
+    const token = JSON.parse(localStorage.getItem('token')) as AuthToken;
+    const tokenParse = token.token;
+    
     const path = environment.TEACHERS_URL.replace('{schoolId}', idSchool);
     return this.connector.get<any>(path, {headers: this.authToken});
   }
