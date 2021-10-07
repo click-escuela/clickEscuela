@@ -12,6 +12,7 @@ import { COMMONS } from 'src/app/enums/commons';
 import { MESSAGES } from 'src/app/enums/messages-constants';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { environment } from 'src/environments/environment';
+import { FORM } from 'src/app/enums/form-controls';
 
 @Component({
   selector: 'app-edit-teacher',
@@ -38,6 +39,9 @@ export class EditTeacherComponent implements OnInit {
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
     // Fin de chips
 
+    teacherControl = FORM.TEACHER_CONTROL;
+
+
   constructor(
     public dialogRef: MatDialogRef<EditTeacherComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -48,6 +52,9 @@ export class EditTeacherComponent implements OnInit {
       }
 
       this.typeIDs = ['DNI', 'CI', 'LE', 'LC'];
+      data.teacher.type = '';
+      data.teacher.gender = '';
+      this.teacherControl.setValue(data.teacher);
   }
 }
 

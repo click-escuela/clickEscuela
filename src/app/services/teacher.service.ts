@@ -1,3 +1,4 @@
+import { AuthToken } from './../components/interfaces/auth-token';
 import { TeacherI } from './../components/interfaces/teacher';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
@@ -57,9 +58,13 @@ export class TeacherService {
     return this.teachersList;
   }
 
-  getTeachers(idSchool): Observable<TeacherI> {
+  getTeachers(idSchool): Observable<any> {
+
+    const token = JSON.parse(localStorage.getItem('token')) as AuthToken;
+    const tokenParse = token.token;
+    
     const path = environment.TEACHERS_URL.replace('{schoolId}', idSchool);
-    return this.connector.get<any>(path);
+    return this.connector.get<any>(path, {headers: {Authorization: `Bearer ${tokenParse}`}});
   }
 
   modifyTeacher(teacher: TeacherI): Observable<any> {

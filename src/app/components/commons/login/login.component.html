@@ -104,7 +104,7 @@
           <div class="row justify-content-center">
       <mat-form-field class="example-full-width">
         <mat-label>Nombre de usuario</mat-label>
-        <input formControlName="user" type="email"  matInput placeholder="Ex. pat@example.com" />
+        <input (keyup.enter)="login._elementRef.nativeElement.click();" formControlName="user" type="email"  matInput placeholder="Ex. pat@example.com" />
       </mat-form-field>
       <mat-error *ngIf="loginControl.get('user').touched && loginControl.get('user').errors">
         El Usuario es requerido
@@ -113,7 +113,7 @@
      <div class="row justify-content-center">
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input formControlName="password" [type]="viewPassword ? 'text' : 'password'" matInput placeholder="Ex. pat@example.com" />
+        <input (keyup.enter)="login._elementRef.nativeElement.click();" formControlName="password" [type]="viewPassword ? 'text' : 'password'" matInput placeholder="Ex. pat@example.com" />
         <mat-icon class="password-saver" [ngClass]="{'view': viewPassword, 'no-view':!viewPassword}" svgIcon="password-saver" (click)="toggleViewPassword()"></mat-icon>
       </mat-form-field>
       
@@ -128,7 +128,7 @@
     
 
     <div [ngClass]="{'show': loginControl.valid}" class="login-button row justify-content-center mt-4">
-        <button [disabled]="!loginControl.valid"  (click)="setSession()" mat-raised-button color="primary">Ingresar</button>
+        <button  [disabled]="!loginControl.valid"  (click)="setSession()" mat-raised-button color="primary" #login>Ingresar</button>
 
     </div>  
 
@@ -157,7 +157,7 @@
       <a (click)="closeSession()">¿No eres tu? Ingresa con otra cuenta</a>
 
       <div class="row justify-content-center mt-4">
-        <button (click)="setSessionToken()" mat-raised-button color="primary">Ingresar</button>
+        <button  (click)="setSessionToken()" mat-raised-button color="primary">Ingresar</button>
 
     </div> 
 
