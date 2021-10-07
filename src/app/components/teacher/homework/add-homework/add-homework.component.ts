@@ -98,12 +98,6 @@ export class AddHomeworkComponent implements OnInit {
     return this.homeworkService;
   }
 
-  modifyHomework() {
-
-    this.homeworkService.modifyHomework(this.data.index, this.data.homework);
-    this.dialogRef.close();
-  }
-
   onClose() {
     this.dialogRef.close(false);
   }

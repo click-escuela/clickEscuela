@@ -30,6 +30,9 @@
     background-color: transparent;
     transition: 0.5s ease-in-out;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .action-item:hover

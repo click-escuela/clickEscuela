@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,33 +10,36 @@ import { AddHomeworkComponent } from '../add-homework/add-homework.component';
 @Component({
   selector: 'app-homework-list',
   templateUrl: './homework-list.component.html',
-  styleUrls: ['./homework-list.component.scss']
+  styleUrls: ['./homework-list.component.scss'],
 })
 export class HomeworkListComponent implements OnInit {
-
   displayedColumns: string[];
   dataSource: any;
-
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @ViewChild(MatSort) sort: MatSort;
   homeworkList = [];
 
-  constructor(private homeworkService: HomeworkService, public dialog: MatDialog) {
-    this.homeworkList = homeworkService.homeworkList;
-  }
+  constructor(
+    private homeworkService: HomeworkService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
-    this.displayedColumns = ['name', 'description', 'deliveryDate', 'matter', 'actions'];
-
+    this.displayedColumns = [
+      'name',
+      'description',
+      'deliveryDate',
+      'matter',
+      'actions',
+    ];
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.homeworkList;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   refreshTable() {
@@ -49,44 +51,21 @@ export class HomeworkListComponent implements OnInit {
   }
 
   confirmDialog(input, index) {
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent,
-      {
-        data: input,
-        width: '260px',
-        height: '150px'
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.deleteHomework(index);
-
-      }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: input,
+      width: '260px',
+      height: '150px',
     });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openModify(index, homework) {
-    const dialogRef = this.dialog.open(AddHomeworkComponent,
-      {
-
-        data: { homework, index },
-        width: '80%',
-        height: '75%'
-
-      }
-
-
-    );
-
-    // dialogRef.afterClosed().subscribe(res =>{this.refreshAllChildrens()})
-
-  }
-
-  deleteHomework(index) {
-
-    this.homeworkService.deleteHomework(index);
-    this.refreshTable();
+    const dialogRef = this.dialog.open(AddHomeworkComponent, {
+      data: { homework, index },
+      width: '80%',
+      height: '75%',
+    });
   }
 
   applyFilter(event: Event) {
@@ -97,5 +76,4 @@ export class HomeworkListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

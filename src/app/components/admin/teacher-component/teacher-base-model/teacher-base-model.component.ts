@@ -21,7 +21,6 @@ import { ContactInfoComponent } from 'src/app/components/commons/contact-info/co
 export class TeacherBaseModelComponent implements OnInit {
   displayedColumns: string[];
   dataSource: any;
-  teachersArray: Teacher[] = new Array(5);
   loadTeacherService = false;
   messageInfo = 'Cargando Lista de profesores';
   loadError = false;
@@ -37,7 +36,6 @@ export class TeacherBaseModelComponent implements OnInit {
     public dialogRef: MatDialogRef<TeacherBaseModelComponent>,
     public snackbar: SnackBarService
   ) {
-    this.teachersArray = this.teachersService.teachersList;
   }
 
   onClose() {
@@ -56,7 +54,7 @@ export class TeacherBaseModelComponent implements OnInit {
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.teachersService.teachersList;
+    this.dataSource.data = [];
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -119,10 +117,6 @@ export class TeacherBaseModelComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.teachersService.deleteTeacher(index);
-        this.getAllTeachers();
-      }
     });
   }
 

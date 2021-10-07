@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { STATUS } from './../components/admin/account/account-list/account-status';
 import { environment } from './../../environments/environment';
 import { Parent } from '../models/parent';
@@ -68,12 +69,18 @@ export class studentService {
 
   studentsArray: Student[];
   editCurrentStudent: Student;
+  authToken: any;
 
 
   constructor(
     private pipe: DecimalPipe,
-    private connector: HttpClient) {
-    this._search$.pipe(
+    private connector: HttpClient,
+    private authService: AuthService) {
+
+      this.authToken = this.authService.getAuthToken();
+
+
+      this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
       switchMap(() => this._search()),
@@ -82,9 +89,9 @@ export class studentService {
     ).subscribe(result => {
     });
 
-    this._search$.next();
-    this.studentsArray = [];
-    this.studentsArray[0] = new Student(
+      this._search$.next();
+      this.studentsArray = [];
+      this.studentsArray[0] = new Student(
       '1',
       'OSCAR',
       'UMBERT',
@@ -97,7 +104,7 @@ export class studentService {
       '1566666666',
       'something@gmail.com'
     );
-    this.studentsArray[1] = new Student(
+      this.studentsArray[1] = new Student(
       '2',
       'CLAUDIO',
       'GOMEZ',
@@ -110,7 +117,7 @@ export class studentService {
       '1566666666',
       'something@gmail.com'
     );
-    this.studentsArray[2] = new Student(
+      this.studentsArray[2] = new Student(
       '3',
       'FELIPE',
       'ROMERO',
@@ -123,7 +130,7 @@ export class studentService {
       '1566666666',
       'something@gmail.com'
     );
-    this.studentsArray[3] = new Student(
+      this.studentsArray[3] = new Student(
       '4',
       'OMAR',
       'GOMEZ',
@@ -136,7 +143,7 @@ export class studentService {
       '1566666666',
       'something@gmail.com'
     );
-    this.studentsArray[4] = new Student(
+      this.studentsArray[4] = new Student(
       '5',
       'MARTA',
       'GIMENEZ',
@@ -149,7 +156,7 @@ export class studentService {
       '1566666666',
       'something@gmail.com'
     );
-    this.studentsArray[5] = new Student(
+      this.studentsArray[5] = new Student(
       '6',
       'MARIANA',
       'FERREIRA',
@@ -163,16 +170,16 @@ export class studentService {
       'something@gmail.com'
     );
 
-    const parent = new Parent('12', 'Daniel', 'Perez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
-    const parent2 = new Parent('25', 'Humberto', 'Gomez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
-    const parent3 = new Parent('68', 'Osvaldo', 'Ferreira', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+      const parent = new Parent('12', 'Daniel', 'Perez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+      const parent2 = new Parent('25', 'Humberto', 'Gomez', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
+      const parent3 = new Parent('68', 'Osvaldo', 'Ferreira', new Date(), 37844777, 'Calle falsa 123', '1544444444', 'alguien@hotmail.com');
 
-    this.studentsArray[0].parent1 = parent;
-    this.studentsArray[1].parent1 = parent2;
-    this.studentsArray[2].parent1 = parent3;
-    this.studentsArray[3].parent1 = parent2;
-    this.studentsArray[4].parent1 = parent2;
-    this.studentsArray[5].parent1 = parent3;
+      this.studentsArray[0].parent1 = parent;
+      this.studentsArray[1].parent1 = parent2;
+      this.studentsArray[2].parent1 = parent3;
+      this.studentsArray[3].parent1 = parent2;
+      this.studentsArray[4].parent1 = parent2;
+      this.studentsArray[5].parent1 = parent3;
   }
 
   get students$() { return this._students$.asObservable(); }
@@ -239,22 +246,22 @@ export class studentService {
     environment.GET_STUDENT_URL
     .replace('{schoolId}', idSchool)
     .replace('{fullDetail}', fulldetail + '');
-    return this.connector.get<any>(path);
+    return this.connector.get<any>(path, {headers: this.authToken});
   }
 
   getStudentsBills(idSchool: string, studentId: string): Observable<Bill[]> {
     const path =
     environment.BILLS_URL
     .replace('{schoolId}', idSchool)
-    .replace('{studentId}', studentId)
-    return this.connector.get<any>(path);
+    .replace('{studentId}', studentId);
+    return this.connector.get<any>(path, {headers: this.authToken});
   }
 
   addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
     const path =
     environment.POST_STUDENT_URL
     .replace('{schoolId}', idSchool);
-    return this.connector.post<StudentI>(path, student);
+    return this.connector.post<StudentI>(path, student, {headers: this.authToken});
   }
 
   uploadBulkFile(idSchool: string, file: File): Observable<HttpEvent<any>> {
@@ -270,6 +277,7 @@ export class studentService {
     const options = {
       params,
       reportProgress: true,
+      headers: this.authToken
     };
 
     const req = new HttpRequest('POST', path, formData, options);
@@ -280,6 +288,6 @@ export class studentService {
     const path =
     environment.POST_STUDENT_URL
     .replace('{schoolId}', idSchool);
-    return this.connector.put<StudentI>(path, student);
+    return this.connector.put<StudentI>(path, student, {headers: this.authToken});
   }
 }
