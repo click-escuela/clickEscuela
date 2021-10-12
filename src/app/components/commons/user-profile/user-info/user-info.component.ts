@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class UserInfoComponent implements OnInit {
 
   credential: any;
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
-    this.credential = JSON.parse(localStorage.getItem('token'))
+    this.credential = JSON.parse(localStorage.getItem('token'));
+  }
+
+  closeSession() {
+    localStorage.clear();
+    this.route.navigate(['/login/']);
+
   }
 
 }
