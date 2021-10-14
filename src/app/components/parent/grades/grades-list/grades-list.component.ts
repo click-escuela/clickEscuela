@@ -68,7 +68,22 @@ export class GradesListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    console.log(this.gradesList)
+    const grade: GradeI = {
+    studentId: '',
+    name: 'Mocked description',
+    subject: 'Mocked subject',
+    type: '',
+    number: 10,
+    courseId: '',
+    schoolId: '',
+    };
+
+
+    if (this.gradesList.length === 0) {
+      this.gradesList.push(grade);
+    }
+
+    console.log(this.gradesList);
 
   }
 
