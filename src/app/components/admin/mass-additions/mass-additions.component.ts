@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from '@angular/common/http';
 import { studentService } from './../../../services/student.service';
 import { LoadDetailsComponent } from './load-details/load-details.component';
@@ -19,7 +20,8 @@ export class MassAdditionsComponent implements OnInit {
 
 
   @ViewChild(LoadDetailsComponent) details: LoadDetailsComponent;
-  constructor(private iconService: IconGeneratorService, private snackBar: SnackBarService, private studentsService: studentService) { }
+  constructor(private iconService: IconGeneratorService, private snackBar: SnackBarService, private studentsService: studentService,
+    private auth: AuthService) { }
 
   ngOnInit() {
   }
@@ -30,8 +32,8 @@ export class MassAdditionsComponent implements OnInit {
     this.fileName = $file.name;
 
 
-    this.studentsService.uploadBulkFile('12345', $file).subscribe(
-        (result) => {
+    this.studentsService.uploadBulkFile(this.auth.getSchoolId(), $file).subscribe(
+        result => {
           console.log(result);
           if (result.type === HttpEventType.UploadProgress) {
             const percentDone = Math.round(100 * result.loaded / result.total);
@@ -56,6 +58,7 @@ export class MassAdditionsComponent implements OnInit {
           }
 
         }, error => {
+           console.log(error)
            this.snackBar.showSnackBar (
                 'Se produjo un error al intentar cargar el archivo',
                 COMMONS.SNACK_BAR.ACTION.ACCEPT,

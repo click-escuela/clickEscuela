@@ -14,7 +14,7 @@ import { SortColumn, SortDirection } from '../components/directives/sortable.dir
 import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { StudentI } from '../components/interfaces/student';
 import { Bill } from '../components/interfaces/bill';
 
@@ -273,11 +273,12 @@ export class studentService {
     formData.append('file', file);
 
     const params = new HttpParams();
+    const headers = new HttpHeaders().set('Authrization', JSON.stringify({headers: this.authToken}));
 
     const options = {
       params,
       reportProgress: true,
-      headers: this.authToken
+      headers
     };
 
     const req = new HttpRequest('POST', path, formData, options);
