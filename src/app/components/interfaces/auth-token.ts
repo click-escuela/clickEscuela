@@ -4,4 +4,5 @@ export interface AuthToken {
     token: string;
     schoolId: string;
     name: string;
+
 }
