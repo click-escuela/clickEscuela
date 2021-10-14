@@ -17,33 +17,41 @@ import { SCHOOL } from 'src/environments/school-data';
 })
 export class GradesService {
   authToken: any;
+  schoolId: any;
 
 
 
   constructor(private connector: HttpClient, private auth: AuthService) {
     this.authToken =  this.auth.getAuthToken();
+    this.schoolId = this.auth.getSchoolId();
+
 
   }
 
   getGrades(idSchool: string): Observable<GradeI[]> {
-    const path = environment.GRADES_URL.replace('{schoolId}', idSchool);
+    const path = environment.GRADES_URL.replace('{schoolId}', this.schoolId);
     return this.connector.get<GradeI[]>(path, {headers: this.authToken});
   }
 
   getGradeByStudent(schoolId: string, studentId: string): Observable<GradeI[]> {
 
-    const path = environment.STUDENT_URL.replace('{schoolId}', schoolId).replace('{studentId}', studentId);
+    const path = environment.STUDENT_URL.replace('{schoolId}', this.schoolId).replace('{studentId}', studentId);
+    return this.connector.get<GradeI[]>(path, {headers: this.authToken});
+  }
+
+  getGradesByParent(parentId:string) {
+    const path = environment.PARENT_GRADE_URL.replace('{schoolId}', this.schoolId).replace('{parentId}', parentId);
     return this.connector.get<GradeI[]>(path, {headers: this.authToken});
   }
 
   getGradesByCourse(schoolId: string, teacherId: string): Observable<CourseGrade[]> {
 
-    const path = environment.COURSES_URL.replace('{schoolId}', schoolId).replace('{teacherId}', teacherId);
+    const path = environment.COURSES_URL.replace('{schoolId}', this.schoolId).replace('{teacherId}', teacherId);
     return this.connector.get<CourseGrade[]>(path, {headers: this.authToken});
   }
 
   addGrade(grade: GradeI): Observable<GradeI> {
-    const path = environment.GRADES_URL.replace('{schoolId}', SCHOOL.ID);
+    const path = environment.GRADES_URL.replace('{schoolId}', this.schoolId);
     return this.connector.post<GradeI>(path, grade, {headers: this.authToken});
   }
 

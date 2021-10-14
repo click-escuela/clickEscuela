@@ -136,9 +136,10 @@ export class StudentBaseModelComponent implements OnInit {
 
     this.reload = true;
     this.serviceRequest =
-    this.studentsService.getStudents(false, this.data).subscribe(
+    this.studentsService.getStudents(false).subscribe(
       data => {
 
+        console.log(data)
         setTimeout(() => {
             this.dataSource.data = data;
             if (JSON.stringify(this.dataSource.data) === JSON.stringify(this.studentsArray)) {

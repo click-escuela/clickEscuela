@@ -32,7 +32,7 @@ export class MassAdditionsComponent implements OnInit {
     this.fileName = $file.name;
 
 
-    this.studentsService.uploadBulkFile(this.auth.getSchoolId(), $file).subscribe(
+    this.studentsService.uploadBulkFile($file).subscribe(
         result => {
           console.log(result);
           if (result.type === HttpEventType.UploadProgress) {
