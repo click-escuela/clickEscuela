@@ -1,3 +1,4 @@
+import { GradeI } from './../../../interfaces/grade';
 import { Router } from '@angular/router';
 
 import {
@@ -17,6 +18,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { GradesService } from 'src/app/services/grades.service';
 import { ConfirmDialogComponent } from 'src/app/components/commons/confirm-dialog/confirm-dialog.component';
 import { AddGradeComponent } from 'src/app/components/teacher/grades/add-grade/add-grade.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { COMMONS } from 'src/app/enums/commons';
 
 @Component({
   selector: 'app-grades-list',
@@ -41,14 +45,16 @@ export class GradesListComponent implements OnInit {
 
   public selectedIndexBinding = 0;
 
-  gradesList: Grade[];
+  gradesList: GradeI[];
 
   constructor(
     private gradeService: GradesService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    private snackbar: SnackBarService
   ) {
-  
+
     this.routeLink = this.router.url;
   }
 
@@ -64,7 +70,19 @@ export class GradesListComponent implements OnInit {
     this.dataSource.data = this.gradesList;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.getGrades();
 
+  }
+
+  getGrades() {
+    this.gradeService.getGradeByStudent(this.auth.getSchoolId(),'156746867' ).subscribe(
+      result => {this.gradesList = result;
+                 this.snackbar.showSnackBar('Se obtuvieron las siguientes listas de notas',
+                 COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
+       },
+      error => { this.snackbar.showSnackBar('No se pudieron obtener las notas de los correspondientes estudiantes',
+       COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR); }
+    );
   }
 
   applyFilter(event: Event) {

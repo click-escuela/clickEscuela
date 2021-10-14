@@ -13,20 +13,7 @@ menu {
   color: white;
 }
 
-.circle-user {
-  width: 40%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid white;
-  transition: 0.3s ease-in-out;
-  cursor: pointer;
-}
 
-.circle-user:hover {
-  width: 50%;
-  border: 6px solid $custom-blue;
-  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.253);
-}
 
 .home-button {
   //background-color: white;
@@ -207,9 +194,7 @@ menu {
     text-align: center !important;
   }
 
-  #user-information {
-    display: none;
-  }
+ 
   #notification-button {
     position: fixed;
     width: 40px;
