@@ -14,7 +14,7 @@ import { SortColumn, SortDirection } from '../components/directives/sortable.dir
 import { Observable } from 'rxjs/internal/Observable';
 import { PipeTransform, Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { StudentI } from '../components/interfaces/student';
 import { Bill } from '../components/interfaces/bill';
 
@@ -70,6 +70,7 @@ export class studentService {
   studentsArray: Student[];
   editCurrentStudent: Student;
   authToken: any;
+  schoolId: any;
 
 
   constructor(
@@ -78,6 +79,7 @@ export class studentService {
     private authService: AuthService) {
 
       this.authToken = this.authService.getAuthToken();
+      this.schoolId = this.authService.getSchoolId();
 
 
       this._search$.pipe(
@@ -241,38 +243,41 @@ export class studentService {
 
   // Aca incia el codigo para consumo de api
 
-  getStudents(fulldetail: boolean, idSchool: string): Observable<any> {
+  getStudents(fulldetail: boolean): Observable<any> {
     const path =
     environment.GET_STUDENT_URL
-    .replace('{schoolId}', idSchool)
+    .replace('{schoolId}', this.schoolId)
     .replace('{fullDetail}', fulldetail + '');
     return this.connector.get<any>(path, {headers: this.authToken});
   }
 
-  getStudentsBills(idSchool: string, studentId: string): Observable<Bill[]> {
+  getStudentsBills(studentId: string): Observable<Bill[]> {
     const path =
     environment.BILLS_URL
-    .replace('{schoolId}', idSchool)
+    .replace('{schoolId}', this.schoolId)
     .replace('{studentId}', studentId);
     return this.connector.get<any>(path, {headers: this.authToken});
   }
 
-  addStudentPost(student: StudentI, idSchool: string): Observable<StudentI> {
+  addStudentPost(student: StudentI): Observable<StudentI> {
     const path =
     environment.POST_STUDENT_URL
-    .replace('{schoolId}', idSchool);
+    .replace('{schoolId}', this.schoolId);
     return this.connector.post<StudentI>(path, student, {headers: this.authToken});
   }
 
-  uploadBulkFile(idSchool: string, file: File): Observable<HttpEvent<any>> {
+  uploadBulkFile(file: File): Observable<HttpEvent<any>> {
     const path =
     environment.EXCEL_URL
-    .replace('{schoolId}', idSchool);
+    .replace('{schoolId}',this.schoolId);
 
     const formData = new FormData();
     formData.append('file', file);
 
     const params = new HttpParams();
+    const headers = new HttpHeaders().set('Authorization',JSON.stringify({headers: this.authToken}))
+
+    console.log(headers)
 
     const options = {
       params,
@@ -284,10 +289,18 @@ export class studentService {
     return this.connector.request(req);
   }
 
-  editStudentPut(student: StudentI, idSchool: string): Observable<StudentI> {
+  editStudentPut(student: StudentI): Observable<StudentI> {
     const path =
     environment.POST_STUDENT_URL
-    .replace('{schoolId}', idSchool);
+    .replace('{schoolId}', this.schoolId);
     return this.connector.put<StudentI>(path, student, {headers: this.authToken});
   }
+
+  // getGradesByParent(){
+  //   const path =
+  //   environment.GET_STUDENT_URL
+  //   .replace('{schoolId}', this.schoolId)
+  //   .replace('{fullDetail}', fulldetail + '');
+  //   return this.connector.get<any>(path, {headers: this.authToken});
+  // }
 }

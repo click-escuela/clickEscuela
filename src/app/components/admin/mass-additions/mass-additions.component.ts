@@ -30,8 +30,8 @@ export class MassAdditionsComponent implements OnInit {
     this.fileName = $file.name;
 
 
-    this.studentsService.uploadBulkFile('12345', $file).subscribe(
-        (result) => {
+    this.studentsService.uploadBulkFile($file).subscribe(
+        result => {
           console.log(result);
           if (result.type === HttpEventType.UploadProgress) {
             const percentDone = Math.round(100 * result.loaded / result.total);

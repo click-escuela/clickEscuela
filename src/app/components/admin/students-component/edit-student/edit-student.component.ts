@@ -81,7 +81,7 @@ export class EditStudentComponent implements OnInit {
 
   editStudent() {
     this.data.student.schoolId = this.data.schoolId;
-    this.studentsService.editStudentPut(this.data.student, this.data.schoolId).subscribe(
+    this.studentsService.editStudentPut(this.data.student).subscribe(
       data => {
         this.snackbarService.showSnackBar(MESSAGES.STUDENT.PUT.SUCCES, COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
         this.dialogRef.close(false);

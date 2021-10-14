@@ -95,7 +95,7 @@ export class PaymentsDetailComponent implements OnInit {
   }
 
   getBills() {
-    this.studentsService.getStudentsBills('12345', this.data.id).subscribe(
+    this.studentsService.getStudentsBills(this.data.id).subscribe(
       result => {
         this.bills = result;
         this.dataSource.data = result;

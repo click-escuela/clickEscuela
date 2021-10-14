@@ -45,14 +45,11 @@ export class GradesListComponent implements OnInit {
 
   public selectedIndexBinding = 0;
 
-  gradesList: GradeI[];
+  @Input() gradesList: GradeI[];
 
   constructor(
-    private gradeService: GradesService,
     public dialog: MatDialog,
     private router: Router,
-    private auth: AuthService,
-    private snackbar: SnackBarService
   ) {
 
     this.routeLink = this.router.url;
@@ -70,20 +67,12 @@ export class GradesListComponent implements OnInit {
     this.dataSource.data = this.gradesList;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.getGrades();
+
+    console.log(this.gradesList)
 
   }
 
-  getGrades() {
-    this.gradeService.getGradeByStudent(this.auth.getSchoolId(),'156746867' ).subscribe(
-      result => {this.gradesList = result;
-                 this.snackbar.showSnackBar('Se obtuvieron las siguientes listas de notas',
-                 COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.SUCCES);
-       },
-      error => { this.snackbar.showSnackBar('No se pudieron obtener las notas de los correspondientes estudiantes',
-       COMMONS.SNACK_BAR.ACTION.ACCEPT, COMMONS.SNACK_BAR.TYPE.ERROR); }
-    );
-  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
