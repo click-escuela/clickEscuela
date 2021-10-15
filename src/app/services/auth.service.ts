@@ -28,6 +28,13 @@ getAuthToken() {
   return {Authorization: `Bearer ${tokenParse}`}
 }
 
+  getAuthTokenText() {
+  const token = JSON.parse(localStorage.getItem('token')) as AuthToken;
+  console.log(token.token)
+  return token.token;
+  
+}
+
 getSchoolId() {
   const token = JSON.parse(localStorage.getItem('token')) as AuthToken;
   return token.schoolId;

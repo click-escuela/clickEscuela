@@ -4,7 +4,7 @@ export const environment = {
   teacherId: '8d9c4552-260f-4c27-946f-dcd98d86dfd6',
   GET_STUDENT_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/' + '{schoolId}' + '/student?fullDetail=' + '{fullDetail}',
   POST_STUDENT_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/' + '{schoolId}' + '/student',
-  EXCEL_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/{schoolId}/excel',
+  EXCEL_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/{schoolId}/processor',
   GRADES_URL: 'http://3.141.92.8:8093/click-escuela/teacher-core/school/{schoolId}/grade',
   TEACHERS_URL: 'http://3.141.92.8:8093/click-escuela/admin-core/school/{schoolId}/teacher',
   ACTIVITY_URL: 'http://3.141.92.8:8093/click-escuela/teacher-core/school/{schoolId}/activity',

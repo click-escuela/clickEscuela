@@ -35,6 +35,7 @@ export class DragAndDropComponent implements OnInit {
   }
 
   prepareFilesList(files: Array<any>) {
+    console.log(files)
     this.fileRejected = false;
     for (const item of files) {
       if (item.type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {

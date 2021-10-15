@@ -269,20 +269,21 @@ export class studentService {
   uploadBulkFile(file: File): Observable<HttpEvent<any>> {
     const path =
     environment.EXCEL_URL
-    .replace('{schoolId}',this.schoolId);
+    .replace('{schoolId}', this.schoolId);
 
     const formData = new FormData();
     formData.append('file', file);
 
     const params = new HttpParams();
-    const headers = new HttpHeaders().set('Authorization',JSON.stringify({headers: this.authToken}))
+    const tokenParse = this.authService.getAuthTokenText();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenParse}`);
 
-    console.log(headers)
+    console.log(headers);
 
     const options = {
       params,
       reportProgress: true,
-      headers: this.authToken
+      headers
     };
 
     const req = new HttpRequest('POST', path, formData, options);
