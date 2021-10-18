@@ -162,11 +162,25 @@ font-size: 9.5vw !important;
 .coming-soon::before{
   top: 32px;
 }
-
-
-
 }
 
+#user-information {
+  position: fixed;
+  width: 200px;
+  right: 0;
+  bottom: 0;
+}
+.mat-bottom-sheet-container{
+  background: url(./assets/images/background.png);
+  background-color: whitesmoke;
+}
+#user-information .opened{
+  transform: translateY(200px);
+}
+
+.user-name{
+  color: $custom-blue;
+}
 
 .svg-content svg {
   width: 40px;

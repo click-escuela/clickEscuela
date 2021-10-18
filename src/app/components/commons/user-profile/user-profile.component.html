@@ -1,0 +1,8 @@
+<div class="row" id="user-information" (click)='openBottomSheet()'  [class]="userAvatar">
+  <div class="col-12 container-icon">
+    <div class="user-image-container text-center mb-2">
+      <img class="image-fluid circle-user" src="./assets/images/user.svg" alt="" />
+    </div>
+    <p class="user-name text-center">{{username | mask: 'capitalize'}}</p>
+  </div>
+</div>

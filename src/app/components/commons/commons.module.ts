@@ -1,3 +1,4 @@
+import { UserInfoComponent } from './user-profile/user-info/user-info.component';
 
 import { TextMaskPipe } from './../../pipes/text-mask.pipe';
 import { PaysCentralComponent } from './pays-central/pays-central.component';
@@ -32,7 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -48,6 +49,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatRadioModule} from '@angular/material/radio';
 import { Error401Component } from './error-401/error-401.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+
 
 
 
@@ -92,7 +96,9 @@ import { Error401Component } from './error-401/error-401.component';
     MatChipsModule,
     MatSelectModule,
     RouterModule,
-    MatRadioModule
+    MatRadioModule,
+    MatBottomSheetModule
+    
   ],
   declarations: [
     CalendarComponent,
@@ -109,7 +115,9 @@ import { Error401Component } from './error-401/error-401.component';
     PaysCentralComponent,
     TextMaskPipe,
     OutReleaseComponent,
-    Error401Component
+    Error401Component,
+    UserProfileComponent,
+    UserInfoComponent
     
   ],
   exports: [
@@ -126,7 +134,9 @@ import { Error401Component } from './error-401/error-401.component';
     PaysCentralComponent,
     TextMaskPipe,
     OutReleaseComponent,
-    Error401Component
+    Error401Component,
+    UserProfileComponent,
+    UserInfoComponent
     
   ],
 })
