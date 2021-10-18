@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -18,7 +19,6 @@ export class UserInfoComponent implements OnInit {
   closeSession() {
     localStorage.clear();
     this.route.navigate(['/login/']);
-
   }
 
 }
