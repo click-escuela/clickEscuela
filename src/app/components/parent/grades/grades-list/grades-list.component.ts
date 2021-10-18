@@ -1,3 +1,4 @@
+import { GradeI } from './../../../interfaces/grade';
 import { Router } from '@angular/router';
 
 import {
@@ -17,6 +18,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { GradesService } from 'src/app/services/grades.service';
 import { ConfirmDialogComponent } from 'src/app/components/commons/confirm-dialog/confirm-dialog.component';
 import { AddGradeComponent } from 'src/app/components/teacher/grades/add-grade/add-grade.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { COMMONS } from 'src/app/enums/commons';
 
 @Component({
   selector: 'app-grades-list',
@@ -41,14 +45,13 @@ export class GradesListComponent implements OnInit {
 
   public selectedIndexBinding = 0;
 
-  gradesList: Grade[];
+  @Input() gradesList: GradeI[];
 
   constructor(
-    private gradeService: GradesService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) {
-  
+
     this.routeLink = this.router.url;
   }
 
@@ -65,7 +68,26 @@ export class GradesListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
+    const grade: GradeI = {
+    studentId: '',
+    name: 'Mocked description',
+    subject: 'Mocked subject',
+    type: '',
+    number: 10,
+    courseId: '',
+    schoolId: '',
+    };
+
+
+    if (this.gradesList.length === 0) {
+      this.gradesList.push(grade);
+    }
+
+    console.log(this.gradesList);
+
   }
+
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

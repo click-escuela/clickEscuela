@@ -14,27 +14,25 @@ export class TeacherService {
 
 
   authToken: any;
+  schoolId: any;
 
   constructor(public connector: HttpClient, public authService: AuthService ) {
     this.authToken =  this.authService.getAuthToken();
+    this.schoolId = this.authService.getSchoolId();
   }
 
-  getTeachers(idSchool): Observable<any> {
-
-    const token = JSON.parse(localStorage.getItem('token')) as AuthToken;
-    const tokenParse = token.token;
-    
-    const path = environment.TEACHERS_URL.replace('{schoolId}', idSchool);
+  getTeachers(idSchool): Observable<TeacherI> {
+    const path = environment.TEACHERS_URL.replace('{schoolId}', this.schoolId);
     return this.connector.get<any>(path, {headers: this.authToken});
   }
 
   modifyTeacher(teacher: TeacherI): Observable<any> {
-    const path = environment.TEACHERS_URL.replace('{schoolId}', environment.schoolId);
+    const path = environment.TEACHERS_URL.replace('{schoolId}', this.schoolId);
     return this.connector.put<any>(path, teacher, {headers: this.authToken});
   }
 
   addTeacher(teacher: TeacherI): Observable<any> {
-    const path = environment.TEACHERS_URL.replace('{schoolId}', environment.schoolId);
+    const path = environment.TEACHERS_URL.replace('{schoolId}', this.schoolId);
     return this.connector.post<any>(path, teacher, {headers: this.authToken});
   }
 

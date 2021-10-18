@@ -83,7 +83,7 @@ export class AccountListComponent implements OnInit {
   getAccounts() {
     this.loadAccounts = false;
     this.loadError = false;
-    this.studentsService.getStudents(true, '12345').subscribe(
+    this.studentsService.getStudents(true).subscribe(
       result => {
         this.accounts = result;
         this.dataSource.data = result;

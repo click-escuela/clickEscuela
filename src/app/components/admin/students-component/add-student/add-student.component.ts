@@ -172,7 +172,7 @@ export class AddStudentComponent implements OnInit {
     
 
     console.log(this.currentStudent);
-    this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent, this.schoolId).subscribe(
+    this.serviceRequest = this.studentsService.addStudentPost(this.currentStudent).subscribe(
       data => {
         setTimeout(() => {
           this.addingStudent = false;
