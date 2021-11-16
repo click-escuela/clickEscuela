@@ -275,16 +275,15 @@ export class studentService {
     formData.append('file', file);
 
     const params = new HttpParams();
-    const tokenParse = this.authService.getAuthTokenText();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenParse}`);
-
-    console.log(headers);
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.getAuthTokenText());
 
     const options = {
       params,
       reportProgress: true,
       headers
     };
+
+    console.log(options);
 
     const req = new HttpRequest('POST', path, formData, options);
     return this.connector.request(req);

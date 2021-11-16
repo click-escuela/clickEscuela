@@ -80,8 +80,7 @@ export class LoginComponent implements OnInit {
     const credential = JSON.parse(localStorage.getItem('token'));
     this.currentSession = credential;
     const authDate = moment(credential.creationDate);
-    console.log(authDate);
-
+    
     if (authDate.isBefore(new Date(), 'minutes')) {
 
       this.validCredentials = false;
@@ -134,11 +133,7 @@ export class LoginComponent implements OnInit {
     }, 3000);
     }
 
-  }
-
-  showHolis(holis) {
-    console.log(holis);
-  }
+  } 
 
   setSession() {
     this.checkLogin = true;

@@ -1,4 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
+import { ProcessorService } from './../../../services/processor.service';
 import { HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from '@angular/common/http';
 import { studentService } from './../../../services/student.service';
 import { LoadDetailsComponent } from './load-details/load-details.component';
@@ -20,8 +21,10 @@ export class MassAdditionsComponent implements OnInit {
 
 
   @ViewChild(LoadDetailsComponent) details: LoadDetailsComponent;
-  constructor(private iconService: IconGeneratorService, private snackBar: SnackBarService, private studentsService: studentService,
-    private auth: AuthService) { }
+  constructor(
+    private iconService: IconGeneratorService,
+    private snackBar: SnackBarService,
+    private studentsService: studentService) { }
 
   ngOnInit() {
   }
@@ -34,14 +37,11 @@ export class MassAdditionsComponent implements OnInit {
 
     this.studentsService.uploadBulkFile($file).subscribe(
         result => {
-          console.log(result);
           if (result.type === HttpEventType.UploadProgress) {
             const percentDone = Math.round(100 * result.loaded / result.total);
             this.loadPercentage = percentDone;
-            console.log(this.loadPercentage);
 
           } else if (result instanceof HttpResponse) {
-            console.log('File is completely loaded!');
             this.details.insertRegistry(
               {
                 type: 'Profesores',
@@ -58,17 +58,19 @@ export class MassAdditionsComponent implements OnInit {
           }
 
         }, error => {
-           console.log(error)
-           this.snackBar.showSnackBar (
+          console.log(error);
+          this.snackBar.showSnackBar (
                 'Se produjo un error al intentar cargar el archivo',
                 COMMONS.SNACK_BAR.ACTION.ACCEPT,
                 COMMONS.SNACK_BAR.TYPE.ERROR);
-           this.onLoad = false;
+          this.onLoad = false;
         }
 
 
       );
 
   }
+
+
 
 }
