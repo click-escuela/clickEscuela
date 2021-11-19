@@ -58,7 +58,7 @@ export class LoadDetailsComponent implements OnInit, AfterViewInit {
     const myfile = atob(data.file);
     const blob = new Blob([myfile], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-    let objectUrl = URL.createObjectURL(blob);
+    const objectUrl = URL.createObjectURL(blob);
     window.open(objectUrl);
   }
 

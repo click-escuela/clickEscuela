@@ -26,6 +26,7 @@ import { PaysCentralComponent } from '../../commons/pays-central/pays-central.co
 describe('AccountComponent', () => {
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
+  
   const account = [MODEL.CURRENT_STUDENT];
 
   beforeEach(async(() => {
